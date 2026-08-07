@@ -377,7 +377,7 @@
     window.orderSearchQuery = '';
     window.confirmationResult = null;
     
-    window.currentAppVersion = localStorage.getItem('app_current_version') || 'v1.7.1';
+    window.currentAppVersion = localStorage.getItem('app_current_version') || 'v1.7.2';
     window.latestServerVersionInfo = null;
 
     // 🔹 গ্লোবাল অ্যাডমিন ও সাব-অ্যাডমিন/ডিলার রোল নিখুঁতভাবে চেক করার ফাংশন
@@ -413,9 +413,9 @@
 
     // REAL-TIME DATABASE LISTENERS
     function startAdminSync() {
-      onValue(ref(db, 'app_update'), snap => {
-        window.latestServerVersionInfo = snap.val() || null;
-      });
+onValue(ref(db, 'app_update/admin'), snap => {
+  window.latestServerVersionInfo = snap.val() || null;
+});
 
       onValue(ref(db, 'products'), snap => {
         const data = snap.val() || {};
