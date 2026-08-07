@@ -85,6 +85,9 @@
       </div>
     </div>
 
+    <!-- Recaptcha Container for Phone Auth -->
+    <div id="recaptcha-container"></div>
+
     <!-- Confirm Action Modal -->
     <div id="confirmActionModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
       <div class="bg-slate-900 border border-slate-700 w-full max-w-xs rounded-2xl p-4 text-center space-y-3 shadow-2xl">
@@ -125,22 +128,11 @@
         portalTitle: "All In1 Shop (Admin)",
         portalSub: "Login to your account to access panel",
         loginFormTitle: "Login Form",
-        userContactLabel: "Username, Phone or Email *",
-        userContactPlaceholder: "Username or Number or Email",
+        userContactLabel: "Email or Phone *",
+        userContactPlaceholder: "Email or Phone Number",
         passwordLabel: "Password *",
         passwordPlaceholder: "******",
-        loginBtn: "Enter Panel",
-        forgotPasswordLink: "Forgot Password?",
-        resetTitle: "Reset Password",
-        searchAccountLabel: "Search Account by Username, Phone or Email *",
-        searchAccountPlaceholder: "Username / Phone / Email",
-        searchBtn: "Search",
-        accountFound: "Account Found:",
-        secretCodeLabel: "Admin Generated Secret Code *",
-        secretCodePlaceholder: "e.g. SC-93821",
-        newPasswordLabel: "New Password *",
-        confirmResetBtn: "Confirm Password Reset",
-        backToLogin: "Back to Login",
+        loginBtn: "Confirm",
         languageLabel: "Admin Language",
         broadcastTitle: "Custom Notification Broadcast",
         broadcastTitlePlaceholder: "Notification Title (e.g. Eid Offer!)",
@@ -164,7 +156,6 @@
         stockAlertMenu: "Stock Alert",
         categoryTitle: "Category",
         customersTitle: "Customers",
-        dealersTitle: "Dealers / Sub-Admin",
         couponsTitle: "Coupons",
         dueLedgerTitle: "Due Ledger",
         backToQuickMenu: "Back to Quick Menu",
@@ -188,9 +179,6 @@
         code: "Code:",
         address: "Address:",
         noAddress: "Address info not provided",
-        dealerManagement: "Sub-Admin & Dealers Management",
-        addDealerBtn: "Add Dealer",
-        secretCodeText: "Password Reset Secret Code:",
         filterOrders: "Filter Customer Orders",
         detailsBtn: "Details",
         productList: "Product List",
@@ -209,11 +197,7 @@
         newCategory: "New Category",
         catNamePlaceholder: "Category Name",
         addCatBtn: "Add Category",
-        addNewDealer: "Add New Sub-Admin / Dealer",
         nameLabel: "Name *",
-        roleLabel: "Role",
-        subAdminRole: "Sub-Admin",
-        dealerRole: "Dealer",
         appointBtn: "Appoint",
         addNewProduct: "Add New Product",
         productNameLabel: "Product Name *",
@@ -233,22 +217,11 @@
         portalTitle: "অল ইন ওয়ান শপ (এডমিন)",
         portalSub: "প্যানেলে প্রবেশ করতে আপনার অ্যাকাউন্টে লগইন করুন",
         loginFormTitle: "লগইন ফরম",
-        userContactLabel: "ইউজার নেম, নাম্বার বা মেইল *",
-        userContactPlaceholder: "ইউজারনেম বা নাম্বার বা মেইল",
+        userContactLabel: "ইমেইল বা ফোন নাম্বার *",
+        userContactPlaceholder: "ইমেইল অথবা ফোন নাম্বার",
         passwordLabel: "পাসওয়ার্ড *",
         passwordPlaceholder: "******",
         loginBtn: "প্যানেলে প্রবেশ করুন",
-        forgotPasswordLink: "Forget Password?",
-        resetTitle: "পাসওয়ার্ড রিসেট করুন",
-        searchAccountLabel: "ইউজারনেম, নম্বর বা জিমেইল দিয়ে অ্যাকাউন্ট খুঁজুন *",
-        searchAccountPlaceholder: "ইউজারনেম / নম্বর / মেইল",
-        searchBtn: "সার্চ",
-        accountFound: "অ্যাকাউন্ট পাওয়া গেছে:",
-        secretCodeLabel: "এডমিন প্রদত্ত জেনারেটেড সিক্রেট কোড *",
-        secretCodePlaceholder: "যেমন: SC-93821",
-        newPasswordLabel: "নতুন পাসওয়ার্ড *",
-        confirmResetBtn: "পাসওয়ার্ড পরিবর্তন কনফার্ম করুন",
-        backToLogin: "লগইনে ফিরে যান",
         languageLabel: "এডমিন ল্যাঙ্গুয়েজ",
         broadcastTitle: "Custom Notification",
         broadcastTitlePlaceholder: "নোটিফিকেশন শিরোনাম (যেমন: ঈদ অফার!)",
@@ -272,7 +245,6 @@
         stockAlertMenu: "Stock Alert",
         categoryTitle: "Category",
         customersTitle: "Customers",
-        dealersTitle: "Dealers / Sub-Admin",
         couponsTitle: "Coupons",
         dueLedgerTitle: "Due Ledger",
         backToQuickMenu: "কুইক মেনুতে ফেরত যান",
@@ -296,9 +268,6 @@
         code: "কোড:",
         address: "ঠিকানা:",
         noAddress: "ঠিকানা তথ্য প্রদান করা হয়নি",
-        dealerManagement: "Sub-Admin & Dealers Management",
-        addDealerBtn: "অ্যাড করুন",
-        secretCodeText: "পাসওয়ার্ড রিসেট সিক্রেট কোড:",
         filterOrders: "গ্রাহকদের অর্ডার ফিল্টার",
         detailsBtn: "ডিটেইলস",
         productList: "প্রোডাক্ট লিস্ট",
@@ -317,11 +286,7 @@
         newCategory: "নতুন ক্যাটাগরি",
         catNamePlaceholder: "ক্যাটাগরির নাম",
         addCatBtn: "যোগ করুন",
-        addNewDealer: "নতুন Sub-Admin / Dealer যোগ করুন",
         nameLabel: "নাম *",
-        roleLabel: "রোল (Role)",
-        subAdminRole: "সাব-এডমিন",
-        dealerRole: "ডিলার",
         appointBtn: "নিয়োগ প্রদান করুন",
         addNewProduct: "নতুন প্রোডাক্ট যোগ করুন",
         productNameLabel: "প্রোডাক্টের নাম *",
@@ -365,7 +330,16 @@
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
     import { getDatabase, ref, set, push, remove, update, onValue, get } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
-    import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+    import { 
+      getAuth, 
+      signInWithEmailAndPassword, 
+      createUserWithEmailAndPassword, 
+      signOut, 
+      onAuthStateChanged,
+      sendPasswordResetEmail,
+      RecaptchaVerifier,
+      signInWithPhoneNumber
+    } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
     const firebaseConfig = {
       apiKey: "AIzaSyCyTaNvT8S6Xg304_9ntWozi1k3N4DmNxM",
@@ -394,7 +368,6 @@
     window.coupons = [];
     window.dues = [];
     window.expenses = [];
-    window.dealers = [];
     window.paymentMethods = [];
     window.notifications = [];
     window.activeView = 'menu';
@@ -402,9 +375,23 @@
     window.selectedOrderStatusFilter = 'All';
     window.stockSearchQuery = '';
     window.orderSearchQuery = '';
+    window.confirmationResult = null;
     
-    window.currentAppVersion = localStorage.getItem('app_current_version') || 'v1.4.1';
+    window.currentAppVersion = localStorage.getItem('app_current_version') || 'v1.7.0';
     window.latestServerVersionInfo = null;
+
+    // 🔹 গ্লোবাল অ্যাডমিন ও সাব-অ্যাডমিন/ডিলার রোল নিখুঁতভাবে চেক করার ফাংশন
+    window.isRestrictedAdmin = function() {
+      if (!window.storedAdmin) return false;
+      
+      // গ্লোবাল অ্যাডমিন হলে সে কোনো ফিল্টারের আওতায় থাকবে না (সম্পূর্ণ এক্সেস পাবে)
+      if (window.storedAdmin.uid === ADMIN_UID || window.storedAdmin.role === 'Main Admin') {
+        return false;
+      }
+      
+      const roleStr = String(window.storedAdmin.role || '').toLowerCase();
+      return roleStr.includes('sub') || roleStr.includes('dealer') || roleStr.includes('ডিলার');
+    };
 
     window.showAdminToast = function(msg) {
       const toast = document.getElementById('adminToast');
@@ -474,15 +461,6 @@
         if (window.storedAdmin && window.activeView === 'expenses') renderAdminDashboard();
       });
 
-      // Dealers list synced securely for Admin
-      if (window.storedAdmin && window.storedAdmin.role === 'Main Admin') {
-        onValue(ref(db, 'dealers'), snap => {
-          const data = snap.val() || {};
-          window.dealers = Object.keys(data).map(k => ({ id: k, ...data[k] }));
-          if (['settings', 'dealers'].includes(window.activeView)) renderAdminDashboard();
-        });
-      }
-
       onValue(ref(db, 'payment_methods'), snap => {
         const data = snap.val() || {};
         window.paymentMethods = Object.keys(data).map(k => ({ id: k, ...data[k] }));
@@ -498,12 +476,43 @@
 
     startAdminSync();
 
-    // Monitoring Auth State
+    // Monitoring Auth State & Matching User Email with Dealers Node
     onAuthStateChanged(auth, (user) => {
-      if (user && user.uid === ADMIN_UID) {
-        const session = { name: 'Main Admin', contact: user.email, role: 'Main Admin' };
-        window.storedAdmin = session;
-        localStorage.setItem('app_admin_session', JSON.stringify(session));
+      if (user) {
+        if (user.uid === ADMIN_UID) {
+          const session = { name: 'Main Admin', contact: user.email, role: 'Main Admin', uid: user.uid };
+          window.storedAdmin = session;
+          localStorage.setItem('app_admin_session', JSON.stringify(session));
+          initAdminView();
+        } else {
+          get(ref(db, 'Dealers')).then((snap) => {
+            const dealers = snap.val() || {};
+            const userEmail = (user.email || '').toLowerCase().trim();
+            
+            const dealerKey = Object.keys(dealers).find(k => (dealers[k].contact || '').toLowerCase().trim() === userEmail);
+            
+            let userRole = 'Sub-Admin';
+            let userName = 'User';
+
+            if (dealerKey) {
+              userRole = dealers[dealerKey].role || 'Sub-Admin';
+              userName = dealers[dealerKey].name || 'User';
+            }
+
+            const session = { name: userName, contact: user.email, role: userRole, uid: user.uid };
+            window.storedAdmin = session;
+            localStorage.setItem('app_admin_session', JSON.stringify(session));
+            initAdminView();
+          }).catch((err) => {
+            const session = { name: 'Sub-Admin', contact: user.email, role: 'Sub-Admin', uid: user.uid };
+            window.storedAdmin = session;
+            localStorage.setItem('app_admin_session', JSON.stringify(session));
+            initAdminView();
+          });
+        }
+      } else {
+        window.storedAdmin = null;
+        localStorage.removeItem('app_admin_session');
         initAdminView();
       }
     });
@@ -548,42 +557,10 @@
               <button onclick="handleAdminLogin()" class="w-full bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500 text-white font-bold py-3 rounded-xl text-xs shadow-lg transition active:scale-98 mt-2">
                 ${t('loginBtn')}
               </button>
-              <div class="text-center text-xs mt-3 pt-2 border-t border-slate-700">
-                <button onclick="toggleAdminAuthMode('forgot')" class="text-amber-400 font-bold hover:underline">${t('forgotPasswordLink')}</button>
-              </div>
-            </div>
 
-            <div id="adminForgotForm" class="space-y-3 hidden">
-              <h2 class="text-xs font-bold text-slate-300 text-center border-b border-slate-700 pb-2">${t('resetTitle')}</h2>
-              
-              <div id="searchAccountStep" class="space-y-2">
-                <label class="text-[10px] font-bold text-slate-400 block">${t('searchAccountLabel')}</label>
-                <div class="flex gap-2">
-                  <input type="text" id="searchAdminQuery" placeholder="${t('searchAccountPlaceholder')}" class="flex-1 bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">
-                  <button onclick="searchAdminAccount()" class="bg-indigo-600 text-white px-3 py-2 rounded-xl text-xs font-bold">${t('searchBtn')}</button>
-                </div>
-              </div>
-
-              <div id="resetAccountBox" class="hidden space-y-2.5 bg-slate-900/60 p-3 rounded-xl border border-slate-700/80">
-                <div class="text-[11px] text-emerald-400 font-bold border-b border-slate-700 pb-1 flex justify-between">
-                  <span>${t('accountFound')}</span>
-                  <span id="foundAccountName" class="text-white"></span>
-                </div>
-                <div>
-                  <label class="text-[10px] text-slate-400 block mb-0.5">${t('secretCodeLabel')}</label>
-                  <input type="text" id="secretCodeVerify" placeholder="${t('secretCodePlaceholder')}" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-2.5 py-1.5 text-xs text-white uppercase font-mono font-bold">
-                </div>
-                <div>
-                  <label class="text-[10px] text-slate-400 block mb-0.5">${t('newPasswordLabel')}</label>
-                  <input type="password" id="newAdminPasswordInput" placeholder="******" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-2.5 py-1.5 text-xs text-white">
-                </div>
-                <button onclick="confirmResetAdminPassword()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2 rounded-xl text-xs shadow mt-1">
-                  ${t('confirmResetBtn')}
-                </button>
-              </div>
-
-              <div class="text-center text-xs mt-2 pt-2 border-t border-slate-700">
-                <button onclick="toggleAdminAuthMode('login')" class="text-indigo-400 font-bold hover:underline">${t('backToLogin')}</button>
+              <div class="flex justify-between items-center text-xs pt-2 border-t border-slate-700">
+                <button onclick="openForgotPasswordModal()" class="text-amber-400 hover:underline">Forget password</button>
+                <button onclick="openCreateAccountModal()" class="text-indigo-400 font-bold hover:underline">Create a new account</button>
               </div>
             </div>
           </div>
@@ -591,96 +568,166 @@
       `;
     };
 
-    window.foundAdminUser = null;
-    window.searchAdminAccount = function() {
-      const q = document.getElementById('searchAdminQuery').value.trim();
-      if (!q) {
-        showAdminToast('সার্চ করতে তথ্য দিন!');
-        return;
-      }
-      get(ref(db, 'dealers')).then(snap => {
-        const dealers = snap.val() || {};
-        const userKey = Object.keys(dealers).find(k => dealers[k].contact === q || dealers[k].name === q);
-        if (userKey) {
-          window.foundAdminUser = { id: userKey, ...dealers[userKey] };
-          document.getElementById('foundAccountName').innerText = `${escapeHTML(window.foundAdminUser.name)} (${escapeHTML(window.foundAdminUser.role)})`;
-          document.getElementById('resetAccountBox').classList.remove('hidden');
-          showAdminToast('অ্যাকাউন্ট পাওয়া গেছে!');
-        } else {
-          showAdminToast('কোনো অ্যাকাউন্ট পাওয়া যায়নি!');
-          document.getElementById('resetAccountBox').classList.add('hidden');
-        }
-      }).catch(() => {
-        showAdminToast('সার্চ করতে ব্যর্থ হয়েছে!');
-      });
-    };
-
-    window.confirmResetAdminPassword = function() {
-      if (!window.foundAdminUser) return;
-      const code = document.getElementById('secretCodeVerify').value.trim().toUpperCase();
-      const newPass = document.getElementById('newAdminPasswordInput').value;
-      if (!code || !newPass) {
-        showAdminToast('সিক্রেট কোড ও পাসওয়ার্ড দিন!');
-        return;
-      }
-      if (window.foundAdminUser.secretCode !== code) {
-        showAdminToast('ভুল সিক্রেট কোড!');
-        return;
-      }
-      update(ref(db, `dealers/${window.foundAdminUser.id}`), { password: newPass });
-      showAdminToast('🎉 পাসওয়ার্ড পরিবর্তন করা হয়েছে!');
-      window.foundAdminUser = null;
-      toggleAdminAuthMode('login');
-    };
-
-    window.toggleAdminAuthMode = function(mode) {
-      document.getElementById('adminLoginForm').classList.add('hidden');
-      document.getElementById('adminForgotForm').classList.add('hidden');
-      if (mode === 'login') document.getElementById('adminLoginForm').classList.remove('hidden');
-      else if (mode === 'forgot') document.getElementById('adminForgotForm').classList.remove('hidden');
-    };
-
     window.handleAdminLogin = function() {
-      const contact = document.getElementById('adminContactInput').value.trim();
+      const contact = document.getElementById('adminContactInput').value.trim().toLowerCase();
       const pass = document.getElementById('adminPassInput').value;
 
       if (!contact || !pass) {
-        showAdminToast('ইউজারনেম/মোবাইল/ইমেইল ও পাসওয়ার্ড লিখুন!');
+        showAdminToast('ইমেইল ও পাসওয়ার্ড দিন!');
         return;
       }
 
-      // ১. Firebase Authentication Login
+      if (!contact.includes('@')) {
+        showAdminToast('নিবন্ধিত জিমেইল প্রদান করুন!');
+        return;
+      }
+
       signInWithEmailAndPassword(auth, contact, pass)
         .then((userCredential) => {
-          const session = { name: 'Main Admin', contact: contact, role: 'Main Admin' };
-          window.storedAdmin = session;
-          localStorage.setItem('app_admin_session', JSON.stringify(session));
-          showAdminToast('এডমিন লগইন সফল!');
-          initAdminView();
+          const user = userCredential.user;
+          showAdminToast('লগইন সফল হয়েছে!');
+
+          if (user.uid === ADMIN_UID) {
+            const session = { name: 'Main Admin', contact: user.email, role: 'Main Admin', uid: user.uid };
+            window.storedAdmin = session;
+            localStorage.setItem('app_admin_session', JSON.stringify(session));
+            initAdminView();
+          } else {
+            get(ref(db, 'Dealers')).then((snap) => {
+              const dealers = snap.val() || {};
+              const dealerKey = Object.keys(dealers).find(k => (dealers[k].contact || '').toLowerCase().trim() === contact);
+              
+              let userRole = 'Sub-Admin';
+              let userName = 'User';
+
+              if (dealerKey) {
+                userRole = dealers[dealerKey].role || 'Sub-Admin';
+                userName = dealers[dealerKey].name || 'User';
+              }
+
+              const session = { name: userName, contact: user.email, role: userRole, uid: user.uid };
+              window.storedAdmin = session;
+              localStorage.setItem('app_admin_session', JSON.stringify(session));
+              
+              initAdminView();
+            }).catch(() => {
+              const session = { name: 'User', contact: user.email, role: 'Sub-Admin', uid: user.uid };
+              window.storedAdmin = session;
+              localStorage.setItem('app_admin_session', JSON.stringify(session));
+              initAdminView();
+            });
+          }
         })
-        .catch(() => {
-          // ২. Realtime Database Sub-Admin / Dealer Verification
-          checkDealerLogin(contact, pass);
+        .catch((error) => {
+          showAdminToast('ইমেইল অথবা পাসওয়ার্ড ভুল!');
         });
     };
 
-    function checkDealerLogin(contact, pass) {
-      get(ref(db, 'dealers')).then(snap => {
-        const dealersData = snap.val() || {};
-        const foundDealer = Object.values(dealersData).find(d => (d.contact === contact || d.name === contact) && d.password === pass);
-        if (foundDealer) {
-          const session = { name: foundDealer.name, contact: foundDealer.contact, role: foundDealer.role };
-          window.storedAdmin = session;
-          localStorage.setItem('app_admin_session', JSON.stringify(session));
-          showAdminToast(`${foundDealer.role} লগইন সফল!`);
-          initAdminView();
-        } else {
-          showAdminToast('ইউজারনেম অথবা পাসওয়ার্ড ভুল!');
-        }
-      }).catch(() => {
-        showAdminToast('লগইন ভেরিফিকেশনে ত্রুটি হয়েছে!');
-      });
-    }
+    // CREATE NEW ACCOUNT MODAL (SAVES DIRECTLY TO 'Dealers' NODE)
+    window.openCreateAccountModal = function() {
+      const modal = document.getElementById('adminModal');
+      const body = document.getElementById('modalBody');
+
+      body.innerHTML = `
+        <h3 class="text-sm font-bold text-slate-100 mb-3 text-center border-b border-slate-700 pb-2">Create a new account (Sub-Admin / Dealer)</h3>
+        <div class="space-y-3 text-xs">
+          <div>
+            <label class="block text-slate-400 mb-1"> Full Name *</label>
+            <input type="text" id="regName" placeholder="Enter full name..." class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-white">
+          </div>
+          <div>
+            <label class="block text-slate-400 mb-1">Email address *</label>
+            <input type="email" id="regEmail" placeholder="Enter mail address..." class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-white">
+          </div>
+          <div>
+            <label class="block text-slate-400 mb-1">Accounts (Role) *</label>
+            <select id="regRole" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-white font-bold">
+              <option value="Sub-Admin">Sub-Admin</option>
+              <option value="Dealer"> Dealers</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-slate-400 mb-1">Strong Password *</label>
+            <input type="password" id="regPass" placeholder="******" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-white">
+          </div>
+
+          <button onclick="handleRegisterAccount()" class="w-full bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold py-3 rounded-xl text-xs shadow-lg transition mt-2">
+            অ্যাকাউন্ট তৈরি করুন
+          </button>
+        </div>
+      `;
+      modal.classList.remove('hidden');
+    };
+
+    window.handleRegisterAccount = function() {
+      const name = document.getElementById('regName').value.trim();
+      const email = document.getElementById('regEmail').value.trim().toLowerCase();
+      const role = document.getElementById('regRole').value;
+      const pass = document.getElementById('regPass').value;
+
+      if (!name || !email || !pass) {
+        showAdminToast('সবগুলো ঘর সঠিকভাবে পূরণ করুন!');
+        return;
+      }
+
+      createUserWithEmailAndPassword(auth, email, pass)
+        .then((userCredential) => {
+          const dealerRef = push(ref(db, 'Dealers'));
+          set(dealerRef, {
+            contact: email,
+            name: name,
+            password: pass,
+            role: role
+          });
+
+          showAdminToast(`🎉 ${role} অ্যাকাউন্ট সফলভাবে তৈরি হয়েছে!`);
+          closeAdminModal();
+        })
+        .catch((err) => {
+          showAdminToast('অ্যাকাউন্ট তৈরিতে সমস্যা হয়েছে: ' + err.message);
+        });
+    };
+
+    // FORGOT PASSWORD MODAL
+    window.openForgotPasswordModal = function() {
+      const modal = document.getElementById('adminModal');
+      const body = document.getElementById('modalBody');
+
+      body.innerHTML = `
+        <h3 class="text-sm font-bold text-slate-100 mb-3 text-center border-b border-slate-700 pb-2">পাসওয়ার্ড রিসেট করুন</h3>
+        <div class="space-y-3 text-xs">
+          <p class="text-slate-400 text-[11px] text-center">আপনার নিবন্ধিত ইমেইল দিন। আমরা রিসেট লিঙ্ক পাঠাবো।</p>
+          
+          <div>
+            <label class="block text-slate-400 mb-1">ইমেইল এড্রেস *</label>
+            <input type="text" id="resetInput" placeholder="Enter mail address..." class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-white">
+          </div>
+
+          <button id="sendResetBtn" onclick="handleSendPasswordReset()" class="w-full bg-amber-600 hover:bg-amber-500 text-white font-bold py-2.5 rounded-xl text-xs shadow transition mt-1">
+            পাসওয়ার্ড রিসেট লিঙ্ক পাঠান
+          </button>
+        </div>
+      `;
+      modal.classList.remove('hidden');
+    };
+
+    window.handleSendPasswordReset = function() {
+      const input = document.getElementById('resetInput').value.trim();
+
+      if (!input) {
+        showAdminToast('ইমেইল নম্বর দিন!');
+        return;
+      }
+
+      sendPasswordResetEmail(auth, input)
+        .then(() => {
+          showAdminToast('📩 আপনার ইমেইলে রিসেট লিঙ্ক পাঠানো হয়েছে!');
+          closeAdminModal();
+        })
+        .catch((error) => {
+          showAdminToast('ত্রুটি: ' + error.message);
+        });
+    };
 
     window.switchAdminTab = function(tab) {
       if (!window.storedAdmin) return;
@@ -695,7 +742,10 @@
 
     window.renderAdminDashboard = function() {
       const main = document.getElementById('adminMain');
-      const isRestrictedRole = window.storedAdmin && (window.storedAdmin.role === 'সাব-এডমিন' || window.storedAdmin.role === 'ডিলার' || window.storedAdmin.role === 'Sub-Admin' || window.storedAdmin.role === 'Dealer');
+      if (!main) return;
+
+      const isRestrictedRole = isRestrictedAdmin();
+      const currentUid = window.storedAdmin ? window.storedAdmin.uid : '';
 
       if (window.activeView === 'settings') {
         main.innerHTML = `
@@ -792,44 +842,103 @@
         return;
       }
 
-      const orderRequests = window.orders.filter(o => o.status === 'Submitted (Pending Approval)' || o.status === 'Submitted');
-      const pendingOrders = window.orders.filter(o => o.status === 'পেন্ডিং' || o.status === 'Pending').length;
-      const totalSales = window.orders.filter(o => o.status === 'ডেলিভার্ড' || o.status === 'Delivery' || o.status === 'Delivered').reduce((sum, o) => sum + Number(o.totalAmount || 0), 0);
-      const lowStockCount = window.products.filter(p => Number(p.stock) <= 5).length;
-      const pendingProductsCount = window.products.filter(p => p.status === 'pending').length;
+      // 🔹 ডিলারের জন্য নির্দিষ্ট ডাটা ফিল্টার করা
+      let relevantOrders = window.orders;
+      let relevantProducts = window.products;
 
       if (isRestrictedRole) {
+        relevantProducts = window.products.filter(p => p.addedByUid === currentUid || p.addedBy === window.storedAdmin.name);
+        const myProdIds = new Set(relevantProducts.map(p => p.id));
+        relevantOrders = window.orders.filter(o => o.items && Array.isArray(o.items) && o.items.some(i => myProdIds.has(i.productId)));
+      }
+
+      const orderRequests = relevantOrders.filter(o => o.status === 'Submitted (Pending Approval)' || o.status === 'Submitted');
+      const pendingOrders = relevantOrders.filter(o => o.status === 'পেন্ডিং' || o.status === 'Pending').length;
+      const totalSales = relevantOrders.filter(o => o.status === 'ডেলিভার্ড' || o.status === 'Delivery' || o.status === 'Delivered').reduce((sum, o) => sum + Number(o.totalAmount || 0), 0);
+      const lowStockCount = relevantProducts.filter(p => Number(p.stock) <= 5).length;
+      const pendingProductsCount = relevantProducts.filter(p => p.status === 'pending').length;
+
+      // 🔹 সাব-এডমিন ও ডিলারের কুইক মেনু বার (৭টি নির্দিষ্ট ফিচার)
+      if (isRestrictedRole) {
         main.innerHTML = `
-          <div class="bg-indigo-950/60 p-3.5 rounded-2xl border border-indigo-800 text-xs flex justify-between items-center">
+          <div class="bg-indigo-950/60 p-4 rounded-2xl border border-indigo-800 text-xs flex justify-between items-center shadow-lg">
             <div>
               <span class="font-bold text-indigo-200 text-sm">${t('welcomeRole')}, ${escapeHTML(window.storedAdmin.name)}</span>
-              <p class="text-[10px] text-indigo-300 mt-0.5">Role: <span class="text-amber-400 font-bold">${escapeHTML(window.storedAdmin.role)}</span> ${t('limitedAccess')}</p>
+              <p class="text-[10px] text-indigo-300 mt-0.5">Role: <span class="text-amber-400 font-bold uppercase">${escapeHTML(window.storedAdmin.role)}</span> ${t('limitedAccess')}</p>
             </div>
-            <i class="fa-solid fa-user-gear text-indigo-400 text-2xl"></i>
+            <div class="w-10 h-10 bg-indigo-600/30 rounded-xl flex items-center justify-center border border-indigo-500/30">
+              <i class="fa-solid fa-user-shield text-indigo-300 text-lg"></i>
+            </div>
           </div>
 
-          <h2 class="text-xs font-bold text-slate-400 uppercase tracking-wider mt-2">${t('assignedFeatures')}</h2>
-          <div class="grid grid-cols-2 gap-3">
-            <button onclick="openSubView('orders')" class="unique-nav-card p-4 rounded-2xl flex flex-col items-center text-center relative group">
-              ${pendingOrders > 0 ? `<span class="absolute top-2 right-2 bg-red-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">${pendingOrders}</span>` : ''}
-              <div class="w-12 h-12 rounded-2xl bg-amber-500/10 text-amber-400 flex items-center justify-center mb-2 group-hover:scale-110 transition">
-                <i class="fa-solid fa-cart-flatbed text-xl"></i>
-              </div>
-              <span class="text-xs font-bold text-slate-200">${t('ordersTitle')}</span>
-            </button>
+          <div class="pt-2">
+            <h2 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">${t('assignedFeatures')}</h2>
+            
+            <div class="grid grid-cols-2 gap-3">
+              <!-- ১. প্রোডাক্টস (Products) -->
+              <button onclick="openSubView('products')" class="unique-nav-card p-4 rounded-2xl flex flex-col items-center text-center relative group">
+                <div class="w-11 h-11 rounded-2xl bg-indigo-500/10 text-indigo-400 flex items-center justify-center mb-1.5 group-hover:scale-110 transition border border-indigo-500/20">
+                  <i class="fa-solid fa-boxes-stacked text-lg"></i>
+                </div>
+                <span class="text-xs font-bold text-slate-200">${t('productsTitle')}</span>
+              </button>
 
-            <button onclick="openSubView('products')" class="unique-nav-card p-4 rounded-2xl flex flex-col items-center text-center relative group">
-              <div class="w-12 h-12 rounded-2xl bg-indigo-500/10 text-indigo-400 flex items-center justify-center mb-2 group-hover:scale-110 transition">
-                <i class="fa-solid fa-boxes-stacked text-xl"></i>
-              </div>
-              <span class="text-xs font-bold text-slate-200">${t('productsTitle')}</span>
-            </button>
+              <!-- ২. অর্ডারস (Orders) -->
+              <button onclick="openSubView('orders')" class="unique-nav-card p-4 rounded-2xl flex flex-col items-center text-center relative group">
+                ${pendingOrders > 0 ? `<span class="absolute top-2 right-2 bg-red-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow-lg">${pendingOrders}</span>` : ''}
+                <div class="w-11 h-11 rounded-2xl bg-amber-500/10 text-amber-400 flex items-center justify-center mb-1.5 group-hover:scale-110 transition border border-amber-500/20">
+                  <i class="fa-solid fa-cart-flatbed text-lg"></i>
+                </div>
+                <span class="text-xs font-bold text-slate-200">${t('ordersTitle')}</span>
+              </button>
+
+              <!-- ৩. এপ্রুভাল স্ট্যাটাস (Products Approval Status) -->
+              <button onclick="openSubView('product_approval')" class="unique-nav-card p-4 rounded-2xl flex flex-col items-center text-center relative group">
+                ${pendingProductsCount > 0 ? `<span class="absolute top-2 right-2 bg-teal-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full animate-pulse shadow-lg">${pendingProductsCount}</span>` : ''}
+                <div class="w-11 h-11 rounded-2xl bg-teal-500/10 text-teal-400 flex items-center justify-center mb-1.5 group-hover:scale-110 transition border border-teal-500/20">
+                  <i class="fa-solid fa-clipboard-check text-lg"></i>
+                </div>
+                <span class="text-xs font-bold text-slate-200">${t('productApprovalTitle')}</span>
+              </button>
+
+              <!-- ৪. ডিউ লেজার (Due Ledger) -->
+              <button onclick="openSubView('dues')" class="unique-nav-card p-4 rounded-2xl flex flex-col items-center text-center relative group">
+                <div class="w-11 h-11 rounded-2xl bg-red-500/10 text-red-400 flex items-center justify-center mb-1.5 group-hover:scale-110 transition border border-red-500/20">
+                  <i class="fa-solid fa-book-bookmark text-lg"></i>
+                </div>
+                <span class="text-xs font-bold text-slate-200">${t('dueLedgerTitle')}</span>
+              </button>
+
+              <!-- ৫. এক্সপেন্স লেজার (Expense Ledger) -->
+              <button onclick="openSubView('expenses')" class="unique-nav-card p-4 rounded-2xl flex flex-col items-center text-center relative group">
+                <div class="w-11 h-11 rounded-2xl bg-orange-500/10 text-orange-400 flex items-center justify-center mb-1.5 group-hover:scale-110 transition border border-orange-500/20">
+                  <i class="fa-solid fa-calculator text-lg"></i>
+                </div>
+                <span class="text-xs font-bold text-slate-200">${t('expenseLedgerTitle')}</span>
+              </button>
+
+              <!-- ৬. কাস্টমারস (Customers) -->
+              <button onclick="openSubView('customers')" class="unique-nav-card p-4 rounded-2xl flex flex-col items-center text-center relative group">
+                <div class="w-11 h-11 rounded-2xl bg-purple-500/10 text-purple-400 flex items-center justify-center mb-1.5 group-hover:scale-110 transition border border-purple-500/20">
+                  <i class="fa-solid fa-users text-lg"></i>
+                </div>
+                <span class="text-xs font-bold text-slate-200">${t('customersTitle')}</span>
+              </button>
+
+              <!-- ৭. কুপনস (Coupons) -->
+              <button onclick="openSubView('coupons')" class="unique-nav-card p-4 rounded-2xl flex flex-col items-center text-center relative group col-span-2">
+                <div class="w-11 h-11 rounded-2xl bg-rose-500/10 text-rose-400 flex items-center justify-center mb-1.5 group-hover:scale-110 transition border border-rose-500/20">
+                  <i class="fa-solid fa-ticket text-lg"></i>
+                </div>
+                <span class="text-xs font-bold text-slate-200">${t('couponsTitle')}</span>
+              </button>
+            </div>
           </div>
         `;
         return;
       }
 
-      // MAIN ADMIN DASHBOARD MODULES
+      // মেইন এডমিনের ফুল ড্যাশবোর্ড
       main.innerHTML = `
         ${lowStockCount > 0 ? `
           <div onclick="openSubView('stock')" class="bg-gradient-to-r from-red-600 to-orange-600 text-white p-3 rounded-2xl shadow-lg flex items-center justify-between cursor-pointer">
@@ -857,11 +966,10 @@
 
         <div class="flex justify-between items-center mt-2">
           <h2 class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">${t('quickNavMenu')}</h2>
-          <span class="text-[10px] bg-slate-800 text-slate-400 px-2 py-0.5 rounded-full border border-slate-700">12 Modules</span>
+          <span class="text-[10px] bg-slate-800 text-slate-400 px-2 py-0.5 rounded-full border border-slate-700">11 Modules</span>
         </div>
         
         <div class="grid grid-cols-3 gap-2.5">
-          <!-- 1. Orders Approval -->
           <button onclick="openSubView('orders_approval')" class="unique-nav-card p-3 rounded-2xl flex flex-col items-center text-center relative group">
             ${orderRequests.length > 0 ? `<span class="absolute top-2 right-2 bg-emerald-500 text-white text-[9px] font-bold px-1.5 py-0.2 rounded-full animate-pulse shadow-lg shadow-emerald-500/50">${orderRequests.length}</span>` : ''}
             <div class="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center mb-1.5 group-hover:scale-110 transition border border-emerald-500/20">
@@ -870,7 +978,6 @@
             <span class="text-[10px] font-bold text-slate-200">${t('ordersApprovalTitle')}</span>
           </button>
 
-          <!-- 2. Orders -->
           <button onclick="openSubView('orders')" class="unique-nav-card p-3 rounded-2xl flex flex-col items-center text-center relative group">
             ${pendingOrders > 0 ? `<span class="absolute top-2 right-2 bg-red-500 text-white text-[9px] font-bold px-1.5 py-0.2 rounded-full shadow-lg shadow-red-500/50">${pendingOrders}</span>` : ''}
             <div class="w-10 h-10 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center mb-1.5 group-hover:scale-110 transition border border-amber-500/20">
@@ -879,7 +986,6 @@
             <span class="text-[10px] font-bold text-slate-200">${t('ordersTitle')}</span>
           </button>
 
-          <!-- 3. Products Approval -->
           <button onclick="openSubView('product_approval')" class="unique-nav-card p-3 rounded-2xl flex flex-col items-center text-center relative group">
             ${pendingProductsCount > 0 ? `<span class="absolute top-2 right-2 bg-teal-500 text-white text-[9px] font-bold px-1.5 py-0.2 rounded-full animate-pulse shadow-lg shadow-teal-500/50">${pendingProductsCount}</span>` : ''}
             <div class="w-10 h-10 rounded-xl bg-teal-500/10 text-teal-400 flex items-center justify-center mb-1.5 group-hover:scale-110 transition border border-teal-500/20">
@@ -888,7 +994,6 @@
             <span class="text-[10px] font-bold text-slate-200">${t('productApprovalTitle')}</span>
           </button>
 
-          <!-- 4. Products -->
           <button onclick="openSubView('products')" class="unique-nav-card p-3 rounded-2xl flex flex-col items-center text-center relative group">
             <div class="w-10 h-10 rounded-xl bg-indigo-500/10 text-indigo-400 flex items-center justify-center mb-1.5 group-hover:scale-110 transition border border-indigo-500/20">
               <i class="fa-solid fa-boxes-stacked text-base"></i>
@@ -896,7 +1001,6 @@
             <span class="text-[10px] font-bold text-slate-200">${t('productsTitle')}</span>
           </button>
 
-          <!-- 5. Stock Alert -->
           <button onclick="openSubView('stock')" class="unique-nav-card p-3 rounded-2xl flex flex-col items-center text-center relative group">
             ${lowStockCount > 0 ? `<span class="absolute top-2 right-2 bg-red-500 text-white text-[9px] font-bold px-1.5 py-0.2 rounded-full">!</span>` : ''}
             <div class="w-10 h-10 rounded-xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center mb-1.5 group-hover:scale-110 transition border border-cyan-500/20">
@@ -905,7 +1009,6 @@
             <span class="text-[10px] font-bold text-slate-200">${t('stockAlertMenu')}</span>
           </button>
 
-          <!-- 6. Category -->
           <button onclick="openSubView('category')" class="unique-nav-card p-3 rounded-2xl flex flex-col items-center text-center relative group">
             <div class="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center mb-1.5 group-hover:scale-110 transition border border-emerald-500/20">
               <i class="fa-solid fa-layer-group text-base"></i>
@@ -913,7 +1016,6 @@
             <span class="text-[10px] font-bold text-slate-200">${t('categoryTitle')}</span>
           </button>
 
-          <!-- 7. Customers -->
           <button onclick="openSubView('customers')" class="unique-nav-card p-3 rounded-2xl flex flex-col items-center text-center relative group">
             <div class="w-10 h-10 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center mb-1.5 group-hover:scale-110 transition border border-purple-500/20">
               <i class="fa-solid fa-users text-base"></i>
@@ -921,15 +1023,6 @@
             <span class="text-[10px] font-bold text-slate-200">${t('customersTitle')}</span>
           </button>
 
-          <!-- 8. Dealers / Sub-Admin -->
-          <button onclick="openSubView('dealers')" class="unique-nav-card p-3 rounded-2xl flex flex-col items-center text-center relative group">
-            <div class="w-10 h-10 rounded-xl bg-pink-500/10 text-pink-400 flex items-center justify-center mb-1.5 group-hover:scale-110 transition border border-pink-500/20">
-              <i class="fa-solid fa-user-gear text-base"></i>
-            </div>
-            <span class="text-[10px] font-bold text-slate-200">${t('dealersTitle')}</span>
-          </button>
-
-          <!-- 9. Expense Ledger -->
           <button onclick="openSubView('expenses')" class="unique-nav-card p-3 rounded-2xl flex flex-col items-center text-center relative group">
             <div class="w-10 h-10 rounded-xl bg-orange-500/10 text-orange-400 flex items-center justify-center mb-1.5 group-hover:scale-110 transition border border-orange-500/20">
               <i class="fa-solid fa-calculator text-base"></i>
@@ -937,7 +1030,6 @@
             <span class="text-[10px] font-bold text-slate-200">${t('expenseLedgerTitle')}</span>
           </button>
 
-          <!-- 10. Due Ledger -->
           <button onclick="openSubView('dues')" class="unique-nav-card p-3 rounded-2xl flex flex-col items-center text-center relative group">
             <div class="w-10 h-10 rounded-xl bg-red-500/10 text-red-400 flex items-center justify-center mb-1.5 group-hover:scale-110 transition border border-red-500/20">
               <i class="fa-solid fa-book-bookmark text-base"></i>
@@ -945,7 +1037,6 @@
             <span class="text-[10px] font-bold text-slate-200">${t('dueLedgerTitle')}</span>
           </button>
 
-          <!-- 11. Coupons -->
           <button onclick="openSubView('coupons')" class="unique-nav-card p-3 rounded-2xl flex flex-col items-center text-center relative group">
             <div class="w-10 h-10 rounded-xl bg-rose-500/10 text-rose-400 flex items-center justify-center mb-1.5 group-hover:scale-110 transition border border-rose-500/20">
               <i class="fa-solid fa-ticket text-base"></i>
@@ -953,7 +1044,6 @@
             <span class="text-[10px] font-bold text-slate-200">${t('couponsTitle')}</span>
           </button>
 
-          <!-- 12. Custom Notification -->
           <button onclick="openSubView('notifications')" class="unique-nav-card p-3 rounded-2xl flex flex-col items-center text-center relative group">
             <div class="w-10 h-10 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center mb-1.5 group-hover:scale-110 transition border border-amber-500/20">
               <i class="fa-solid fa-bell text-base"></i>
@@ -976,16 +1066,28 @@
 
     function renderSubView(view) {
       const main = document.getElementById('adminMain');
-      
+      const isRestrictedRole = isRestrictedAdmin();
+      const currentUid = window.storedAdmin ? window.storedAdmin.uid : '';
+
+      // 🔹 ডিলারের ফিল্টারড ডাটা প্রিপারেশন
+      let myProducts = window.products;
+      if (isRestrictedRole) {
+        myProducts = window.products.filter(p => p.addedByUid === currentUid || p.addedBy === window.storedAdmin.name);
+      }
+      const myProductIds = new Set(myProducts.map(p => p.id));
+
       let html = `
         <button onclick="${view === 'payment_setup' ? "switchAdminTab('settings')" : "openSubView('menu')"}" class="text-xs bg-slate-800 hover:bg-slate-700 text-slate-300 px-3 py-1.5 rounded-xl mb-3 flex items-center gap-1.5 font-bold transition">
           <i class="fa-solid fa-arrow-left text-[10px]"></i> ${view === 'payment_setup' ? 'Back to Settings' : t('backToQuickMenu')}
         </button>
       `;
 
-      // 1. ORDERS APPROVAL VIEW
       if (view === 'orders_approval') {
-        const submittedOrders = window.orders.filter(o => o.status === 'Submitted (Pending Approval)' || o.status === 'Submitted');
+        let submittedOrders = window.orders.filter(o => o.status === 'Submitted (Pending Approval)' || o.status === 'Submitted');
+        
+        if (isRestrictedRole) {
+          submittedOrders = submittedOrders.filter(o => o.items && Array.isArray(o.items) && o.items.some(i => myProductIds.has(i.productId)));
+        }
 
         html += `
           <h2 class="text-xs font-bold text-slate-200 mb-3 flex justify-between items-center">
@@ -1034,9 +1136,14 @@
         `;
       }
 
-      // 2. EXPENSE LEDGER VIEW
       else if (view === 'expenses') {
-        const totalExp = window.expenses.reduce((sum, e) => sum + Number(e.amount || 0), 0);
+        // 🔹 ডিলারের এক্সপেন্স লেজার শুধুমাত্র নিজস্ব হিসাব প্রদর্শন করবে
+        let filteredExpenses = window.expenses;
+        if (isRestrictedRole) {
+          filteredExpenses = window.expenses.filter(e => e.addedByUid === currentUid);
+        }
+
+        const totalExp = filteredExpenses.reduce((sum, e) => sum + Number(e.amount || 0), 0);
         const todayStr = new Date().toISOString().split('T')[0];
 
         html += `
@@ -1044,7 +1151,7 @@
             <h2 class="text-xs font-bold text-slate-200 flex items-center gap-1.5">
               <i class="fa-solid fa-receipt text-orange-400"></i> ${t('expenseLedgerTitle')}
             </h2>
-            <button onclick="toggleExpenseForm()" class="bg-indigo-600 hover:bg-indigo-500 text-white w-8 h-8 rounded-lg flex items-center justify-center font-bold text-sm shadow transition" title="Add New Expense">
+            <button onclick="toggleExpenseForm()" class="bg-indigo-600 hover:bg-indigo-500 text-white w-8 h-8 rounded-lg flex items-center justify-center font-bold text-sm shadow transition">
               <i class="fa-solid fa-plus"></i>
             </button>
           </div>
@@ -1075,15 +1182,15 @@
             </button>
           </div>
 
-          <h3 class="text-xs font-bold text-slate-300 mb-2">খরচের হিসাব খাতা (${window.expenses.length})</h3>
+          <h3 class="text-xs font-bold text-slate-300 mb-2">খরচের হিসাব খাতা (${filteredExpenses.length})</h3>
           <div class="space-y-2">
-            ${window.expenses.length === 0 ? `
+            ${filteredExpenses.length === 0 ? `
               <div class="text-center py-8 text-slate-500 text-xs bg-slate-800/50 rounded-2xl border border-slate-800">
                 <i class="fa-solid fa-folder-open text-2xl mb-1 opacity-50 block"></i>
                 এখনো কোনো খরচের হিসাব যুক্ত করা হয়নি।
               </div>
             ` : `
-              ${window.expenses.map(e => `
+              ${filteredExpenses.map(e => `
                 <div class="bg-slate-800 p-3 rounded-xl border border-slate-700 flex justify-between items-center text-xs shadow-sm">
                   <div>
                     <span class="font-bold text-slate-100 block text-xs">${escapeHTML(e.title)}</span>
@@ -1091,7 +1198,7 @@
                   </div>
                   <div class="flex items-center gap-3">
                     <span class="font-bold text-orange-400 text-sm">৳${e.amount}</span>
-                    <button onclick="promptDeleteExpense('${e.id}')" class="w-7 h-7 bg-red-500/20 hover:bg-red-500/40 text-red-400 rounded-lg flex items-center justify-center transition" title="Delete Expense">
+                    <button onclick="promptDeleteExpense('${e.id}')" class="w-7 h-7 bg-red-500/20 hover:bg-red-500/40 text-red-400 rounded-lg flex items-center justify-center transition">
                       <i class="fa-solid fa-trash-can text-xs"></i>
                     </button>
                   </div>
@@ -1102,9 +1209,12 @@
         `;
       }
 
-      // 3. PRODUCT APPROVAL VIEW
       else if (view === 'product_approval') {
-        const pendingList = window.products.filter(p => p.status === 'pending');
+        let pendingList = window.products.filter(p => p.status === 'pending');
+        if (isRestrictedRole) {
+          pendingList = pendingList.filter(p => p.addedByUid === currentUid || p.addedBy === window.storedAdmin.name);
+        }
+
         html += `
           <h2 class="text-xs font-bold text-slate-200 mb-3 flex justify-between items-center">
             <span>${t('pendingApprovalList')}</span>
@@ -1125,10 +1235,10 @@
                   <div class="flex-1 text-xs space-y-0.5">
                     <h4 class="font-bold text-slate-100">${escapeHTML(p.name)}</h4>
                     <p class="text-slate-400 text-[10px]">${t('itemCodeText')} <span class="text-amber-400 font-bold">${escapeHTML(p.itemCode || 'N/A')}</span></p>
-                    <p class="text-slate-400 text-[10px]">${t('addedByText')} <span class="text-indigo-400 font-bold">${escapeHTML(p.addedBy || 'Sub-Admin/Dealer')}</span></p>
                     <p class="text-emerald-400 font-extrabold text-xs">৳${p.currentPrice}</p>
                   </div>
                 </div>
+                ${!isRestrictedRole ? `
                 <div class="flex gap-2 pt-2 border-t border-slate-700/80">
                   <button onclick="approveProduct('${p.id}')" class="flex-1 bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-1.5 rounded-lg text-xs shadow flex items-center justify-center gap-1 transition">
                     <i class="fa-solid fa-check text-xs"></i> Approve
@@ -1137,51 +1247,17 @@
                     Reject
                   </button>
                 </div>
+                ` : `
+                <div class="pt-2 border-t border-slate-700/80 text-center text-[10px] text-amber-400 font-semibold">
+                  ⏳ মেইন এডমিনের অনুমোদনের অপেক্ষায় রয়েছে
+                </div>
+                `}
               </div>
             `}).join('')}
           </div>
         `;
       }
 
-      // 4. DEALERS / SUB-ADMIN MANAGEMENT VIEW
-      else if (view === 'dealers') {
-        html += `
-          <div class="flex justify-between items-center mb-3">
-            <h2 class="text-xs font-bold text-slate-200">${t('dealerManagement')} (${window.dealers.length})</h2>
-            <button onclick="openAddDealerModal()" class="bg-indigo-600 hover:bg-indigo-500 text-white font-bold px-3 py-1.5 rounded-lg text-xs flex items-center gap-1 shadow">
-              <i class="fa-solid fa-plus"></i> ${t('addDealerBtn')}
-            </button>
-          </div>
-          <div class="space-y-2.5">
-            ${window.dealers.length === 0 ? `
-              <div class="bg-slate-800 p-8 rounded-2xl text-center text-xs text-slate-400 border border-slate-700">
-                <i class="fa-solid fa-users-slash text-slate-500 text-3xl mb-2"></i>
-                <p>এখনো কোনো Sub-Admin বা Dealer যুক্ত করা হয়নি!</p>
-              </div>
-            ` : window.dealers.map(d => `
-              <div class="bg-slate-800 p-3 rounded-xl border border-slate-700 space-y-1.5 text-xs shadow-sm">
-                <div class="flex justify-between items-center">
-                  <div class="flex items-center gap-2">
-                    <span class="font-bold text-slate-100 text-sm">${escapeHTML(d.name)}</span>
-                    <span class="text-[9px] px-2 py-0.5 rounded-full font-bold ${d.role === 'Sub-Admin' || d.role === 'সাব-এডমিন' ? 'bg-purple-500/20 text-purple-400 border border-purple-500/30' : 'bg-cyan-500/20 text-cyan-400 border border-cyan-500/30'}">${escapeHTML(d.role)}</span>
-                  </div>
-                  <button onclick="deleteDealer('${d.id}')" class="text-red-400 hover:bg-slate-700 p-1.5 rounded-lg transition" title="Delete Account"><i class="fa-solid fa-trash"></i></button>
-                </div>
-
-                <div class="bg-slate-900/80 p-2 rounded-lg border border-slate-700/80 space-y-1 text-slate-300">
-                  <p><i class="fa-solid fa-user-tag text-indigo-400 mr-1.5"></i> <strong>User / Phone:</strong> ${escapeHTML(d.contact)}</p>
-                  <div class="flex justify-between items-center pt-1 border-t border-slate-800">
-                    <span><i class="fa-solid fa-key text-amber-400 mr-1.5"></i> <strong>${t('secretCodeText')}</strong></span>
-                    <span class="text-amber-400 font-mono font-bold bg-slate-950 px-2 py-0.5 rounded border border-amber-500/30">${escapeHTML(d.secretCode || 'SC-NONE')}</span>
-                  </div>
-                </div>
-              </div>
-            `).join('')}
-          </div>
-        `;
-      }
-
-      // 5. PAYMENT SETUP VIEW
       else if (view === 'payment_setup') {
         html += `
           <div class="flex justify-between items-center mb-3">
@@ -1214,8 +1290,12 @@
         `;
       }
 
-      // 6. COUPONS VIEW
       else if (view === 'coupons') {
+        let filteredCoupons = window.coupons;
+        if (isRestrictedRole) {
+          filteredCoupons = window.coupons.filter(c => c.addedByUid === currentUid);
+        }
+
         html += `
           <div class="bg-slate-800 p-3.5 rounded-2xl border border-slate-700 mb-4 space-y-2.5">
             <h3 class="text-xs font-bold text-slate-200 border-b border-slate-700 pb-1.5 flex items-center gap-1.5">
@@ -1247,9 +1327,9 @@
             </button>
           </div>
 
-          <h2 class="text-xs font-bold text-slate-200 mb-2">${t('availableCoupons')} (${window.coupons.length})</h2>
+          <h2 class="text-xs font-bold text-slate-200 mb-2">${t('availableCoupons')} (${filteredCoupons.length})</h2>
           <div class="space-y-2">
-            ${window.coupons.map(c => `
+            ${filteredCoupons.map(c => `
               <div class="bg-slate-800 p-3 rounded-xl border border-slate-700 flex justify-between items-center text-xs">
                 <div>
                   <span class="font-black text-amber-400 uppercase text-sm font-mono">${escapeHTML(c.code)}</span>
@@ -1262,9 +1342,15 @@
         `;
       }
 
-      // 7. DUE LEDGER VIEW
       else if (view === 'dues') {
-        const codOrders = window.orders.filter(o => o.paymentMethod === 'cod');
+        let codOrders = window.orders.filter(o => o.paymentMethod === 'cod');
+        let filteredDues = window.dues;
+
+        if (isRestrictedRole) {
+          codOrders = codOrders.filter(o => o.items && Array.isArray(o.items) && o.items.some(i => myProductIds.has(i.productId)));
+          filteredDues = window.dues.filter(d => d.addedByUid === currentUid);
+        }
+
         html += `
           <div class="bg-slate-800 p-3 rounded-xl border border-slate-700 mb-3 space-y-2">
             <h3 class="text-xs font-bold text-slate-200 flex items-center gap-1.5">
@@ -1288,7 +1374,7 @@
               </div>
             `).join('')}
 
-            ${window.dues.map(d => `
+            ${filteredDues.map(d => `
               <div class="bg-slate-800 p-3 rounded-xl border border-slate-700 flex justify-between items-center text-xs">
                 <div>
                   <h4 class="font-bold text-slate-200">${escapeHTML(d.customerName)} (Manual)</h4>
@@ -1301,10 +1387,26 @@
         `;
       }
 
-      // 8. CUSTOMERS VIEW
       else if (view === 'customers') {
-        const totalUsers = window.customers.length;
-        const todayUsers = window.customers.filter(c => isToday(c.createdAt)).length;
+        // 🔹 যে কাস্টমাররা সাব-এডমিন/ডিলারের প্রোডাক্ট কিনেছে কেবল তাদের ফিল্টার করা
+        let filteredCustomers = window.customers;
+        if (isRestrictedRole) {
+          const myCustomerPhones = new Set();
+          window.orders.forEach(o => {
+            if (o.items && Array.isArray(o.items) && o.items.some(i => myProductIds.has(i.productId))) {
+              if (o.userPhone) myCustomerPhones.add(o.userPhone.toLowerCase().trim());
+              if (o.userId) myCustomerPhones.add(o.userId.toLowerCase().trim());
+            }
+          });
+          filteredCustomers = window.customers.filter(c => {
+            const phone = (c.contact || c.phone || '').toLowerCase().trim();
+            const uid = (c.id || '').toLowerCase().trim();
+            return myCustomerPhones.has(phone) || myCustomerPhones.has(uid);
+          });
+        }
+
+        const totalUsers = filteredCustomers.length;
+        const todayUsers = filteredCustomers.filter(c => isToday(c.createdAt)).length;
 
         html += `
           <div class="grid grid-cols-2 gap-2.5 mb-3">
@@ -1320,12 +1422,12 @@
 
           <h2 class="text-xs font-bold text-slate-200 mb-2">${t('userList')} (${totalUsers})</h2>
           <div class="space-y-2">
-            ${window.customers.map(c => `
+            ${filteredCustomers.map(c => `
               <div class="bg-slate-800 p-3 rounded-xl border border-slate-700 space-y-2 text-xs shadow-sm">
                 <div class="flex justify-between items-center font-bold text-slate-100">
                   <span class="text-indigo-400 text-sm"><i class="fa-solid fa-user text-xs mr-1"></i> ${escapeHTML(c.name || 'User')}</span>
                   <div class="flex items-center gap-2">
-                    <button onclick="promptDeleteCustomer('${c.id}')" class="w-7 h-7 bg-red-500/20 hover:bg-red-500/40 text-red-400 rounded-lg flex items-center justify-center transition" title="Delete Customer">
+                    <button onclick="promptDeleteCustomer('${c.id}')" class="w-7 h-7 bg-red-500/20 hover:bg-red-500/40 text-red-400 rounded-lg flex items-center justify-center transition">
                       <i class="fa-solid fa-trash-can text-xs"></i>
                     </button>
                   </div>
@@ -1335,21 +1437,19 @@
                   <p><i class="fa-solid fa-phone text-slate-500 mr-1.5"></i> <strong>Contact:</strong> ${escapeHTML(c.contact || c.phone || 'N/A')}</p>
                   <p><i class="fa-solid fa-location-dot text-slate-500 mr-1.5"></i> <strong>${t('address')}</strong> ${escapeHTML(c.address || t('noAddress'))}</p>
                 </div>
-
-                <div class="bg-slate-900/90 p-2 rounded-lg border border-amber-500/30 flex justify-between items-center">
-                  <span class="text-[11px] text-slate-400"><i class="fa-solid fa-key text-amber-400 mr-1"></i> Secret Code:</span>
-                  <span class="text-amber-400 font-mono font-bold text-xs bg-black/60 px-2.5 py-0.5 rounded border border-amber-500/40">${escapeHTML(c.secretCode || c.resetCode || 'SC-NONE')}</span>
-                </div>
               </div>
             `).join('')}
           </div>
         `;
       }
 
-      // 9. ORDERS MANAGEMENT VIEW
       else if (view === 'orders') {
         let filteredOrders = window.orders.filter(o => o.status !== 'Submitted (Pending Approval)' && o.status !== 'Submitted');
         
+        if (isRestrictedRole) {
+          filteredOrders = filteredOrders.filter(o => o.items && Array.isArray(o.items) && o.items.some(i => myProductIds.has(i.productId)));
+        }
+
         if (window.selectedOrderStatusFilter === 'Pending') {
           filteredOrders = filteredOrders.filter(o => o.status === 'Pending' || o.status === 'পেন্ডিং');
         } else if (window.selectedOrderStatusFilter === 'Processing') {
@@ -1420,9 +1520,12 @@
         `;
       }
 
-      // 10. PRODUCTS VIEW
       else if (view === 'products') {
         let filteredProds = window.products;
+        if (isRestrictedRole) {
+          filteredProds = filteredProds.filter(p => p.addedByUid === currentUid || p.addedBy === window.storedAdmin.name);
+        }
+
         if (window.selectedProductCat !== ' সকল ') {
           filteredProds = filteredProds.filter(p => p.category === window.selectedProductCat);
         }
@@ -1455,7 +1558,7 @@
                 </div>
                 <div class="flex items-center gap-1">
                   <span class="text-indigo-400 p-1 hover:bg-slate-700 rounded text-xs" title="Click to Edit"><i class="fa-solid fa-pen-to-square"></i></span>
-                  <button onclick="event.stopPropagation(); deleteProduct('${p.id}')" class="text-red-400 p-1.5 hover:bg-slate-700 rounded"><i class="fa-solid fa-trash text-xs"></i></button>
+                  ${!isRestrictedRole ? `<button onclick="event.stopPropagation(); deleteProduct('${p.id}')" class="text-red-400 p-1.5 hover:bg-slate-700 rounded"><i class="fa-solid fa-trash text-xs"></i></button>` : ''}
                 </div>
               </div>
             `}).join('')}
@@ -1463,9 +1566,12 @@
         `;
       }
 
-      // 11. STOCK VIEW
       else if (view === 'stock') {
         let stockProducts = window.products;
+        if (isRestrictedRole) {
+          stockProducts = stockProducts.filter(p => p.addedByUid === currentUid || p.addedBy === window.storedAdmin.name);
+        }
+
         if (window.stockSearchQuery) {
           const query = window.stockSearchQuery.toLowerCase();
           stockProducts = stockProducts.filter(p => 
@@ -1516,7 +1622,6 @@
         `;
       }
 
-      // 12. CATEGORY VIEW
       else if (view === 'category') {
         html += `
           <div class="bg-slate-800 p-3 rounded-xl border border-slate-700 mb-3 space-y-2">
@@ -1537,7 +1642,6 @@
         `;
       }
 
-      // 13. CUSTOM NOTIFICATIONS VIEW
       else if (view === 'notifications') {
         html += `
           <div class="bg-slate-800 p-3.5 rounded-2xl border border-slate-700 mb-4 space-y-3 shadow-lg">
@@ -1576,7 +1680,7 @@
                     <p class="text-slate-300 text-[11px] mt-1 leading-relaxed">${escapeHTML(n.message || '')}</p>
                     <span class="text-[9px] text-slate-400 block mt-1.5"><i class="fa-regular fa-clock mr-1"></i>${n.createdAt ? new Date(n.createdAt).toLocaleString() : 'N/A'}</span>
                   </div>
-                  <button onclick="deleteNotification('${n.id}')" class="w-7 h-7 bg-red-500/20 hover:bg-red-500/40 text-red-400 rounded-lg flex items-center justify-center shrink-0 transition" title="Delete Notification">
+                  <button onclick="deleteNotification('${n.id}')" class="w-7 h-7 bg-red-500/20 hover:bg-red-500/40 text-red-400 rounded-lg flex items-center justify-center shrink-0 transition">
                     <i class="fa-solid fa-trash-can text-xs"></i>
                   </button>
                 </div>
@@ -1646,7 +1750,7 @@
       }, 2000);
     };
 
-    // ORDER SEARCH
+    // SEARCH HANDLERS
     window.handleOrderSearch = function(val) {
       window.orderSearchQuery = val;
       renderAdminDashboard();
@@ -1657,7 +1761,6 @@
       }
     };
 
-    // STOCK SEARCH
     window.handleStockSearch = function(val) {
       window.stockSearchQuery = val;
       renderAdminDashboard();
@@ -1720,7 +1823,7 @@
       modal.classList.remove('hidden');
     };
 
-    // ORDERS APPROVAL HANDLERS WITH AUTOMATIC NOTIFICATION
+    // ORDERS APPROVAL HANDLERS WITH NOTIFICATION
     window.promptApproveOrder = function(orderId) {
       document.getElementById('confirmActionTitle').innerText = 'অর্ডার কনফার্ম করার নিশ্চয়তা';
       document.getElementById('confirmActionMsg').innerText = 'আপনি কি নিশ্চিত যে এই অর্ডারটি কনফার্ম করে Pending এ পাঠাতে চান?';
@@ -1787,7 +1890,7 @@
       document.getElementById('confirmActionModal').classList.remove('hidden');
     };
 
-    // ORDER STATUS UPDATE WITH AUTOMATIC NOTIFICATION
+    // ORDER STATUS UPDATE WITH NOTIFICATION
     window.updateOrderStatus = function(id, newStatus) {
       const order = window.orders.find(o => o.id === id);
       if (!order) return;
@@ -1863,7 +1966,13 @@
       }
 
       const newRef = push(ref(db, 'expenses'));
-      set(newRef, { date, title, amount: amt, createdAt: Date.now() });
+      set(newRef, { 
+        date, 
+        title, 
+        amount: amt, 
+        addedByUid: window.storedAdmin ? window.storedAdmin.uid : '',
+        createdAt: Date.now() 
+      });
       showAdminToast('🎉 খরচটি সফলভাবে খাতায় যুক্ত হয়েছে!');
       document.getElementById('expTitle').value = '';
       document.getElementById('expAmount').value = '';
@@ -1899,71 +2008,6 @@
         .then(() => {
           showAdminToast('🎉 প্রোডাক্টটি সফলভাবে Approved হয়েছে!');
         });
-    };
-
-    // SUB-ADMIN & DEALER CREATION
-    window.openAddDealerModal = function() {
-      const modal = document.getElementById('adminModal');
-      const body = document.getElementById('modalBody');
-      body.innerHTML = `
-        <h3 class="text-sm font-bold text-slate-100 mb-3">${t('addNewDealer')}</h3>
-        <div class="space-y-2 text-xs">
-          <div>
-            <label class="block text-slate-400 mb-1">${t('nameLabel')}</label>
-            <input type="text" id="dealerNameModal" placeholder="Full Name" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-2 text-white">
-          </div>
-          <div>
-            <label class="block text-slate-400 mb-1">${t('userContactLabel')}</label>
-            <input type="text" id="dealerContactModal" placeholder="Username/Phone" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-2 text-white">
-          </div>
-          <div>
-            <label class="block text-slate-400 mb-1">${t('passwordLabel')}</label>
-            <input type="password" id="dealerPassModal" placeholder="******" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-2 text-white">
-          </div>
-          <div>
-            <label class="block text-slate-400 mb-1">${t('roleLabel')}</label>
-            <select id="dealerRoleModal" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-2 text-white font-bold">
-              <option value="Sub-Admin">${t('subAdminRole')}</option>
-              <option value="Dealer">${t('dealerRole')}</option>
-            </select>
-          </div>
-          <button onclick="saveDealerFromModal()" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-2.5 rounded-xl text-xs shadow mt-2 transition">
-            ${t('appointBtn')}
-          </button>
-        </div>
-      `;
-      modal.classList.remove('hidden');
-    };
-
-    window.saveDealerFromModal = function() {
-      const name = document.getElementById('dealerNameModal').value.trim();
-      const contact = document.getElementById('dealerContactModal').value.trim();
-      const pass = document.getElementById('dealerPassModal').value;
-      const role = document.getElementById('dealerRoleModal').value;
-
-      if (!name || !contact || !pass) {
-        showAdminToast('সকল ঘর পূরণ করুন!');
-        return;
-      }
-      const generatedSecretCode = 'SC-' + Math.floor(100000 + Math.random() * 900000);
-      const newRef = push(ref(db, 'dealers'));
-      set(newRef, {
-        name,
-        contact,
-        password: pass,
-        role,
-        secretCode: generatedSecretCode,
-        createdAt: Date.now()
-      }).then(() => {
-        showAdminToast(`🎉 ${role} নিয়োগ দেওয়া হয়েছে! (Code: ${generatedSecretCode})`);
-        closeAdminModal();
-      });
-    };
-
-    window.deleteDealer = function(id) {
-      if (!confirm('আপনি কি এই অ্যাকাউন্টটি মুছে ফেলতে চান?')) return;
-      remove(ref(db, `dealers/${id}`));
-      showAdminToast('অ্যাকাউন্ট ডিলিট করা হয়েছে!');
     };
 
     // PRODUCT MODALS
@@ -2122,8 +2166,8 @@
         return;
       }
 
-      const isSubAdminOrDealer = window.storedAdmin && (window.storedAdmin.role === 'সাব-এডমিন' || window.storedAdmin.role === 'ডিলার' || window.storedAdmin.role === 'Sub-Admin' || window.storedAdmin.role === 'Dealer');
-      
+      const isSubAdminOrDealer = isRestrictedAdmin();
+
       const payload = {
         name,
         itemCode: itemCode || ('ITEM-' + Math.floor(1000 + Math.random() * 9000)),
@@ -2147,21 +2191,21 @@
             closeAdminModal();
           });
       } else {
-        const productStatus = isSubAdminOrDealer ? 'pending' : 'approved';
-        payload.status = productStatus;
-        payload.addedBy = window.storedAdmin ? `${window.storedAdmin.name} (${window.storedAdmin.role})` : 'Main Admin';
+        payload.status = isSubAdminOrDealer ? 'pending' : 'approved';
+        payload.addedBy = window.storedAdmin ? `${window.storedAdmin.name}` : 'Main Admin';
+        payload.addedByUid = window.storedAdmin ? window.storedAdmin.uid : '';
         payload.createdAt = Date.now();
 
         const newRef = push(ref(db, 'products'));
         set(newRef, payload).then(() => {
-          showAdminToast(isSubAdminOrDealer ? 'প্রোডাক্টটি রিকোয়েস্ট আকারে পাঠানো হয়েছে (Approval এর অপেক্ষায়)!' : 'প্রোডাক্টটি সফলভাবে সেভ করা হয়েছে!');
+          showAdminToast(isSubAdminOrDealer ? 'প্রোডাক্টটি অনুমোদনের জন্য পাঠানো হয়েছে!' : 'প্রোডাক্টটি সফলভাবে সেভ করা হয়েছে!');
           closeAdminModal();
         });
       }
     };
 
     window.deleteProduct = function(id) {
-      if (window.storedAdmin && (window.storedAdmin.role === 'সাব-এডমিন' || window.storedAdmin.role === 'ডিলার' || window.storedAdmin.role === 'Sub-Admin' || window.storedAdmin.role === 'Dealer')) {
+      if (isRestrictedAdmin()) {
         alert('⚠️ সাব-এডমিন বা ডিলার কোনো প্রোডাক্ট ডিলিট করতে পারবে না।');
         return;
       }
@@ -2242,7 +2286,6 @@
         coupons: window.coupons,
         dues: window.dues,
         expenses: window.expenses,
-        dealers: window.dealers,
         paymentMethods: window.paymentMethods,
         notifications: window.notifications,
         backupDate: new Date().toISOString()
@@ -2319,7 +2362,15 @@
         return;
       }
       const newRef = push(ref(db, 'coupons'));
-      set(newRef, { code, discountType: type, discountAmount: amt, expDate, active: true, createdAt: Date.now() });
+      set(newRef, { 
+        code, 
+        discountType: type, 
+        discountAmount: amt, 
+        expDate, 
+        active: true, 
+        addedByUid: window.storedAdmin ? window.storedAdmin.uid : '',
+        createdAt: Date.now() 
+      });
       showAdminToast('কুপন তৈরি হয়েছে!');
       renderAdminDashboard();
     };
@@ -2338,7 +2389,12 @@
         return;
       }
       const newRef = push(ref(db, 'dues'));
-      set(newRef, { customerName: cust, amount: amt, createdAt: Date.now() });
+      set(newRef, { 
+        customerName: cust, 
+        amount: amt, 
+        addedByUid: window.storedAdmin ? window.storedAdmin.uid : '',
+        createdAt: Date.now() 
+      });
       showAdminToast('বকেয়া খাতায় যোগ হয়েছে');
     };
 
