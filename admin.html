@@ -107,6 +107,25 @@
       </div>
     </div>
 
+    <!-- Exit App Modal -->
+    <div id="exitAppModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+      <div class="bg-slate-900 border border-slate-700/80 w-full max-w-xs rounded-2xl p-5 text-center space-y-3 shadow-2xl animate-fade-in">
+        <div class="w-12 h-12 bg-red-500/20 text-red-500 rounded-full flex items-center justify-center mx-auto text-xl">
+          <i class="fa-solid fa-arrow-right-from-bracket"></i>
+        </div>
+        <h3 class="text-sm font-bold text-slate-100">Exit App?</h3>
+        <p class="text-xs text-slate-400">আপনি কি এডমিন প্যানেল থেকে বের হতে চান?</p>
+        <div class="flex gap-2 pt-2">
+          <button onclick="confirmExitApp()" class="flex-1 bg-red-600 hover:bg-red-500 text-white font-bold py-2 rounded-xl text-xs transition shadow flex items-center justify-center gap-1">
+            <i class="fa-solid fa-check text-[10px]"></i> Confirm
+          </button>
+          <button onclick="closeExitAppModal()" class="flex-1 bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold py-2 rounded-xl text-xs transition flex items-center justify-center gap-1">
+            <i class="fa-solid fa-xmark text-[10px]"></i> Cancel
+          </button>
+        </div>
+      </div>
+    </div>
+
     <!-- Toast Notification -->
     <div id="adminToast" class="fixed top-16 left-1/2 -translate-x-1/2 bg-emerald-600 text-white text-xs px-4 py-2 rounded-full shadow-lg z-50 opacity-0 pointer-events-none transition-all border border-emerald-400/30">
       Message
@@ -158,7 +177,6 @@
         customersTitle: "Customers",
         couponsTitle: "Coupons",
         dueLedgerTitle: "Due Ledger",
-        backToQuickMenu: "Back to Quick Menu",
         createCoupon: "Create New Coupon",
         couponCodeLabel: "Coupon Code *",
         discountTypeLabel: "Discount Type",
@@ -247,7 +265,6 @@
         customersTitle: "Customers",
         couponsTitle: "Coupons",
         dueLedgerTitle: "Due Ledger",
-        backToQuickMenu: "কুইক মেনুতে ফেরত যান",
         createCoupon: "নতুন কুপন তৈরি করুন",
         couponCodeLabel: "কুপন কোড *",
         discountTypeLabel: "ছাড়ের ধরন",
@@ -377,18 +394,67 @@
     window.orderSearchQuery = '';
     window.confirmationResult = null;
     
-    window.currentAppVersion = localStorage.getItem('app_current_version') || 'v1.7.2';
+    window.currentAppVersion = localStorage.getItem('app_current_version') || 'v1.7.3';
     window.latestServerVersionInfo = null;
 
-    // 🔹 গ্লোবাল অ্যাডমিন ও সাব-অ্যাডমিন/ডিলার রোল নিখুঁতভাবে চেক করার ফাংশন
+    // 🔹 মোবাইল ব্যাক বাটন ও সাইড সোয়াইপ হ্যান্ডেল করার জন্য History Management
+    history.replaceState({ view: 'menu' }, '');
+
+    window.addEventListener('popstate', (event) => {
+      const modal = document.getElementById('adminModal');
+      const confirmModal = document.getElementById('confirmActionModal');
+      const exitModal = document.getElementById('exitAppModal');
+
+      // ১. যদি কোনো মোডাল বা পপআপ খোলা থাকে, ব্যাক চাপলে আগে মোডাল বন্ধ হবে
+      if (exitModal && !exitModal.classList.contains('hidden')) {
+        closeExitAppModal();
+        return;
+      }
+      if (modal && !modal.classList.contains('hidden')) {
+        closeAdminModal();
+        return;
+      }
+      if (confirmModal && !confirmModal.classList.contains('hidden')) {
+        closeConfirmActionModal();
+        return;
+      }
+
+      // ২. যদি সাব-ভিউতে থাকে, ব্যাক চাপলে ড্যাশবোর্ডে (menu) ফিরে যাবে
+      if (window.activeView !== 'menu') {
+        window.activeView = 'menu';
+        renderAdminDashboard();
+        return;
+      }
+
+      // ৩. যদি অলরেডি মেইন ড্যাশবোর্ডে (menu) থাকে, ব্যাক চাপলে স্মার্ট এক্সিট মোডাল শো করবে
+      if (window.activeView === 'menu') {
+        openExitAppModal();
+      }
+    });
+
+    window.openExitAppModal = function() {
+      const exitModal = document.getElementById('exitAppModal');
+      if (exitModal) exitModal.classList.remove('hidden');
+      // হিস্ট্রি স্টেট ধরে রাখা যেন অ্যাপ সাথে সাথে ক্লোজ না হয়
+      history.pushState({ view: 'menu' }, '');
+    };
+
+    window.closeExitAppModal = function() {
+      const exitModal = document.getElementById('exitAppModal');
+      if (exitModal) exitModal.classList.add('hidden');
+    };
+
+    window.confirmExitApp = function() {
+      closeExitAppModal();
+      history.back(); // ব্রাউজার বা পিডব্লিউএ ট্যাব ব্যাক/ক্লোজ করা
+    };
+
+    // 🔹 গ্লোবাল অ্যাডমিন ও সাব-অ্যাডমিন/ডিলার রোল চেক করার ফাংশন
     window.isRestrictedAdmin = function() {
       if (!window.storedAdmin) return false;
-      
-      // গ্লোবাল অ্যাডমিন হলে সে কোনো ফিল্টারের আওতায় থাকবে না (সম্পূর্ণ এক্সেস পাবে)
       if (window.storedAdmin.uid === ADMIN_UID || window.storedAdmin.role === 'Main Admin') {
         return false;
       }
-      
       const roleStr = String(window.storedAdmin.role || '').toLowerCase();
       return roleStr.includes('sub') || roleStr.includes('dealer') || roleStr.includes('ডিলার');
     };
@@ -413,9 +479,9 @@
 
     // REAL-TIME DATABASE LISTENERS
     function startAdminSync() {
-onValue(ref(db, 'app_update/admin'), snap => {
-  window.latestServerVersionInfo = snap.val() || null;
-});
+      onValue(ref(db, 'app_update/admin'), snap => {
+        window.latestServerVersionInfo = snap.val() || null;
+      });
 
       onValue(ref(db, 'products'), snap => {
         const data = snap.val() || {};
@@ -488,7 +554,6 @@ onValue(ref(db, 'app_update/admin'), snap => {
           get(ref(db, 'Dealers')).then((snap) => {
             const dealers = snap.val() || {};
             const userEmail = (user.email || '').toLowerCase().trim();
-            
             const dealerKey = Object.keys(dealers).find(k => (dealers[k].contact || '').toLowerCase().trim() === userEmail);
             
             let userRole = 'Sub-Admin';
@@ -611,7 +676,7 @@ onValue(ref(db, 'app_update/admin'), snap => {
               
               initAdminView();
             }).catch(() => {
-              const session = { name: 'User', contact: user.email, role: 'Sub-Admin', uid: user.uid };
+              const session = { name: 'User', contact: user.email, role: userRole, uid: user.uid };
               window.storedAdmin = session;
               localStorage.setItem('app_admin_session', JSON.stringify(session));
               initAdminView();
@@ -623,7 +688,7 @@ onValue(ref(db, 'app_update/admin'), snap => {
         });
     };
 
-    // CREATE NEW ACCOUNT MODAL (SAVES DIRECTLY TO 'Dealers' NODE)
+    // CREATE NEW ACCOUNT MODAL
     window.openCreateAccountModal = function() {
       const modal = document.getElementById('adminModal');
       const body = document.getElementById('modalBody');
@@ -731,13 +796,8 @@ onValue(ref(db, 'app_update/admin'), snap => {
 
     window.switchAdminTab = function(tab) {
       if (!window.storedAdmin) return;
-      if (tab === 'dashboard') {
-        window.activeView = 'menu';
-        renderAdminDashboard();
-      } else if (tab === 'settings') {
-        window.activeView = 'settings';
-        renderAdminDashboard();
-      }
+      const newView = (tab === 'dashboard') ? 'menu' : 'settings';
+      openSubView(newView);
     };
 
     window.renderAdminDashboard = function() {
@@ -858,7 +918,7 @@ onValue(ref(db, 'app_update/admin'), snap => {
       const lowStockCount = relevantProducts.filter(p => Number(p.stock) <= 5).length;
       const pendingProductsCount = relevantProducts.filter(p => p.status === 'pending').length;
 
-      // 🔹 সাব-এডমিন ও ডিলারের কুইক মেনু বার (৭টি নির্দিষ্ট ফিচার)
+      // 🔹 সাব-এডমিন ও ডিলারের কুইক মেনু বার
       if (isRestrictedRole) {
         main.innerHTML = `
           <div class="bg-indigo-950/60 p-4 rounded-2xl border border-indigo-800 text-xs flex justify-between items-center shadow-lg">
@@ -875,7 +935,6 @@ onValue(ref(db, 'app_update/admin'), snap => {
             <h2 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">${t('assignedFeatures')}</h2>
             
             <div class="grid grid-cols-2 gap-3">
-              <!-- ১. প্রোডাক্টস (Products) -->
               <button onclick="openSubView('products')" class="unique-nav-card p-4 rounded-2xl flex flex-col items-center text-center relative group">
                 <div class="w-11 h-11 rounded-2xl bg-indigo-500/10 text-indigo-400 flex items-center justify-center mb-1.5 group-hover:scale-110 transition border border-indigo-500/20">
                   <i class="fa-solid fa-boxes-stacked text-lg"></i>
@@ -883,7 +942,6 @@ onValue(ref(db, 'app_update/admin'), snap => {
                 <span class="text-xs font-bold text-slate-200">${t('productsTitle')}</span>
               </button>
 
-              <!-- ২. অর্ডারস (Orders) -->
               <button onclick="openSubView('orders')" class="unique-nav-card p-4 rounded-2xl flex flex-col items-center text-center relative group">
                 ${pendingOrders > 0 ? `<span class="absolute top-2 right-2 bg-red-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow-lg">${pendingOrders}</span>` : ''}
                 <div class="w-11 h-11 rounded-2xl bg-amber-500/10 text-amber-400 flex items-center justify-center mb-1.5 group-hover:scale-110 transition border border-amber-500/20">
@@ -892,7 +950,6 @@ onValue(ref(db, 'app_update/admin'), snap => {
                 <span class="text-xs font-bold text-slate-200">${t('ordersTitle')}</span>
               </button>
 
-              <!-- ৩. এপ্রুভাল স্ট্যাটাস (Products Approval Status) -->
               <button onclick="openSubView('product_approval')" class="unique-nav-card p-4 rounded-2xl flex flex-col items-center text-center relative group">
                 ${pendingProductsCount > 0 ? `<span class="absolute top-2 right-2 bg-teal-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full animate-pulse shadow-lg">${pendingProductsCount}</span>` : ''}
                 <div class="w-11 h-11 rounded-2xl bg-teal-500/10 text-teal-400 flex items-center justify-center mb-1.5 group-hover:scale-110 transition border border-teal-500/20">
@@ -901,7 +958,6 @@ onValue(ref(db, 'app_update/admin'), snap => {
                 <span class="text-xs font-bold text-slate-200">${t('productApprovalTitle')}</span>
               </button>
 
-              <!-- ৪. ডিউ লেজার (Due Ledger) -->
               <button onclick="openSubView('dues')" class="unique-nav-card p-4 rounded-2xl flex flex-col items-center text-center relative group">
                 <div class="w-11 h-11 rounded-2xl bg-red-500/10 text-red-400 flex items-center justify-center mb-1.5 group-hover:scale-110 transition border border-red-500/20">
                   <i class="fa-solid fa-book-bookmark text-lg"></i>
@@ -909,7 +965,6 @@ onValue(ref(db, 'app_update/admin'), snap => {
                 <span class="text-xs font-bold text-slate-200">${t('dueLedgerTitle')}</span>
               </button>
 
-              <!-- ৫. এক্সপেন্স লেজার (Expense Ledger) -->
               <button onclick="openSubView('expenses')" class="unique-nav-card p-4 rounded-2xl flex flex-col items-center text-center relative group">
                 <div class="w-11 h-11 rounded-2xl bg-orange-500/10 text-orange-400 flex items-center justify-center mb-1.5 group-hover:scale-110 transition border border-orange-500/20">
                   <i class="fa-solid fa-calculator text-lg"></i>
@@ -917,7 +972,6 @@ onValue(ref(db, 'app_update/admin'), snap => {
                 <span class="text-xs font-bold text-slate-200">${t('expenseLedgerTitle')}</span>
               </button>
 
-              <!-- ৬. কাস্টমারস (Customers) -->
               <button onclick="openSubView('customers')" class="unique-nav-card p-4 rounded-2xl flex flex-col items-center text-center relative group">
                 <div class="w-11 h-11 rounded-2xl bg-purple-500/10 text-purple-400 flex items-center justify-center mb-1.5 group-hover:scale-110 transition border border-purple-500/20">
                   <i class="fa-solid fa-users text-lg"></i>
@@ -925,7 +979,6 @@ onValue(ref(db, 'app_update/admin'), snap => {
                 <span class="text-xs font-bold text-slate-200">${t('customersTitle')}</span>
               </button>
 
-              <!-- ৭. কুপনস (Coupons) -->
               <button onclick="openSubView('coupons')" class="unique-nav-card p-4 rounded-2xl flex flex-col items-center text-center relative group col-span-2">
                 <div class="w-11 h-11 rounded-2xl bg-rose-500/10 text-rose-400 flex items-center justify-center mb-1.5 group-hover:scale-110 transition border border-rose-500/20">
                   <i class="fa-solid fa-ticket text-lg"></i>
@@ -1054,9 +1107,13 @@ onValue(ref(db, 'app_update/admin'), snap => {
       `;
     };
 
+    // 🔹 সাব-ভিউ পরিবর্তন ও ব্রাউজার হিস্টোরি পুশ করা
     window.openSubView = function(view) {
-      window.activeView = view;
-      renderAdminDashboard();
+      if (window.activeView !== view) {
+        window.activeView = view;
+        history.pushState({ view: view }, '');
+        renderAdminDashboard();
+      }
     };
 
     window.setOrderStatusFilter = function(status) {
@@ -1076,11 +1133,7 @@ onValue(ref(db, 'app_update/admin'), snap => {
       }
       const myProductIds = new Set(myProducts.map(p => p.id));
 
-      let html = `
-        <button onclick="${view === 'payment_setup' ? "switchAdminTab('settings')" : "openSubView('menu')"}" class="text-xs bg-slate-800 hover:bg-slate-700 text-slate-300 px-3 py-1.5 rounded-xl mb-3 flex items-center gap-1.5 font-bold transition">
-          <i class="fa-solid fa-arrow-left text-[10px]"></i> ${view === 'payment_setup' ? 'Back to Settings' : t('backToQuickMenu')}
-        </button>
-      `;
+      let html = '';
 
       if (view === 'orders_approval') {
         let submittedOrders = window.orders.filter(o => o.status === 'Submitted (Pending Approval)' || o.status === 'Submitted');
@@ -1137,7 +1190,6 @@ onValue(ref(db, 'app_update/admin'), snap => {
       }
 
       else if (view === 'expenses') {
-        // 🔹 ডিলারের এক্সপেন্স লেজার শুধুমাত্র নিজস্ব হিসাব প্রদর্শন করবে
         let filteredExpenses = window.expenses;
         if (isRestrictedRole) {
           filteredExpenses = window.expenses.filter(e => e.addedByUid === currentUid);
@@ -1388,7 +1440,6 @@ onValue(ref(db, 'app_update/admin'), snap => {
       }
 
       else if (view === 'customers') {
-        // 🔹 যে কাস্টমাররা সাব-এডমিন/ডিলারের প্রোডাক্ট কিনেছে কেবল তাদের ফিল্টার করা
         let filteredCustomers = window.customers;
         if (isRestrictedRole) {
           const myCustomerPhones = new Set();
@@ -1693,7 +1744,7 @@ onValue(ref(db, 'app_update/admin'), snap => {
       main.innerHTML = html;
     }
 
-    // CHECK APP UPDATE
+    // CHECK APP UPDATE LOGIC
     window.checkAppUpdate = function() {
       showAdminToast("🔍 Checking for updates...");
       setTimeout(() => {
@@ -1702,34 +1753,34 @@ onValue(ref(db, 'app_update/admin'), snap => {
         const serverVer = window.latestServerVersionInfo;
 
         if (serverVer && serverVer.version && serverVer.version !== window.currentAppVersion) {
+          const sizeText = serverVer.size || '11.17 MB';
+          const warningText = serverVer.warning || 'Online features will be locked unless you download the data.';
+
           body.innerHTML = `
-            <div class="space-y-3 text-xs text-slate-200 text-center py-2">
-              <div class="w-14 h-14 bg-indigo-500/20 text-indigo-400 rounded-full flex items-center justify-center mx-auto text-2xl border border-indigo-500/30 animate-bounce">
-                <i class="fa-solid fa-rocket"></i>
+            <div class="space-y-4 text-xs text-slate-200 text-center py-2">
+              <h3 class="font-bold text-base text-slate-100">Download Latest Data?</h3>
+              <p class="text-slate-300 leading-relaxed text-xs px-2">${escapeHTML(warningText)}</p>
+              <p class="font-bold text-slate-200 text-sm">Data size: ${escapeHTML(sizeText)}</p>
+              
+              <div class="flex gap-2 pt-2">
+                <button onclick="closeAdminModal()" class="flex-1 bg-sky-200/80 hover:bg-sky-200 text-slate-800 font-bold py-2.5 rounded-xl text-xs transition">
+                  Cancel
+                </button>
+                <button onclick="startLiveDownload('${escapeHTML(serverVer.version)}')" class="flex-1 bg-sky-300 hover:bg-sky-400 text-slate-900 font-bold py-2.5 rounded-xl text-xs transition">
+                  Download
+                </button>
               </div>
-              <h3 class="font-bold text-sm text-slate-100">নতুন আপডেট উপলভ্য আছে!</h3>
-              <div class="bg-slate-950 p-3 rounded-xl border border-slate-800 space-y-1 text-left">
-                <p><strong>বর্তমান ভার্সন:</strong> <span class="text-slate-400">${window.currentAppVersion}</span></p>
-                <p><strong>নতুন ভার্সন:</strong> <span class="text-emerald-400 font-bold">${escapeHTML(serverVer.version)}</span></p>
-                <p class="text-[11px] text-slate-400 pt-1"><strong>আপডেট নোট:</strong> ${escapeHTML(serverVer.notes) || 'বাগ ফিক্সিং ও পারফরম্যান্স উন্নতি।'}</p>
-              </div>
-              <button onclick="downloadAppUpdate('${escapeHTML(serverVer.version)}')" class="w-full bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold py-2.5 rounded-xl text-xs shadow-lg transition flex justify-center items-center gap-1.5">
-                <i class="fa-solid fa-download"></i> Download & Install Update (${escapeHTML(serverVer.version)})
-              </button>
-              <button onclick="closeAdminModal()" class="w-full bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold py-2 rounded-xl text-xs transition">
-                Cancel
-              </button>
             </div>
           `;
         } else {
           body.innerHTML = `
             <div class="space-y-3 text-xs text-slate-200 text-center py-3">
-              <div class="w-14 h-14 bg-emerald-500/20 text-emerald-400 rounded-full flex items-center justify-center mx-auto text-2xl border border-emerald-500/30">
-                <i class="fa-solid fa-circle-check"></i>
+              <div class="w-12 h-12 bg-emerald-500/20 text-emerald-400 rounded-full flex items-center justify-center mx-auto text-xl border border-emerald-500/30">
+                <i class="fa-solid fa-check"></i>
               </div>
-              <h3 class="font-bold text-sm text-slate-100">আপনার অ্যাপটি আপডেট আছে!</h3>
-              <p class="text-slate-400 text-[11px]">বর্তমানে আপনি লেটেস্ট ভার্সন (<span class="text-emerald-400 font-bold">${window.currentAppVersion}</span>) ব্যবহার করছেন।</p>
-              <button onclick="closeAdminModal()" class="w-full bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold py-2 rounded-xl text-xs transition">
+              <h3 class="font-bold text-base text-slate-100">আপনার অ্যাপটি আপডেট আছে!</h3>
+              <p class="text-slate-400 text-xs">বর্তমানে আপনি লেটেস্ট ভার্সন (<span class="text-emerald-400 font-bold">${window.currentAppVersion}</span>) ব্যবহার করছেন।</p>
+              <button onclick="closeAdminModal()" class="w-full bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold py-2.5 rounded-xl text-xs transition">
                 ঠিক আছে
               </button>
             </div>
@@ -1739,16 +1790,76 @@ onValue(ref(db, 'app_update/admin'), snap => {
       }, 800);
     };
 
-    window.downloadAppUpdate = function(version) {
-      closeAdminModal();
+    // LIVE DOWNLOAD PROCESS
+    window.startLiveDownload = function(version) {
+      const body = document.getElementById('modalBody');
       showAdminToast(`📥 Downloading update ${version}...`);
-      setTimeout(() => {
-        window.currentAppVersion = version;
-        localStorage.setItem('app_current_version', version);
-        showAdminToast(`🎉 অ্যাপ সফলভাবে ${version} ভার্সনে আপডেট হয়েছে!`);
-        renderAdminDashboard();
-      }, 2000);
+
+      body.innerHTML = `
+        <div class="space-y-4 text-xs text-slate-200 text-center py-3">
+          <h3 class="font-bold text-base text-slate-100">Live Update in Progress</h3>
+          <p class="text-slate-300 text-xs leading-relaxed px-2">Applying the Live Update ensures you will play with the latest team roster and player data.</p>
+          
+          <div class="py-2">
+            <span id="downloadProgressPercent" class="font-bold text-slate-100 text-sm block mb-2">0%</span>
+            <div class="w-full bg-slate-800 rounded-full h-2.5 overflow-hidden border border-slate-700">
+              <div id="downloadProgressBar" class="bg-blue-500 h-2.5 rounded-full transition-all duration-100" style="width: 0%"></div>
+            </div>
+          </div>
+        </div>
+      `;
+
+      let progress = 0;
+      const interval = setInterval(() => {
+        progress += 5;
+        const bar = document.getElementById('downloadProgressBar');
+        const txt = document.getElementById('downloadProgressPercent');
+
+        if (bar && txt) {
+          bar.style.width = progress + '%';
+          txt.innerText = progress + '%';
+        }
+
+        if (progress >= 100) {
+          clearInterval(interval);
+          window.currentAppVersion = version;
+          localStorage.setItem('app_current_version', version);
+          showAdminToast(`🎉 অ্যাপ সফলভাবে ${version} ভার্সনে আপডেট হয়েছে!`);
+          
+          showUpdateFeaturesModal(version);
+          renderAdminDashboard();
+        }
+      }, 100);
     };
+
+    // SHOW UPDATED FEATURES / CHANGELOG
+    function showUpdateFeaturesModal(version) {
+      const modal = document.getElementById('adminModal');
+      const body = document.getElementById('modalBody');
+      const serverVer = window.latestServerVersionInfo;
+
+      const features = serverVer && serverVer.changelog 
+        ? serverVer.changelog 
+        : ['নতুন ডায়নামিক ফিচারস যুক্ত করা হয়েছে', 'পারফরম্যান্স ও ইউজার ইন্টারফেস উন্নত করা হয়েছে', 'বাগ ফিক্সিং সম্পন্ন করা হয়েছে'];
+
+      body.innerHTML = `
+        <div class="space-y-3 text-xs text-slate-200 py-1">
+          <div class="w-12 h-12 bg-emerald-500/20 text-emerald-400 rounded-full flex items-center justify-center mx-auto text-xl border border-emerald-500/30">
+            <i class="fa-solid fa-sparkles"></i>
+          </div>
+          <h3 class="font-bold text-sm text-slate-100 text-center">নতুন ভার্সন (${version}) ফিচারসমূহ</h3>
+          
+          <div class="bg-slate-950 p-3 rounded-xl border border-slate-800 space-y-1.5 text-left">
+            ${features.map(f => `<p class="flex items-start gap-1.5 text-slate-300"><i class="fa-solid fa-circle-check text-emerald-400 text-xs mt-0.5 shrink-0"></i> <span>${escapeHTML(f)}</span></p>`).join('')}
+          </div>
+
+          <button onclick="closeAdminModal()" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-2 rounded-xl text-xs transition">
+            ঠিক আছে
+          </button>
+        </div>
+      `;
+      modal.classList.remove('hidden');
+    }
 
     // SEARCH HANDLERS
     window.handleOrderSearch = function(val) {

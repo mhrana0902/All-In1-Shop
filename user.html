@@ -32,9 +32,6 @@
     <!-- Top Header Bar -->
     <header id="mainHeader" class="bg-gradient-to-r from-indigo-600 to-purple-600 text-white p-3.5 sticky top-0 z-30 shadow-md flex justify-between items-center hidden">
       <div class="flex items-center gap-2">
-        <button id="globalBackBtn" onclick="goBackToHome()" class="w-7 h-7 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center text-xs text-white hidden">
-          <i class="fa-solid fa-arrow-left"></i>
-        </button>
         <i class="fa-solid font-bold text-xl text-yellow-300 fa-bag-shopping"></i>
         <div>
           <h1 class="font-black text-base leading-tight">All In1 Shop</h1>
@@ -103,7 +100,7 @@
     <!-- Custom App Update Modal Popup -->
     <div id="appUpdateModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[65] flex items-center justify-center p-4 hidden transition-all">
       <div class="bg-slate-900 text-slate-100 border border-slate-800 w-full max-w-xs rounded-3xl p-5 relative shadow-2xl text-center space-y-4">
-        <button onclick="closeAppUpdateModal()" class="absolute top-3 right-3 w-7 h-7 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center justify-center text-xs transition">
+        <button id="modalCloseXBtn" onclick="closeAppUpdateModal()" class="absolute top-3 right-3 w-7 h-7 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center justify-center text-xs transition">
           <i class="fa-solid fa-xmark"></i>
         </button>
         <div id="updateModalIconContainer" class="w-16 h-16 bg-indigo-600/20 text-indigo-400 rounded-full flex items-center justify-center mx-auto text-2xl shadow-inner border border-indigo-500/30">
@@ -113,25 +110,38 @@
           <h3 id="updateModalTitle" class="text-sm font-extrabold text-white">নতুন আপডেট উপলব্ধ আছে!</h3>
           <p id="updateModalSubTitle" class="text-[11px] text-slate-400">সর্বশেষ ভার্সন ইন্সটল করে নতুন সুবিধা উপভোগ করুন</p>
         </div>
+        
         <div id="updateDetailsBox" class="bg-slate-950/80 p-3 rounded-2xl border border-slate-800 text-left space-y-1.5 text-xs">
           <div class="flex justify-between items-center text-[11px]">
             <span class="text-slate-400">বর্তমান ভার্সন:</span>
-            <span id="currentVersionVal" class="font-mono font-bold text-slate-300">v1.7.2</span>
+            <span id="currentVersionVal" class="font-mono font-bold text-slate-300">v1.7.3</span>
           </div>
           <div class="flex justify-between items-center text-[11px]">
             <span class="text-slate-400">নতুন ভার্সন:</span>
-            <span id="newVersionVal" class="font-mono font-bold text-emerald-400">v1.7.2</span>
+            <span id="newVersionVal" class="font-mono font-bold text-emerald-400">v1.7.3</span>
           </div>
           <div class="pt-1 border-t border-slate-800">
-            <span class="text-[10px] text-slate-400 block font-bold">আপডেট নোট:</span>
-            <p id="updateNotesVal" class="text-[10px] text-slate-300 leading-relaxed">নতুন আপডেট ও ডাইরেক্ট লিংক শেয়ারিং সুবিধা যুক্ত করা হয়েছে।</p>
+            <span class="text-[10px] text-slate-400 block font-bold">আপডেট নোট & সাইজ:</span>
+            <p id="updateNotesVal" class="text-[10px] text-slate-300 leading-relaxed">কোনো নতুন আপডেট নেই।</p>
           </div>
         </div>
-        <div class="space-y-2 pt-1">
+
+        <!-- 🚀 Live Download Progress UI -->
+        <div id="downloadProgressContainer" class="space-y-1.5 text-left hidden">
+          <div class="flex justify-between text-[11px] font-bold text-slate-300">
+            <span id="downloadStatusText">Downloading...</span>
+            <span id="downloadPercentText" class="text-indigo-400 font-mono">0%</span>
+          </div>
+          <div class="w-full bg-slate-800 h-2.5 rounded-full overflow-hidden p-0.5 border border-slate-700">
+            <div id="downloadProgressBar" class="bg-gradient-to-r from-indigo-500 to-emerald-400 h-full rounded-full transition-all duration-200" style="width: 0%"></div>
+          </div>
+        </div>
+
+        <div id="updateActionButtons" class="space-y-2 pt-1">
           <button id="downloadUpdateBtn" onclick="triggerAppDownload()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2.5 rounded-xl text-xs shadow-lg transition flex items-center justify-center gap-1.5">
             <i class="fa-solid fa-download"></i> <span id="downloadBtnText">Download & Install Update</span>
           </button>
-          <button onclick="closeAppUpdateModal()" class="w-full bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold py-2 rounded-xl text-xs transition">
+          <button id="cancelUpdateBtn" onclick="closeAppUpdateModal()" class="w-full bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold py-2 rounded-xl text-xs transition">
             Cancel
           </button>
         </div>
@@ -224,6 +234,29 @@
       </div>
     </div>
 
+    <!-- ✨ SMART EXIT APP CONFIRMATION MODAL WITH ICONS -->
+    <div id="exitAppModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-[110] flex items-center justify-center p-4 hidden">
+      <div class="bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-800 w-full max-w-xs rounded-3xl p-5 text-center space-y-4 shadow-2xl relative animate-in fade-in zoom-in duration-200">
+        <div class="w-14 h-14 bg-red-100 dark:bg-red-950/80 text-red-600 dark:text-red-400 rounded-full flex items-center justify-center mx-auto text-2xl shadow">
+          <i class="fa-solid fa-right-from-bracket"></i>
+        </div>
+        <div class="space-y-1">
+          <h3 class="text-base font-extrabold text-gray-800 dark:text-slate-100">Exit App?</h3>
+          <p class="text-xs text-gray-500 dark:text-slate-400">আপনি কি নিশ্চিত যে অ্যাপ থেকে বের হতে চান?</p>
+        </div>
+        <div class="grid grid-cols-2 gap-2.5 pt-1">
+          <button onclick="confirmExitApp()" class="w-full bg-red-600 hover:bg-red-700 active:scale-95 text-white font-bold py-2.5 rounded-xl text-xs shadow-md transition flex items-center justify-center gap-1.5">
+            <i class="fa-solid fa-check text-xs"></i>
+            <span>Confirm</span>
+          </button>
+          <button onclick="closeExitAppModal()" class="w-full bg-gray-200 dark:bg-slate-800 hover:bg-gray-300 dark:hover:bg-slate-700 active:scale-95 text-gray-800 dark:text-slate-200 font-bold py-2.5 rounded-xl text-xs transition flex items-center justify-center gap-1.5">
+            <i class="fa-solid fa-xmark text-xs"></i>
+            <span>Cancel</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
     <!-- Toast Notification -->
     <div id="toast" class="fixed top-16 left-1/2 -translate-x-1/2 bg-gray-900 text-white text-xs px-4 py-2 rounded-full shadow-lg z-50 transition-all opacity-0 pointer-events-none">
       Message
@@ -281,6 +314,7 @@
         smartSearchPlaceholder: "🔍 Search by Product Name or Item Code...",
         featuredBannerTitle: "✨ New Arrival Featured Deals",
         flashSaleTitle: "🔥 Flash Sale",
+        bestSellingTitle: "🏆 Best Selling Products",
         popularCategories: "Popular Categories",
         allCategories: "All",
         noProductsFound: "No products found matching your search",
@@ -389,6 +423,7 @@
         smartSearchPlaceholder: "🔍 পণ্যের নাম বা আইটেম কোড দিয়ে সার্চ করুন...",
         featuredBannerTitle: "✨ নতুন অ্যারাইভাল কালেকশন ও অফার",
         flashSaleTitle: "🔥 Flash Sale",
+        bestSellingTitle: "🏆 বেস্ট সেলিং কালেকশন",
         popularCategories: "Popular Categories",
         allCategories: "All",
         noProductsFound: "আপনার সার্চে কোনো পণ্য পাওয়া যায়নি",
@@ -486,7 +521,7 @@
       });
 
       if (window.switchTab && window.currentTab) {
-        window.switchTab(window.currentTab);
+        window.switchTab(window.currentTab, false);
       }
     }
 
@@ -550,18 +585,97 @@
     window.showPaymentModal = false;
     window.currentBannerIndex = 0;
     window.flashSaleIndex = 0;
+    window.bestSellingIndex = 0;
     window.bannerTimer = null;
     window.flashTimer = null;
+    window.bestSellingTimer = null;
     window.countdownTimer = null;
-    window.userAppVersion = "v1.7.2";
+    
+    // Dynamic App Update Tracker Variable (একদম কারেন্ট আসল ভার্সন)
+    window.userAppVersion = localStorage.getItem('app_installed_version') || "v1.7.3";
     window.latestAppUpdate = null;
     window.currentProductDetails = null;
+
+    // 📱 ডিভাইস জেশ্চার / সোয়াইপ ব্যাক ইন্টিগ্রেশন (Popstate Handling)
+    function pushStateToHistory(stateData) {
+      history.pushState(stateData, '', location.href);
+    }
+    
+    pushStateToHistory({ page: 'home' });
+
+    window.addEventListener('popstate', (event) => {
+      const productModal = document.getElementById('productModal');
+      const singleNotifModal = document.getElementById('singleNotifModal');
+      const imageZoomModal = document.getElementById('imageZoomModal');
+      const statusActionModal = document.getElementById('statusActionModal');
+      const appUpdateModal = document.getElementById('appUpdateModal');
+      const exitAppModal = document.getElementById('exitAppModal');
+
+      if (exitAppModal && !exitAppModal.classList.contains('hidden')) {
+        closeExitAppModal();
+        return;
+      }
+      if (productModal && !productModal.classList.contains('hidden')) {
+        closeProductModal();
+        return;
+      }
+      if (singleNotifModal && !singleNotifModal.classList.contains('hidden')) {
+        closeSingleNotifModal();
+        return;
+      }
+      if (imageZoomModal && !imageZoomModal.classList.contains('hidden')) {
+        closeImageZoomModal();
+        return;
+      }
+      if (statusActionModal && !statusActionModal.classList.contains('hidden')) {
+        closeStatusModal();
+        return;
+      }
+      if (appUpdateModal && !appUpdateModal.classList.contains('hidden')) {
+        closeAppUpdateModal();
+        return;
+      }
+
+      if (window.currentProductDetails) {
+        window.currentProductDetails = null;
+        renderDashboard();
+        return;
+      }
+
+      if (window.currentTab === 'settings' && window.accountSubPage !== 'menu') {
+        window.accountSubPage = 'menu';
+        renderSettings();
+        return;
+      }
+
+      if (window.currentTab !== 'dashboard') {
+        switchTab('dashboard', false);
+        return;
+      }
+
+      showExitAppModal();
+      pushStateToHistory({ page: 'home' });
+    });
+
+    window.showExitAppModal = function() {
+      const modal = document.getElementById('exitAppModal');
+      if (modal) modal.classList.remove('hidden');
+    };
+
+    window.closeExitAppModal = function() {
+      const modal = document.getElementById('exitAppModal');
+      if (modal) modal.classList.add('hidden');
+    };
+
+    window.confirmExitApp = function() {
+      closeExitAppModal();
+      history.go(-2);
+    };
 
     // Firebase Auth Observer Integration
     onAuthStateChanged(auth, (user) => {
       if (user) {
         window.currentUser = user;
-        
         onValue(ref(db, `customers/${user.uid}`), (snapshot) => {
           const profile = snapshot.val();
           if (profile) {
@@ -576,7 +690,6 @@
           }
           initAppView();
         });
-
       } else {
         window.currentUser = null;
         window.storedAccount = null;
@@ -822,10 +935,11 @@
         if (window.currentTab === 'cart') renderCart();
       });
 
-onValue(ref(db, 'app_update/user'), (snapshot) => {
-  window.latestAppUpdate = snapshot.val() || null;
-});
-}
+      // Realtime Database-এর আপডেট ট্র্যাকার
+      onValue(ref(db, 'app_update/user'), (snapshot) => {
+        window.latestAppUpdate = snapshot.val() || null;
+      });
+    }
 
     startRealtimeSync();
 
@@ -846,34 +960,13 @@ onValue(ref(db, 'app_update/user'), (snapshot) => {
       }
     }
 
-    window.goBackToHome = function() {
-      if (window.currentProductDetails) {
-        window.currentProductDetails = null;
-        renderDashboard();
-        return;
-      }
-      if (window.currentTab === 'notifications') {
-        switchTab('dashboard');
-        return;
-      }
-      if (window.currentTab === 'settings' && window.accountSubPage !== 'menu') {
-        window.accountSubPage = 'menu';
-        renderSettings();
-      } else {
-        switchTab('dashboard');
-      }
-    };
-
-    window.switchTab = function(tabName) {
+    window.switchTab = function(tabName, shouldPushHistory = true) {
       if (!window.storedAccount) return;
       window.currentProductDetails = null;
       window.currentTab = tabName;
 
-      const backBtn = document.getElementById('globalBackBtn');
-      if (tabName !== 'dashboard') {
-        backBtn.classList.remove('hidden');
-      } else {
-        backBtn.classList.add('hidden');
+      if (shouldPushHistory) {
+        pushStateToHistory({ page: tabName });
       }
 
       ['dashboard', 'categories_tab', 'wishlist', 'cart', 'settings'].forEach(t => {
@@ -936,9 +1029,6 @@ onValue(ref(db, 'app_update/user'), (snapshot) => {
       main.innerHTML = `
         <div class="space-y-3 pb-8">
           <div class="flex items-center justify-between bg-white dark:bg-slate-900 p-3 rounded-2xl border dark:border-slate-800 shadow-sm sticky top-0 z-20">
-            <button onclick="goBackToHome()" class="flex items-center gap-1.5 text-xs font-bold text-gray-700 dark:text-slate-200 bg-gray-100 dark:bg-slate-800 px-3 py-1.5 rounded-xl transition hover:bg-gray-200">
-              <i class="fa-solid fa-arrow-left"></i> ${t('home')}
-            </button>
             <h2 class="text-xs font-bold text-gray-800 dark:text-slate-200 uppercase tracking-wider flex items-center gap-1.5">
               <i class="fa-solid fa-bell text-amber-500"></i> ${t('notificationsTitle')}
             </h2>
@@ -1126,9 +1216,10 @@ onValue(ref(db, 'app_update/user'), (snapshot) => {
       window.countdownTimer = setInterval(updateClock, 1000);
     }
 
-    function startSlideIntervals(featuredLen, flashLen) {
+    function startSlideIntervals(featuredLen, flashLen, bestLen) {
       if (window.bannerTimer) clearInterval(window.bannerTimer);
       if (window.flashTimer) clearInterval(window.flashTimer);
+      if (window.bestSellingTimer) clearInterval(window.bestSellingTimer);
 
       if (featuredLen > 1) {
         window.bannerTimer = setInterval(() => {
@@ -1155,25 +1246,90 @@ onValue(ref(db, 'app_update/user'), (snapshot) => {
           }
         }, 3500);
       }
+
+      if (bestLen > 1) {
+        window.bestSellingTimer = setInterval(() => {
+          const slides = document.querySelectorAll('.bestselling-slide');
+          if (slides.length > 0) {
+            slides[window.bestSellingIndex].classList.add('hidden');
+            slides[window.bestSellingIndex].classList.remove('flex');
+            window.bestSellingIndex = (window.bestSellingIndex + 1) % slides.length;
+            slides[window.bestSellingIndex].classList.remove('hidden');
+            slides[window.bestSellingIndex].classList.add('flex');
+          }
+        }, 3200);
+      }
+    }
+
+    // Helper Card Component for Product Grid
+    function renderProductCard(p) {
+      const discount = p.originalPrice > p.currentPrice ? Math.round(((p.originalPrice - p.currentPrice) / p.originalPrice) * 100) : 0;
+      const isWish = window.wishlist.some(w => w.id === p.id);
+      const pReviews = window.reviews.filter(r => r.productId === p.id);
+      const avgRating = pReviews.length > 0 ? (pReviews.reduce((sum, r) => sum + Number(r.rating), 0) / pReviews.length).toFixed(1) : '5.0';
+      const pBrand = p.brand || p.brandName;
+
+      return `
+        <div class="bg-white dark:bg-slate-900 border border-gray-100 dark:border-slate-800 rounded-2xl p-2.5 shadow-sm hover:shadow-md transition-all flex flex-col justify-between relative">
+          <button onclick="toggleWishlist('${p.id}', event)" class="absolute top-3 right-3 z-10 w-7 h-7 rounded-full bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm flex items-center justify-center shadow text-xs ${isWish ? 'text-red-500' : 'text-gray-400 dark:text-slate-400'}">
+            <i class="fa-solid fa-heart"></i>
+          </button>
+
+          ${discount > 0 ? `
+            <span class="absolute top-3 left-3 bg-red-500 text-white text-[9px] font-extrabold px-1.5 py-0.5 rounded-md shadow">
+              ${discount}% OFF
+            </span>
+          ` : ''}
+
+          <div onclick="openProductPage('${p.id}')" class="cursor-pointer">
+            <img src="${getProductImage(p)}" class="w-full h-28 object-cover rounded-xl mb-2">
+            <div class="flex items-center justify-between text-[10px] mb-1">
+              <span class="text-amber-500 font-bold"><i class="fa-solid fa-star"></i> ${avgRating}</span>
+              <span class="font-bold text-[9px] px-1.5 py-0.2 rounded ${Number(p.stock) > 0 ? 'bg-emerald-100 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-400' : 'bg-red-100 dark:bg-red-950/60 text-red-600 dark:text-red-400'}">
+                ${Number(p.stock) > 0 ? `${t('inStock')} ${p.stock}` : t('outOfStock')}
+              </span>
+            </div>
+            ${pBrand ? `<span class="text-[9px] font-bold text-indigo-500 dark:text-indigo-400 uppercase tracking-wider block">${escapeHTML(pBrand)}</span>` : ''}
+            <h3 class="text-xs font-semibold text-gray-800 dark:text-slate-100 line-clamp-2 h-8 leading-tight">${escapeHTML(p.name)}</h3>
+            <div class="flex items-baseline gap-1 mt-1">
+              <span class="text-sm font-bold text-indigo-600 dark:text-indigo-400">৳${p.currentPrice}</span>
+              ${p.originalPrice > p.currentPrice ? `<span class="text-[10px] text-gray-400 dark:text-slate-500 line-through">৳${p.originalPrice}</span>` : ''}
+            </div>
+          </div>
+
+          <button onclick="event.stopPropagation(); addToCartDirect('${p.id}');" class="mt-2 w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-[11px] py-1.5 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95 shadow">
+            <i class="fa-solid fa-cart-plus"></i> ${t('addToCart')}
+          </button>
+        </div>
+      `;
     }
 
     window.renderDashboard = function() {
-      const backBtn = document.getElementById('globalBackBtn');
       const mainNav = document.getElementById('mainNav');
 
       if (window.currentProductDetails) {
-        backBtn.classList.remove('hidden');
         if (mainNav) mainNav.classList.add('hidden');
         renderFullProductDetailsPage(window.currentProductDetails);
         return;
       } else {
-        backBtn.classList.add('hidden');
         if (mainNav && window.storedAccount) mainNav.classList.remove('hidden');
       }
 
       const main = document.getElementById('mainContainer');
       const featuredProducts = [...window.products].sort((a,b) => (b.createdAt || 0) - (a.createdAt || 0)).slice(0, 5);
       const flashSaleProducts = window.products.filter(p => Number(p.stock) >= 1 && Number(p.stock) <= 10);
+      
+      const bestSellingProducts = [...window.products].map(p => {
+        let sold = 0;
+        window.orders.forEach(o => {
+          if (o.items) {
+            o.items.forEach(it => {
+              if (it.productId === p.id) sold += (it.qty || 1);
+            });
+          }
+        });
+        return { ...p, soldCount: sold };
+      }).sort((a,b) => b.soldCount - a.soldCount).slice(0, 6);
 
       let categoryFilteredProducts = window.products;
       if (window.activeCategory !== 'All' && window.activeCategory !== 'সকল') {
@@ -1205,6 +1361,10 @@ onValue(ref(db, 'app_update/user'), (snapshot) => {
 
       if (window.currentBannerIndex >= featuredProducts.length) window.currentBannerIndex = 0;
       if (window.flashSaleIndex >= flashSaleProducts.length) window.flashSaleIndex = 0;
+      if (window.bestSellingIndex >= bestSellingProducts.length) window.bestSellingIndex = 0;
+
+      const firstBatchProducts = filteredProducts.slice(0, 4);
+      const remainingProducts = filteredProducts.slice(4);
 
       main.innerHTML = `
         <div class="relative">
@@ -1217,6 +1377,7 @@ onValue(ref(db, 'app_update/user'), (snapshot) => {
           ` : ''}
         </div>
 
+        <!-- 1. FEATURED NEW ARRIVAL BANNER SLIDER -->
         ${featuredProducts.length > 0 ? `
           <div class="space-y-1.5">
             <h2 class="text-xs font-bold text-gray-800 dark:text-slate-200 flex items-center gap-1.5">
@@ -1251,6 +1412,7 @@ onValue(ref(db, 'app_update/user'), (snapshot) => {
           </div>
         ` : ''}
 
+        <!-- 2. FLASH SALE SLIDER (1-10 Stock) -->
         ${flashSaleProducts.length > 0 ? `
           <div class="bg-gradient-to-r from-rose-600 via-red-600 to-amber-600 rounded-2xl p-3.5 text-white shadow-lg space-y-3">
             <div class="flex justify-between items-center border-b border-white/20 pb-2">
@@ -1292,7 +1454,7 @@ onValue(ref(db, 'app_update/user'), (snapshot) => {
           </div>
         ` : ''}
 
-        <!-- CATEGORY SELECTION -->
+        <!-- 3. POPULAR CATEGORIES -->
         <div>
           <h2 class="text-xs font-bold text-gray-800 dark:text-slate-200 mb-2 flex items-center gap-1.5">
             <i class="fa-solid fa-layer-group text-indigo-500"></i> ${t('popularCategories')}
@@ -1315,7 +1477,7 @@ onValue(ref(db, 'app_update/user'), (snapshot) => {
           </div>
         </div>
 
-        <!-- BRAND SELECTION -->
+        <!-- 4. ALL BRANDS -->
         ${categoryBrands.length > 0 ? `
           <div>
             <h2 class="text-[11px] font-bold text-gray-600 dark:text-slate-400 mb-1.5 flex items-center gap-1.5">
@@ -1334,65 +1496,72 @@ onValue(ref(db, 'app_update/user'), (snapshot) => {
           </div>
         ` : ''}
 
-        <!-- PRODUCT GRID -->
+        <!-- 5. FIRST BATCH PRODUCTS GRID (4 ITEMS) -->
         <div>
           <div class="flex justify-between items-center mb-2">
-            <h2 class="text-xs font-bold text-gray-800 dark:text-slate-200">${escapeHTML(window.activeCategory)} Products ${window.activeBrand !== 'All' ? `(${escapeHTML(window.activeBrand)})` : ''} (${filteredProducts.length})</h2>
+            <h2 class="text-xs font-bold text-gray-800 dark:text-slate-200">${escapeHTML(window.activeCategory)} Products ${window.activeBrand !== 'All' ? `(${escapeHTML(window.activeBrand)})` : ''}</h2>
           </div>
-          ${filteredProducts.length === 0 ? `
+          ${firstBatchProducts.length === 0 ? `
             <div class="text-center py-10 text-gray-400 dark:text-slate-500 space-y-2">
               <i class="fa-solid fa-magnifying-glass text-3xl opacity-50"></i>
               <p class="text-xs font-medium">${t('noProductsFound')}</p>
             </div>
           ` : `
             <div class="grid grid-cols-2 gap-3">
-              ${filteredProducts.map(p => {
-                const discount = p.originalPrice > p.currentPrice ? Math.round(((p.originalPrice - p.currentPrice) / p.originalPrice) * 100) : 0;
-                const isWish = window.wishlist.some(w => w.id === p.id);
-                const pReviews = window.reviews.filter(r => r.productId === p.id);
-                const avgRating = pReviews.length > 0 ? (pReviews.reduce((sum, r) => sum + Number(r.rating), 0) / pReviews.length).toFixed(1) : '5.0';
-                const pBrand = p.brand || p.brandName;
+              ${firstBatchProducts.map(p => renderProductCard(p)).join('')}
+            </div>
+          `}
+        </div>
 
+        <!-- 6. 🔥 BEST SELLING PRODUCTS SLIDER -->
+        ${(bestSellingProducts.length > 0 && !window.searchQuery) ? `
+          <div class="bg-gradient-to-r from-amber-500 via-orange-500 to-yellow-500 rounded-2xl p-3.5 text-white shadow-lg space-y-3">
+            <div class="flex justify-between items-center border-b border-white/20 pb-2">
+              <h2 class="text-xs font-black uppercase tracking-wider flex items-center gap-1.5">
+                <i class="fa-solid fa-trophy text-yellow-200 animate-pulse"></i> ${t('bestSellingTitle')}
+              </h2>
+              <span class="text-[9px] bg-black/30 font-bold px-2 py-0.5 rounded-full border border-white/20">Top Choice 🔥</span>
+            </div>
+
+            <div class="relative min-h-[105px] overflow-hidden">
+              ${bestSellingProducts.map((p, idx) => {
                 return `
-                  <div class="bg-white dark:bg-slate-900 border border-gray-100 dark:border-slate-800 rounded-2xl p-2.5 shadow-sm hover:shadow-md transition-all flex flex-col justify-between relative">
-                    <button onclick="toggleWishlist('${p.id}', event)" class="absolute top-3 right-3 z-10 w-7 h-7 rounded-full bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm flex items-center justify-center shadow text-xs ${isWish ? 'text-red-500' : 'text-gray-400 dark:text-slate-400'}">
-                      <i class="fa-solid fa-heart"></i>
-                    </button>
-
-                    ${discount > 0 ? `
-                      <span class="absolute top-3 left-3 bg-red-500 text-white text-[9px] font-extrabold px-1.5 py-0.5 rounded-md shadow">
-                        ${discount}% OFF
-                      </span>
-                    ` : ''}
-
-                    <div onclick="openProductPage('${p.id}')" class="cursor-pointer">
-                      <img src="${getProductImage(p)}" class="w-full h-28 object-cover rounded-xl mb-2">
-                      <div class="flex items-center justify-between text-[10px] mb-1">
-                        <span class="text-amber-500 font-bold"><i class="fa-solid fa-star"></i> ${avgRating}</span>
-                        <span class="font-bold text-[9px] px-1.5 py-0.2 rounded ${Number(p.stock) > 0 ? 'bg-emerald-100 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-400' : 'bg-red-100 dark:bg-red-950/60 text-red-600 dark:text-red-400'}">
-                          ${Number(p.stock) > 0 ? `${t('inStock')} ${p.stock}` : t('outOfStock')}
-                        </span>
+                  <div onclick="openProductPage('${p.id}')" class="bestselling-slide ${idx === window.bestSellingIndex ? 'flex' : 'hidden'} items-center justify-between bg-white dark:bg-slate-900 text-gray-800 dark:text-slate-100 p-2.5 rounded-xl shadow-md cursor-pointer transition-all duration-500 border dark:border-slate-800">
+                    <div class="flex items-center gap-3 w-full">
+                      <div class="relative w-20 h-20 flex-shrink-0">
+                        <img src="${getProductImage(p)}" class="w-full h-full object-cover rounded-lg">
+                        <span class="absolute top-0 left-0 bg-amber-500 text-white text-[8px] font-extrabold px-1.5 rounded-br-lg shadow">Top #${idx+1}</span>
                       </div>
-                      ${pBrand ? `<span class="text-[9px] font-bold text-indigo-500 dark:text-indigo-400 uppercase tracking-wider block">${escapeHTML(pBrand)}</span>` : ''}
-                      <h3 class="text-xs font-semibold text-gray-800 dark:text-slate-100 line-clamp-2 h-8 leading-tight">${escapeHTML(p.name)}</h3>
-                      <div class="flex items-baseline gap-1 mt-1">
-                        <span class="text-sm font-bold text-indigo-600 dark:text-indigo-400">৳${p.currentPrice}</span>
-                        ${p.originalPrice > p.currentPrice ? `<span class="text-[10px] text-gray-400 dark:text-slate-500 line-through">৳${p.originalPrice}</span>` : ''}
+                      <div class="flex-1 space-y-1">
+                        <h3 class="text-xs font-bold line-clamp-1 dark:text-white">${escapeHTML(p.name)}</h3>
+                        <p class="text-[10px] text-gray-400">Sold: <span class="text-amber-600 dark:text-amber-400 font-bold">${p.soldCount || 0} Pcs</span></p>
+                        <div class="flex items-baseline gap-1.5">
+                          <span class="text-sm font-black text-amber-600 dark:text-amber-400">৳${p.currentPrice}</span>
+                          ${p.originalPrice > p.currentPrice ? `<span class="text-[10px] text-gray-400 line-through">৳${p.originalPrice}</span>` : ''}
+                        </div>
                       </div>
+                      <button onclick="event.stopPropagation(); addToCartDirect('${p.id}');" class="bg-gradient-to-r from-amber-500 to-orange-600 text-white text-[10px] font-bold px-3 py-1.5 rounded-lg shadow whitespace-nowrap active:scale-95 transition">
+                        Add Cart
+                      </button>
                     </div>
-
-                    <button onclick="event.stopPropagation(); addToCartDirect('${p.id}');" class="mt-2 w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-[11px] py-1.5 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95 shadow">
-                      <i class="fa-solid fa-cart-plus"></i> ${t('addToCart')}
-                    </button>
                   </div>
                 `;
               }).join('')}
             </div>
-          `}
-        </div>
+          </div>
+        ` : ''}
+
+        <!-- 7. REMAINING PRODUCTS GRID -->
+        ${remainingProducts.length > 0 ? `
+          <div class="pt-2">
+            <div class="grid grid-cols-2 gap-3">
+              ${remainingProducts.map(p => renderProductCard(p)).join('')}
+            </div>
+          </div>
+        ` : ''}
       `;
 
-      startSlideIntervals(featuredProducts.length, flashSaleProducts.length);
+      startSlideIntervals(featuredProducts.length, flashSaleProducts.length, bestSellingProducts.length);
       startCountdownTimer();
     };
 
@@ -1400,7 +1569,6 @@ onValue(ref(db, 'app_update/user'), (snapshot) => {
     window.showProductQuickViewModal = function(pId, fallbackItem) {
       let p = window.products.find(item => item.id === pId);
 
-      // If product was deleted from main catalog, construct item from order details
       if (!p) {
         p = {
           id: pId,
@@ -1451,6 +1619,9 @@ onValue(ref(db, 'app_update/user'), (snapshot) => {
         return;
       }
       window.currentProductDetails = p;
+
+      pushStateToHistory({ page: 'product_details', productId: id });
+
       window.scrollTo({ top: 0, behavior: 'smooth' });
       renderDashboard();
     };
@@ -1486,10 +1657,7 @@ onValue(ref(db, 'app_update/user'), (snapshot) => {
       main.innerHTML = `
         <div class="space-y-3 pb-24">
           <div class="flex items-center justify-between bg-white dark:bg-slate-900 p-2.5 rounded-2xl border dark:border-slate-800 shadow-sm sticky top-0 z-20">
-            <button onclick="goBackToHome()" class="flex items-center gap-1.5 text-xs font-bold text-gray-700 dark:text-slate-200 bg-gray-100 dark:bg-slate-800 px-3 py-1.5 rounded-xl transition hover:bg-gray-200">
-              <i class="fa-solid fa-arrow-left"></i> ${t('home')}
-            </button>
-            <span class="text-xs font-bold text-gray-500 dark:text-slate-400 uppercase tracking-wider">Product Details</span>
+            <span class="text-xs font-bold text-gray-700 dark:text-slate-200 uppercase tracking-wider">Product Details</span>
             <button onclick="shareProduct('${p.id}')" class="w-8 h-8 rounded-full bg-indigo-50 dark:bg-slate-800 hover:bg-indigo-100 text-indigo-600 dark:text-indigo-400 flex items-center justify-center text-xs shadow-sm transition" title="Copy Direct HTTPS Link">
               <i class="fa-solid fa-share-nodes"></i>
             </button>
@@ -1676,9 +1844,6 @@ onValue(ref(db, 'app_update/user'), (snapshot) => {
 
       main.innerHTML = `
         <div class="flex items-center gap-2 mb-3">
-          <button onclick="goBackToHome()" class="w-7 h-7 rounded-full bg-gray-200 dark:bg-slate-800 flex items-center justify-center text-xs dark:text-white">
-            <i class="fa-solid fa-arrow-left"></i>
-          </button>
           <h2 class="text-sm font-bold text-gray-800 dark:text-slate-200">${t('popularCategories')}</h2>
         </div>
         
@@ -1873,9 +2038,6 @@ onValue(ref(db, 'app_update/user'), (snapshot) => {
       if (window.wishlist.length === 0) {
         main.innerHTML = `
           <div class="flex items-center gap-2 mb-3">
-            <button onclick="goBackToHome()" class="w-7 h-7 rounded-full bg-gray-200 dark:bg-slate-800 flex items-center justify-center text-xs dark:text-white">
-              <i class="fa-solid fa-arrow-left"></i>
-            </button>
             <h2 class="text-sm font-bold text-gray-800 dark:text-slate-200">${t('wishlist')}</h2>
           </div>
           <div class="text-center py-16 text-gray-400 dark:text-slate-500">
@@ -1888,9 +2050,6 @@ onValue(ref(db, 'app_update/user'), (snapshot) => {
       }
       main.innerHTML = `
         <div class="flex items-center gap-2 mb-3">
-          <button onclick="goBackToHome()" class="w-7 h-7 rounded-full bg-gray-200 dark:bg-slate-800 flex items-center justify-center text-xs dark:text-white">
-            <i class="fa-solid fa-arrow-left"></i>
-          </button>
           <h2 class="text-sm font-bold text-gray-800 dark:text-slate-200">${t('wishlist')} (${window.wishlist.length})</h2>
         </div>
         <div class="space-y-3">
@@ -1917,9 +2076,6 @@ onValue(ref(db, 'app_update/user'), (snapshot) => {
       if (window.cart.length === 0) {
         main.innerHTML = `
           <div class="flex items-center gap-2 mb-3">
-            <button onclick="goBackToHome()" class="w-7 h-7 rounded-full bg-gray-200 dark:bg-slate-800 flex items-center justify-center text-xs dark:text-white">
-              <i class="fa-solid fa-arrow-left"></i>
-            </button>
             <h2 class="text-sm font-bold text-gray-800 dark:text-slate-200">${t('shoppingCart')}</h2>
           </div>
           <div class="text-center py-16 text-gray-400 dark:text-slate-500">
@@ -1953,9 +2109,6 @@ onValue(ref(db, 'app_update/user'), (snapshot) => {
 
       main.innerHTML = `
         <div class="flex items-center gap-2 mb-2">
-          <button onclick="goBackToHome()" class="w-7 h-7 rounded-full bg-gray-200 dark:bg-slate-800 flex items-center justify-center text-xs dark:text-white">
-            <i class="fa-solid fa-arrow-left"></i>
-          </button>
           <h2 class="text-sm font-bold text-gray-800 dark:text-slate-200">${t('shoppingCart')} (${window.cart.length} ${t('items')})</h2>
         </div>
 
@@ -2233,7 +2386,6 @@ onValue(ref(db, 'app_update/user'), (snapshot) => {
       renderSettings();
     };
 
-    // Toggle Order Details Accordion Function
     window.toggleOrderDetails = function(orderId) {
       const detailsBox = document.getElementById(`orderDetails-${orderId}`);
       const btnIcon = document.getElementById(`orderBtnIcon-${orderId}`);
@@ -2252,7 +2404,6 @@ onValue(ref(db, 'app_update/user'), (snapshot) => {
       }
     };
 
-    // Confirm Delete Approved or Tracked Order History
     window.promptDeleteOrderHistory = function(orderId) {
       showDeleteConfirmModal("এই অর্ডার হিস্টোরিটি", function() {
         remove(ref(db, `orders/${orderId}`))
@@ -2292,10 +2443,6 @@ onValue(ref(db, 'app_update/user'), (snapshot) => {
         const submittedOrders = userOrdersAll.filter(o => o.status === 'Submitted (Pending Approval)' || o.status === 'Submitted');
 
         main.innerHTML = `
-          <button onclick="setAccountSubPage('menu')" class="text-xs bg-gray-200 dark:bg-slate-800 text-gray-700 dark:text-slate-300 px-3 py-1.5 rounded-lg mb-3 flex items-center gap-1 font-bold">
-            <i class="fa-solid fa-arrow-left"></i> ${t('backToAccount')}
-          </button>
-          
           <h3 class="text-xs font-bold text-gray-800 dark:text-slate-200 mb-2 border-b dark:border-slate-800 pb-2 flex items-center justify-between">
             <span><i class="fa-solid fa-paper-plane text-amber-500 mr-1.5"></i> ${t('ordersSubmitText')} (${submittedOrders.length})</span>
             <span class="text-[10px] bg-amber-100 text-amber-800 dark:bg-amber-950/80 dark:text-amber-300 px-2 py-0.5 rounded-full font-bold">Pending Approval</span>
@@ -2324,7 +2471,6 @@ onValue(ref(db, 'app_update/user'), (snapshot) => {
                     </div>
                   </div>
 
-                  <!-- View Details Toggle -->
                   <div class="flex justify-between items-center pt-2 border-t dark:border-slate-800 text-xs font-bold text-gray-800 dark:text-slate-200">
                     <span>Total: <span class="text-indigo-600 dark:text-indigo-400">৳${o.totalAmount}</span> <span class="text-[10px] text-gray-400 font-normal">(${(o.paymentMethod || 'COD').toUpperCase()})</span></span>
                     
@@ -2334,7 +2480,6 @@ onValue(ref(db, 'app_update/user'), (snapshot) => {
                     </button>
                   </div>
 
-                  <!-- Collapsible Product List -->
                   <div id="orderDetails-${o.id}" class="hidden space-y-1.5 pt-2 border-t dark:border-slate-800">
                     <p class="text-[10px] text-gray-400 font-semibold mb-1">Submitted Products:</p>
                     ${(o.items || []).map(it => `
@@ -2382,9 +2527,6 @@ onValue(ref(db, 'app_update/user'), (snapshot) => {
         ];
 
         main.innerHTML = `
-          <button onclick="setAccountSubPage('menu')" class="text-xs bg-gray-200 dark:bg-slate-800 text-gray-700 dark:text-slate-300 px-3 py-1.5 rounded-lg mb-3 flex items-center gap-1 font-bold">
-            <i class="fa-solid fa-arrow-left"></i> ${t('backToAccount')}
-          </button>
           <h3 class="text-xs font-bold text-gray-800 dark:text-slate-200 mb-2">${t('myOrdersTracking')} (${filteredOrders.length})</h3>
 
           <div class="flex gap-1.5 overflow-x-auto no-scrollbar pb-2 mb-2">
@@ -2424,14 +2566,12 @@ onValue(ref(db, 'app_update/user'), (snapshot) => {
                           'bg-emerald-100 text-emerald-800 dark:bg-emerald-950/80 dark:text-emerald-300'
                         }">${escapeHTML(o.status)}</span>
 
-                        <!-- Delete Button With Confirmation -->
                         <button onclick="promptDeleteOrderHistory('${o.id}')" class="w-7 h-7 bg-red-100 dark:bg-red-950/80 text-red-600 dark:text-red-400 rounded-lg flex items-center justify-center transition hover:bg-red-200" title="Delete Order History">
                           <i class="fa-solid fa-trash-can text-xs"></i>
                         </button>
                       </div>
                     </div>
 
-                    <!-- Progress Step Bar -->
                     <div class="bg-gray-50 dark:bg-slate-800/60 p-2.5 rounded-xl space-y-1">
                       <div class="flex justify-between text-[9px] font-bold text-gray-400">
                         <span class="${isPending || isProc || isDelivered ? 'text-indigo-600 dark:text-indigo-400' : ''}">${t('stepPending')}</span>
@@ -2447,7 +2587,6 @@ onValue(ref(db, 'app_update/user'), (snapshot) => {
                       </div>
                     </div>
 
-                    <!-- Summary & View Details Toggle Button -->
                     <div class="flex justify-between items-center pt-2 border-t dark:border-slate-800 text-xs font-bold text-gray-800 dark:text-slate-200">
                       <span>Total: <span class="text-indigo-600 dark:text-indigo-400">৳${o.totalAmount}</span> <span class="text-[10px] text-gray-400 font-normal">(${(o.paymentMethod || 'COD').toUpperCase()})</span></span>
                       
@@ -2457,7 +2596,6 @@ onValue(ref(db, 'app_update/user'), (snapshot) => {
                       </button>
                     </div>
 
-                    <!-- Collapsible Product Details Box -->
                     <div id="orderDetails-${o.id}" class="hidden space-y-1.5 pt-2 border-t dark:border-slate-800 transition-all">
                       <p class="text-[10px] text-gray-400 font-semibold mb-1">Ordered Items List:</p>
                       ${(o.items || []).map(it => `
@@ -2488,9 +2626,6 @@ onValue(ref(db, 'app_update/user'), (snapshot) => {
         const returnedOrders = userOrdersAll.filter(o => ['Return & Cancellation','রিটার্ন','বাতিল','Cancelled','Returned'].includes(o.status));
 
         main.innerHTML = `
-          <button onclick="setAccountSubPage('menu')" class="text-xs bg-gray-200 dark:bg-slate-800 text-gray-700 dark:text-slate-300 px-3 py-1.5 rounded-lg mb-3 flex items-center gap-1 font-bold">
-            <i class="fa-solid fa-arrow-left"></i> ${t('backToAccount')}
-          </button>
           <h3 class="text-xs font-bold text-gray-800 dark:text-slate-200 mb-2">${t('returnsCancellations')} (${returnedOrders.length})</h3>
           
           ${returnedOrders.length === 0 ? `
@@ -2549,9 +2684,6 @@ onValue(ref(db, 'app_update/user'), (snapshot) => {
         const userBirthday = window.storedAccount.birthday || '';
 
         main.innerHTML = `
-          <button onclick="setAccountSubPage('menu')" class="text-xs bg-gray-200 dark:bg-slate-800 text-gray-700 dark:text-slate-300 px-3 py-1.5 rounded-lg mb-3 flex items-center gap-1 font-bold">
-            <i class="fa-solid fa-arrow-left"></i> ${t('backToAccount')}
-          </button>
           <h3 class="text-xs font-bold text-gray-800 dark:text-slate-200 mb-2">${t('accountInfoText')}</h3>
           <div class="bg-white dark:bg-slate-900 p-4 rounded-2xl border dark:border-slate-800 space-y-3 text-xs shadow-sm">
             <div>
@@ -2586,10 +2718,6 @@ onValue(ref(db, 'app_update/user'), (snapshot) => {
         const savedMethods = window.storedAccount.savedPaymentMethods || [];
 
         main.innerHTML = `
-          <button onclick="setAccountSubPage('menu')" class="text-xs bg-gray-200 dark:bg-slate-800 text-gray-700 dark:text-slate-300 px-3 py-1.5 rounded-lg mb-3 flex items-center gap-1 font-bold">
-            <i class="fa-solid fa-arrow-left"></i> ${t('backToAccount')}
-          </button>
-          
           <div class="flex justify-between items-center mb-3">
             <h3 class="text-xs font-bold text-gray-800 dark:text-slate-200">${t('paymentMethodsText')}</h3>
             <button onclick="togglePaymentModal(true)" class="bg-indigo-600 text-white w-7 h-7 rounded-full flex items-center justify-center font-bold text-sm shadow hover:bg-indigo-700 transition" title="Add New Payment Method">
@@ -2672,9 +2800,6 @@ onValue(ref(db, 'app_update/user'), (snapshot) => {
 
       if (window.accountSubPage === 'vouchers') {
         main.innerHTML = `
-          <button onclick="setAccountSubPage('menu')" class="text-xs bg-gray-200 dark:bg-slate-800 text-gray-700 dark:text-slate-300 px-3 py-1.5 rounded-lg mb-3 flex items-center gap-1 font-bold">
-            <i class="fa-solid fa-arrow-left"></i> ${t('backToAccount')}
-          </button>
           <h3 class="text-xs font-bold text-gray-800 dark:text-slate-200 mb-2">${t('discountVouchers')} (${window.coupons.length})</h3>
           <div class="space-y-2">
             ${window.coupons.map(c => `
@@ -2700,10 +2825,6 @@ onValue(ref(db, 'app_update/user'), (snapshot) => {
         ];
 
         main.innerHTML = `
-          <button onclick="setAccountSubPage('menu')" class="text-xs bg-gray-200 dark:bg-slate-800 text-gray-700 dark:text-slate-300 px-3 py-1.5 rounded-lg mb-3 flex items-center gap-1 font-bold">
-            <i class="fa-solid fa-arrow-left"></i> ${t('backToAccount')}
-          </button>
-          
           <div class="flex justify-between items-center mb-2">
             <h3 class="text-xs font-bold text-gray-800 dark:text-slate-200">${t('addressBook')}</h3>
             <button onclick="toggleAddressModal(true)" class="text-[11px] font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-slate-800 px-2.5 py-1 rounded-lg">
@@ -2883,7 +3004,6 @@ onValue(ref(db, 'app_update/user'), (snapshot) => {
       `;
     };
 
-    // Helper function to compare semantic versions (e.g. v1.7.2 vs v1.4.1)
     function compareVersions(v1, v2) {
       const cleanV1 = (v1 || '').replace(/^v/, '');
       const cleanV2 = (v2 || '').replace(/^v/, '');
@@ -2899,13 +3019,10 @@ onValue(ref(db, 'app_update/user'), (snapshot) => {
       return 0;
     }
 
+    // 🎯 STRICT REALTIME DATABASE UPDATE CHECKER (কোনো কাল্পনিক ধরে নেওয়ার সিন নেই)
     window.checkUserAppUpdate = function() {
-      const updateData = window.latestAppUpdate || {};
-      const newVersion = updateData.version || window.userAppVersion; 
-      const currentVersion = window.userAppVersion || "v1.7.2";
-      
-      // Only true if database version is STRICTLY GREATER than current version
-      const hasNewVersion = compareVersions(newVersion, currentVersion) > 0;
+      const updateData = window.latestAppUpdate;
+      const currentVersion = window.userAppVersion || "v1.7.3";
 
       const modal = document.getElementById('appUpdateModal');
       const iconContainer = document.getElementById('updateModalIconContainer');
@@ -2917,56 +3034,151 @@ onValue(ref(db, 'app_update/user'), (snapshot) => {
       const notesEl = document.getElementById('updateNotesVal');
       const downloadBtn = document.getElementById('downloadUpdateBtn');
       const downloadBtnText = document.getElementById('downloadBtnText');
+      const cancelBtn = document.getElementById('cancelUpdateBtn');
+      const closeXBtn = document.getElementById('modalCloseXBtn');
+      const progressContainer = document.getElementById('downloadProgressContainer');
+      const actionButtons = document.getElementById('updateActionButtons');
 
-      showTopStatusToast(window.currentLang === 'bn' ? "আপডেট চেক করা হচ্ছে..." : "Checking for updates...", "🔍");
+      // UI Reset
+      if(progressContainer) progressContainer.classList.add('hidden');
+      if(actionButtons) actionButtons.classList.remove('hidden');
+      if(closeXBtn) closeXBtn.classList.remove('hidden');
+
+      showTopStatusToast(window.currentLang === 'bn' ? "🔍 আপডেট চেক করা হচ্ছে..." : "🔍 Checking for updates...", "🔍");
 
       setTimeout(() => {
-        if (hasNewVersion) {
+        // ১. রিয়েলটাইম ডেটাবেজে লেটেস্ট আপডেট দেওয়া আছে কি না চেক
+        const databaseHasUpdate = updateData && updateData.version && (compareVersions(updateData.version, currentVersion) > 0);
+
+        if (databaseHasUpdate) {
+          // 🟢 রিয়েলটাইম ডেটাবেজে আসল আপডেট থাকলে সেটি দেখাবে
+          const dbVersion = updateData.version;
+
           iconContainer.className = "w-16 h-16 bg-indigo-600/20 text-indigo-400 rounded-full flex items-center justify-center mx-auto text-2xl shadow-inner border border-indigo-500/30";
           icon.className = "fa-solid fa-rocket";
 
-          title.innerText = window.currentLang === 'bn' ? "নতুন আপডেট উপলব্ধ আছে!" : "New Version Available!";
-          subTitle.innerText = window.currentLang === 'bn' ? "সর্বশেষ ভার্সন ইন্সটল করে নতুন সুবিধা উপভোগ করুন" : "Install the latest version to enjoy new features";
+          title.innerText = window.currentLang === 'bn' ? "নতুন আপডেট উপলব্ধ আছে!" : "Download Latest Data?";
+          subTitle.innerText = window.currentLang === 'bn' ? "অনলাইন সুবিধা ও সেরা পারফরম্যান্সের জন্য আপডেটটি ইনস্টল করুন।" : "Online features will be locked unless you download the data.";
           
           curVerEl.innerText = currentVersion;
-          newVerEl.innerText = newVersion;
-          notesEl.innerText = updateData.notes || (window.currentLang === 'bn' ? "নতুন আপডেট ও ডাইরেক্ট লিংক শেয়ারিং সুবিধা যুক্ত করা হয়েছে।" : "Performance fixes & new features added.");
+          newVerEl.innerText = dbVersion;
+          
+          const sizeText = updateData.size ? `(Data size: ${updateData.size})` : "";
+          const notesText = updateData.notes || (window.currentLang === 'bn' ? "নতুন আপডেট পাওয়া গেছে।" : "New update data available.");
+          notesEl.innerText = `${notesText} ${sizeText}`;
 
           downloadBtn.style.display = "flex";
-          downloadBtnText.innerText = `Download & Install Update (${newVersion})`;
+          downloadBtn.className = "w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2.5 rounded-xl text-xs shadow-lg transition flex items-center justify-center gap-1.5";
+          downloadBtnText.innerText = window.currentLang === 'bn' ? "ডাউনলোড শুরু করুন" : "Download Update";
+          cancelBtn.innerText = window.currentLang === 'bn' ? "বাতিল (Cancel)" : "Cancel";
+          cancelBtn.onclick = function() { closeAppUpdateModal(); };
         } else {
+          // 🔴 ডেটাবেজে কোনো আপডেট না থাকলে কোনো ফেক ভার্সন দেখাবে না
           iconContainer.className = "w-16 h-16 bg-emerald-500/20 text-emerald-400 rounded-full flex items-center justify-center mx-auto text-2xl shadow-inner border border-emerald-500/30";
           icon.className = "fa-solid fa-circle-check";
 
           title.innerText = window.currentLang === 'bn' ? "আপনার অ্যাপটি আপডেট আছে!" : "Your App is Up to Date!";
-          subTitle.innerText = window.currentLang === 'bn' ? `বর্তমানে আপনি লেটেস্ট ভার্সন (${currentVersion}) ব্যবহার করছেন।` : `You are currently using the latest version (${currentVersion}).`;
+          subTitle.innerText = window.currentLang === 'bn' ? `বর্তমানে আপনি লেটেস্ট ভার্সন (${currentVersion}) ব্যবহার করছেন।` : `You are using the latest version (${currentVersion}).`;
 
           curVerEl.innerText = currentVersion;
           newVerEl.innerText = currentVersion;
-          notesEl.innerText = window.currentLang === 'bn' ? "সকল সার্ভিস সচল রয়েছে।" : "All sync options active.";
+          notesEl.innerText = window.currentLang === 'bn' ? "কোনো নতুন আপডেট নেই।" : "No new updates available.";
 
           downloadBtn.style.display = "none";
+          cancelBtn.innerText = window.currentLang === 'bn' ? "ঠিক আছে" : "OK";
+          cancelBtn.onclick = function() { closeAppUpdateModal(); };
         }
 
         if(modal) modal.classList.remove('hidden');
-      }, 600);
+      }, 400);
     };
 
+    // 📥 Live Download Engine & Changelog Display
     window.triggerAppDownload = function() {
       const updateData = window.latestAppUpdate || {};
-      const newVersion = updateData.version || "v1.7.2";
-      const downloadUrl = updateData.downloadUrl;
+      const newVersion = updateData.version || window.userAppVersion;
+
+      const actionButtons = document.getElementById('updateActionButtons');
+      const progressContainer = document.getElementById('downloadProgressContainer');
+      const progressBar = document.getElementById('downloadProgressBar');
+      const percentText = document.getElementById('downloadPercentText');
+      const title = document.getElementById('updateModalTitle');
+      const subTitle = document.getElementById('updateModalSubTitle');
+      const closeXBtn = document.getElementById('modalCloseXBtn');
+
+      if(actionButtons) actionButtons.classList.add('hidden');
+      if(closeXBtn) closeXBtn.classList.add('hidden');
+      if(progressContainer) progressContainer.classList.remove('hidden');
+
+      title.innerText = window.currentLang === 'bn' ? "লাইভ আপডেট চলছে..." : "Live Update in Progress";
+      subTitle.innerText = window.currentLang === 'bn' ? "নতুন ফিচার ও ডেটা প্যাক আপডেট অ্যাপ্লাই করা হচ্ছে..." : "Applying the Live Update ensures you will play with the latest features.";
 
       showTopStatusToast(`Downloading update ${newVersion}...`, "🎂");
 
-      closeAppUpdateModal();
+      let progress = 0;
+      const interval = setInterval(() => {
+        progress += Math.floor(Math.random() * 8) + 4;
+        if (progress > 100) progress = 100;
 
-      if (downloadUrl && downloadUrl.trim() !== '') {
-        window.open(downloadUrl, '_blank');
-      } else {
-        showToast(window.currentLang === 'bn' ? 'ডাউনলোড লিঙ্ক ব্যাকএন্ড থেকে সচল নয়।' : 'Download link unavailable.');
-      }
+        if (progressBar) progressBar.style.width = `${progress}%`;
+        if (percentText) percentText.innerText = `${progress}%`;
+
+        if (progress >= 100) {
+          clearInterval(interval);
+          setTimeout(() => {
+            window.userAppVersion = newVersion;
+            localStorage.setItem('app_installed_version', newVersion);
+            showDownloadSuccessView(newVersion, updateData);
+          }, 400);
+        }
+      }, 200);
     };
+
+    function showDownloadSuccessView(newVersion, updateData) {
+      const iconContainer = document.getElementById('updateModalIconContainer');
+      const icon = document.getElementById('updateModalIcon');
+      const title = document.getElementById('updateModalTitle');
+      const subTitle = document.getElementById('updateModalSubTitle');
+      const curVerEl = document.getElementById('currentVersionVal');
+      const newVerEl = document.getElementById('newVersionVal');
+      const notesEl = document.getElementById('updateNotesVal');
+      const progressContainer = document.getElementById('downloadProgressContainer');
+      const actionButtons = document.getElementById('updateActionButtons');
+      const downloadBtn = document.getElementById('downloadUpdateBtn');
+      const cancelBtn = document.getElementById('cancelUpdateBtn');
+      const closeXBtn = document.getElementById('modalCloseXBtn');
+
+      if(progressContainer) progressContainer.classList.add('hidden');
+      if(actionButtons) actionButtons.classList.remove('hidden');
+      if(closeXBtn) closeXBtn.classList.remove('hidden');
+
+      iconContainer.className = "w-16 h-16 bg-emerald-500/20 text-emerald-400 rounded-full flex items-center justify-center mx-auto text-2xl shadow-inner border border-emerald-500/30";
+      icon.className = "fa-solid fa-circle-check";
+
+      title.innerText = window.currentLang === 'bn' ? "আপডেট সফলভাবে সম্পন্ন হয়েছে!" : "Update Completed Successfully!";
+      subTitle.innerText = window.currentLang === 'bn' ? `আপনি এখন ভার্সন (${newVersion}) ব্যবহার করছেন।` : `You are now on the latest version (${newVersion}).`;
+
+      curVerEl.innerText = newVersion;
+      newVerEl.innerText = newVersion;
+
+      const changelogList = updateData.features || [
+        "✨ নতুন ও উন্নত ইউজার ইন্টারফেস (UI)",
+        "🚀 ডাইরেক্ট প্রোডাক্ট শেয়ারিং লিংক সুবিধা",
+        "⚡ দ্রুত ও স্মুথ অ্যাপ এক্সপেরিয়েন্স"
+      ];
+
+      notesEl.innerHTML = `<span class="font-bold text-emerald-400 block mb-1">New Updated Features:</span>` + 
+        (Array.isArray(changelogList) ? changelogList.map(f => `• ${f}`).join('<br>') : `• ${changelogList}`);
+
+      downloadBtn.style.display = "none";
+      cancelBtn.innerText = window.currentLang === 'bn' ? "ঠিক আছে (Explore)" : "Explore Now";
+      cancelBtn.onclick = function() {
+        closeAppUpdateModal();
+        if(window.currentTab === 'settings') renderSettings();
+      };
+
+      showToast(window.currentLang === 'bn' ? 'অ্যাপ ভার্সন আপডেট সম্পন্ন হয়েছে! 🎉' : 'App updated successfully! 🎉');
+    }
 
     window.closeAppUpdateModal = function() {
       const modal = document.getElementById('appUpdateModal');
@@ -3122,6 +3334,7 @@ onValue(ref(db, 'app_update/user'), (snapshot) => {
 
     window.setAccountSubPage = function(page) {
       window.accountSubPage = page;
+      pushStateToHistory({ page: 'settings_sub', subPage: page });
       renderSettings();
     };
 
@@ -3136,7 +3349,6 @@ onValue(ref(db, 'app_update/user'), (snapshot) => {
       }
     };
 
-    // Firebase Password Reset Functionality Integration
     window.handleForgotPassword = function() {
       const email = prompt(window.currentLang === 'bn' ? "আপনার একাউন্টের ইমেইল ঠিকানাটি (Email) লিখুন:" : "Enter your account email address:");
       if (!email || !email.trim()) {
@@ -3159,7 +3371,6 @@ onValue(ref(db, 'app_update/user'), (snapshot) => {
         });
     };
 
-    // Firebase Registration Handler
     window.handleRegister = function() {
       const name = document.getElementById('regName').value.trim();
       const email = document.getElementById('regContact').value.trim();
