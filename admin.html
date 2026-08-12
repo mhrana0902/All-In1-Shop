@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>All In1 Shop - Admin Panel</title>
+  <title>All In1 Shop - Main Admin Panel</title>
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- FontAwesome Icons -->
@@ -44,7 +44,7 @@
           <i class="fa-solid fa-user-shield text-sm"></i>
         </div>
         <div>
-          <h1 class="font-bold text-sm text-slate-100 leading-tight" id="headerRoleTitle">Admin Panel</h1>
+          <h1 class="font-bold text-sm text-slate-100 leading-tight" id="headerRoleTitle">Global Admin Panel</h1>
           <p class="text-[10px] text-emerald-400 font-medium" data-i18n="liveSync">● Live Sync Active</p>
         </div>
       </div>
@@ -85,9 +85,6 @@
       </div>
     </div>
 
-    <!-- Recaptcha Container for Phone Auth -->
-    <div id="recaptcha-container"></div>
-
     <!-- Confirm Action Modal -->
     <div id="confirmActionModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
       <div class="bg-slate-900 border border-slate-700 w-full max-w-xs rounded-2xl p-4 text-center space-y-3 shadow-2xl">
@@ -109,7 +106,7 @@
 
     <!-- Exit App Modal -->
     <div id="exitAppModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
-      <div class="bg-slate-900 border border-slate-700/80 w-full max-w-xs rounded-2xl p-5 text-center space-y-3 shadow-2xl animate-fade-in">
+      <div class="bg-slate-900 border border-slate-700/80 w-full max-w-xs rounded-2xl p-5 text-center space-y-3 shadow-2xl">
         <div class="w-12 h-12 bg-red-500/20 text-red-500 rounded-full flex items-center justify-center mx-auto text-xl">
           <i class="fa-solid fa-arrow-right-from-bracket"></i>
         </div>
@@ -144,8 +141,8 @@
         dashboard: "Dashboard",
         add: "Add",
         settings: "Settings",
-        portalTitle: "All In1 Shop (Admin)",
-        portalSub: "Login to your account to access panel",
+        portalTitle: "All In1 Shop (Global Admin)",
+        portalSub: "Login to your account to access main panel",
         loginFormTitle: "Login Form",
         userContactLabel: "Email or Phone *",
         userContactPlaceholder: "Email or Phone Number",
@@ -158,9 +155,6 @@
         broadcastMsgPlaceholder: "Write your message...",
         sendNotificationBtn: "Send to Users",
         logoutBtn: "Logout",
-        welcomeRole: "Welcome",
-        limitedAccess: "(Limited Access)",
-        assignedFeatures: "Features Assigned For You",
         ordersTitle: "Orders",
         productsTitle: "Products",
         stockAlertTitle: "Stock Alert!",
@@ -175,9 +169,9 @@
         stockAlertMenu: "Stock Alert",
         categoryTitle: "Category",
         customersTitle: "Customers",
-        couponsTitle: "Coupons",
+        approvalCouponsTitle: "Approval Coupons",
         dueLedgerTitle: "Due Ledger",
-        createCoupon: "Create New Coupon",
+        createCoupon: "Create New Master Coupon",
         couponCodeLabel: "Coupon Code *",
         discountTypeLabel: "Discount Type",
         discountAmountLabel: "Discount Amount *",
@@ -185,7 +179,8 @@
         flatMoney: "Flat Cash (৳)",
         percentage: "Percentage (%)",
         saveCouponBtn: "Save Coupon",
-        availableCoupons: "Available Coupon List",
+        availableCoupons: "Approved & Active Coupons List",
+        pendingCouponsTitle: "Merchant/Sub-Admin/Dealer Coupon Approval Requests",
         manualDueTitle: "Add Manual Due Record",
         customerNameLabel: "Customer Name *",
         amountLabel: "Amount (৳) *",
@@ -216,7 +211,6 @@
         catNamePlaceholder: "Category Name",
         addCatBtn: "Add Category",
         nameLabel: "Name *",
-        appointBtn: "Appoint",
         addNewProduct: "Add New Product",
         productNameLabel: "Product Name *",
         currentPriceLabel: "Current Price *",
@@ -232,8 +226,8 @@
         dashboard: "ড্যাশবোর্ড",
         add: "যোগ করুন",
         settings: "সেটিংস",
-        portalTitle: "অল ইন ওয়ান শপ (এডমিন)",
-        portalSub: "প্যানেলে প্রবেশ করতে আপনার অ্যাকাউন্টে লগইন করুন",
+        portalTitle: "অল ইন ওয়ান শপ (মেইন এডমিন)",
+        portalSub: "প্যানেলে প্রবেশ করতে আপনার এডমিন অ্যাকাউন্টে লগইন করুন",
         loginFormTitle: "লগইন ফরম",
         userContactLabel: "ইমেইল বা ফোন নাম্বার *",
         userContactPlaceholder: "ইমেইল অথবা ফোন নাম্বার",
@@ -246,9 +240,6 @@
         broadcastMsgPlaceholder: "বার্তা লিখুন...",
         sendNotificationBtn: "ইউজারদের কাছে পাঠান",
         logoutBtn: "লগআউট করুন",
-        welcomeRole: "স্বাগতম",
-        limitedAccess: "(সীমিত এক্সেস)",
-        assignedFeatures: "আপনার জন্য নির্দিষ্ট ফিচার সমূহ",
         ordersTitle: "Orders",
         productsTitle: "Products",
         stockAlertTitle: "স্টক অ্যালার্ট!",
@@ -263,9 +254,9 @@
         stockAlertMenu: "Stock Alert",
         categoryTitle: "Category",
         customersTitle: "Customers",
-        couponsTitle: "Coupons",
+        approvalCouponsTitle: "Approval Coupons",
         dueLedgerTitle: "Due Ledger",
-        createCoupon: "নতুন কুপন তৈরি করুন",
+        createCoupon: "নতুন মাস্টার কুপন তৈরি করুন",
         couponCodeLabel: "কুপন কোড *",
         discountTypeLabel: "ছাড়ের ধরন",
         discountAmountLabel: "ছাড়ের পরিমাণ *",
@@ -273,7 +264,8 @@
         flatMoney: "ফ্ল্যাট টাকা (৳)",
         percentage: "শতাংশ (%)",
         saveCouponBtn: "কুপন সেভ করুন",
-        availableCoupons: "উপলব্ধ কুপন তালিকা",
+        availableCoupons: "অনুমোদিত ও সক্রিয় কুপন সমূহের তালিকা",
+        pendingCouponsTitle: "কুপন এপ্রুভাল রিকোয়েস্ট (মার্চেন্ট/সাব-এডমিন/ডিলার)",
         manualDueTitle: "ম্যানুয়াল বকেয়া খাতায় নাম যোগ করুন",
         customerNameLabel: "কাস্টমারের নাম *",
         amountLabel: "টাকার পরিমাণ (৳) *",
@@ -304,7 +296,6 @@
         catNamePlaceholder: "ক্যাটাগরির নাম",
         addCatBtn: "যোগ করুন",
         nameLabel: "নাম *",
-        appointBtn: "নিয়োগ প্রদান করুন",
         addNewProduct: "নতুন প্রোডাক্ট যোগ করুন",
         productNameLabel: "প্রোডাক্টের নাম *",
         currentPriceLabel: "বর্তমান দাম *",
@@ -331,7 +322,6 @@
       }
     }
 
-    // Security Sanitizer (XSS Protection Filter)
     window.escapeHTML = function(str) {
       if (!str) return '';
       return String(str)
@@ -343,19 +333,15 @@
     };
   </script>
 
-  <!-- Firebase Realtime & Authentication Integration -->
+  <!-- Firebase Script Integration -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-    import { getDatabase, ref, set, push, remove, update, onValue, get } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+    import { getDatabase, ref, set, push, remove, update, onValue } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
     import { 
       getAuth, 
       signInWithEmailAndPassword, 
-      createUserWithEmailAndPassword, 
       signOut, 
-      onAuthStateChanged,
-      sendPasswordResetEmail,
-      RecaptchaVerifier,
-      signInWithPhoneNumber
+      onAuthStateChanged
     } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
     const firebaseConfig = {
@@ -365,8 +351,7 @@
       projectId: "all-in1-shop",
       storageBucket: "all-in1-shop.firebasestorage.app",
       messagingSenderId: "120883945223",
-      appId: "1:120883945223:web:9f74f7ff3aa78f637fafa2",
-      measurementId: "G-BGKW9ZB4TV"
+      appId: "1:120883945223:web:9f74f7ff3aa78f637fafa2"
     };
 
     const app = initializeApp(firebaseConfig);
@@ -375,7 +360,6 @@
 
     window.db = db;
     window.auth = auth;
-    const ADMIN_UID = "8IFmnXc6yQSvVv2vpYz5WbTRh2G2";
 
     window.storedAdmin = JSON.parse(localStorage.getItem('app_admin_session')) || null;
     window.products = [];
@@ -387,17 +371,16 @@
     window.expenses = [];
     window.paymentMethods = [];
     window.notifications = [];
+    window.appUpdateInfo = null;
     window.activeView = 'menu';
     window.selectedProductCat = ' সকল ';
     window.selectedOrderStatusFilter = 'All';
     window.stockSearchQuery = '';
     window.orderSearchQuery = '';
-    window.confirmationResult = null;
-    
-    window.currentAppVersion = localStorage.getItem('app_current_version') || 'v1.7.3';
-    window.latestServerVersionInfo = null;
 
-    // 🔹 মোবাইল ব্যাক বাটন ও সাইড সোয়াইপ হ্যান্ডেল করার জন্য History Management
+    window.ADMIN_BUILD_VERSION = 'v1.8.0';
+    window.currentAppVersion = localStorage.getItem('app_admin_installed_version') || window.ADMIN_BUILD_VERSION;
+
     history.replaceState({ view: 'menu' }, '');
 
     window.addEventListener('popstate', (event) => {
@@ -405,7 +388,6 @@
       const confirmModal = document.getElementById('confirmActionModal');
       const exitModal = document.getElementById('exitAppModal');
 
-      // ১. যদি কোনো মোডাল বা পপআপ খোলা থাকে, ব্যাক চাপলে আগে মোডাল বন্ধ হবে
       if (exitModal && !exitModal.classList.contains('hidden')) {
         closeExitAppModal();
         return;
@@ -419,14 +401,12 @@
         return;
       }
 
-      // ২. যদি সাব-ভিউতে থাকে, ব্যাক চাপলে ড্যাশবোর্ডে (menu) ফিরে যাবে
       if (window.activeView !== 'menu') {
         window.activeView = 'menu';
         renderAdminDashboard();
         return;
       }
 
-      // ৩. যদি অলরেডি মেইন ড্যাশবোর্ডে (menu) থাকে, ব্যাক চাপলে স্মার্ট এক্সিট মোডাল শো করবে
       if (window.activeView === 'menu') {
         openExitAppModal();
       }
@@ -435,7 +415,6 @@
     window.openExitAppModal = function() {
       const exitModal = document.getElementById('exitAppModal');
       if (exitModal) exitModal.classList.remove('hidden');
-      // হিস্ট্রি স্টেট ধরে রাখা যেন অ্যাপ সাথে সাথে ক্লোজ না হয়
       history.pushState({ view: 'menu' }, '');
     };
 
@@ -446,17 +425,7 @@
 
     window.confirmExitApp = function() {
       closeExitAppModal();
-      history.back(); // ব্রাউজার বা পিডব্লিউএ ট্যাব ব্যাক/ক্লোজ করা
-    };
-
-    // 🔹 গ্লোবাল অ্যাডমিন ও সাব-অ্যাডমিন/ডিলার রোল চেক করার ফাংশন
-    window.isRestrictedAdmin = function() {
-      if (!window.storedAdmin) return false;
-      if (window.storedAdmin.uid === ADMIN_UID || window.storedAdmin.role === 'Main Admin') {
-        return false;
-      }
-      const roleStr = String(window.storedAdmin.role || '').toLowerCase();
-      return roleStr.includes('sub') || roleStr.includes('dealer') || roleStr.includes('ডিলার');
+      history.back();
     };
 
     window.showAdminToast = function(msg) {
@@ -479,10 +448,6 @@
 
     // REAL-TIME DATABASE LISTENERS
     function startAdminSync() {
-      onValue(ref(db, 'app_update/admin'), snap => {
-        window.latestServerVersionInfo = snap.val() || null;
-      });
-
       onValue(ref(db, 'products'), snap => {
         const data = snap.val() || {};
         window.products = Object.keys(data).map(k => ({ id: k, ...data[k] }));
@@ -512,7 +477,7 @@
       onValue(ref(db, 'coupons'), snap => {
         const data = snap.val() || {};
         window.coupons = Object.keys(data).map(k => ({ id: k, ...data[k] }));
-        if (window.storedAdmin && window.activeView === 'coupons') renderAdminDashboard();
+        if (window.storedAdmin && (window.activeView === 'coupons' || window.activeView === 'menu')) renderAdminDashboard();
       });
 
       onValue(ref(db, 'dues'), snap => {
@@ -538,43 +503,21 @@
         window.notifications = Object.keys(data).map(k => ({ id: k, ...data[k] }));
         if (window.storedAdmin && window.activeView === 'notifications') renderAdminDashboard();
       });
+
+      onValue(ref(db, 'app_update'), snap => {
+        window.appUpdateInfo = snap.val() || {};
+        if (window.storedAdmin && window.activeView === 'settings') renderAdminDashboard();
+      });
     }
 
     startAdminSync();
 
-    // Monitoring Auth State & Matching User Email with Dealers Node
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        if (user.uid === ADMIN_UID) {
-          const session = { name: 'Main Admin', contact: user.email, role: 'Main Admin', uid: user.uid };
-          window.storedAdmin = session;
-          localStorage.setItem('app_admin_session', JSON.stringify(session));
-          initAdminView();
-        } else {
-          get(ref(db, 'Dealers')).then((snap) => {
-            const dealers = snap.val() || {};
-            const userEmail = (user.email || '').toLowerCase().trim();
-            const dealerKey = Object.keys(dealers).find(k => (dealers[k].contact || '').toLowerCase().trim() === userEmail);
-            
-            let userRole = 'Sub-Admin';
-            let userName = 'User';
-
-            if (dealerKey) {
-              userRole = dealers[dealerKey].role || 'Sub-Admin';
-              userName = dealers[dealerKey].name || 'User';
-            }
-
-            const session = { name: userName, contact: user.email, role: userRole, uid: user.uid };
-            window.storedAdmin = session;
-            localStorage.setItem('app_admin_session', JSON.stringify(session));
-            initAdminView();
-          }).catch((err) => {
-            const session = { name: 'Sub-Admin', contact: user.email, role: 'Sub-Admin', uid: user.uid };
-            window.storedAdmin = session;
-            localStorage.setItem('app_admin_session', JSON.stringify(session));
-            initAdminView();
-          });
-        }
+        const session = { name: 'Global Admin', contact: user.email, role: 'Main Admin', uid: user.uid };
+        window.storedAdmin = session;
+        localStorage.setItem('app_admin_session', JSON.stringify(session));
+        initAdminView();
       } else {
         window.storedAdmin = null;
         localStorage.removeItem('app_admin_session');
@@ -590,12 +533,12 @@
       } else {
         document.getElementById('adminHeader').classList.remove('hidden');
         document.getElementById('adminNav').classList.remove('hidden');
-        document.getElementById('headerRoleTitle').innerText = `${window.storedAdmin.role || 'Admin'} Panel`;
+        document.getElementById('headerRoleTitle').innerText = `Main Admin Panel`;
         renderAdminDashboard();
       }
     }
 
-    // LOGIN & AUTH SCREENS
+    // LOGIN SCREEN
     window.renderAdminLoginScreen = function() {
       const main = document.getElementById('adminMain');
       main.innerHTML = `
@@ -622,11 +565,6 @@
               <button onclick="handleAdminLogin()" class="w-full bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500 text-white font-bold py-3 rounded-xl text-xs shadow-lg transition active:scale-98 mt-2">
                 ${t('loginBtn')}
               </button>
-
-              <div class="flex justify-between items-center text-xs pt-2 border-t border-slate-700">
-                <button onclick="openForgotPasswordModal()" class="text-amber-400 hover:underline">Forget password</button>
-                <button onclick="openCreateAccountModal()" class="text-indigo-400 font-bold hover:underline">Create a new account</button>
-              </div>
             </div>
           </div>
         </div>
@@ -642,155 +580,12 @@
         return;
       }
 
-      if (!contact.includes('@')) {
-        showAdminToast('নিবন্ধিত জিমেইল প্রদান করুন!');
-        return;
-      }
-
       signInWithEmailAndPassword(auth, contact, pass)
-        .then((userCredential) => {
-          const user = userCredential.user;
-          showAdminToast('লগইন সফল হয়েছে!');
-
-          if (user.uid === ADMIN_UID) {
-            const session = { name: 'Main Admin', contact: user.email, role: 'Main Admin', uid: user.uid };
-            window.storedAdmin = session;
-            localStorage.setItem('app_admin_session', JSON.stringify(session));
-            initAdminView();
-          } else {
-            get(ref(db, 'Dealers')).then((snap) => {
-              const dealers = snap.val() || {};
-              const dealerKey = Object.keys(dealers).find(k => (dealers[k].contact || '').toLowerCase().trim() === contact);
-              
-              let userRole = 'Sub-Admin';
-              let userName = 'User';
-
-              if (dealerKey) {
-                userRole = dealers[dealerKey].role || 'Sub-Admin';
-                userName = dealers[dealerKey].name || 'User';
-              }
-
-              const session = { name: userName, contact: user.email, role: userRole, uid: user.uid };
-              window.storedAdmin = session;
-              localStorage.setItem('app_admin_session', JSON.stringify(session));
-              
-              initAdminView();
-            }).catch(() => {
-              const session = { name: 'User', contact: user.email, role: userRole, uid: user.uid };
-              window.storedAdmin = session;
-              localStorage.setItem('app_admin_session', JSON.stringify(session));
-              initAdminView();
-            });
-          }
-        })
-        .catch((error) => {
-          showAdminToast('ইমেইল অথবা পাসওয়ার্ড ভুল!');
-        });
-    };
-
-    // CREATE NEW ACCOUNT MODAL
-    window.openCreateAccountModal = function() {
-      const modal = document.getElementById('adminModal');
-      const body = document.getElementById('modalBody');
-
-      body.innerHTML = `
-        <h3 class="text-sm font-bold text-slate-100 mb-3 text-center border-b border-slate-700 pb-2">Create a new account (Sub-Admin / Dealer)</h3>
-        <div class="space-y-3 text-xs">
-          <div>
-            <label class="block text-slate-400 mb-1"> Full Name *</label>
-            <input type="text" id="regName" placeholder="Enter full name..." class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-white">
-          </div>
-          <div>
-            <label class="block text-slate-400 mb-1">Email address *</label>
-            <input type="email" id="regEmail" placeholder="Enter mail address..." class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-white">
-          </div>
-          <div>
-            <label class="block text-slate-400 mb-1">Accounts (Role) *</label>
-            <select id="regRole" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-white font-bold">
-              <option value="Sub-Admin">Sub-Admin</option>
-              <option value="Dealer"> Dealers</option>
-            </select>
-          </div>
-          <div>
-            <label class="block text-slate-400 mb-1">Strong Password *</label>
-            <input type="password" id="regPass" placeholder="******" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-white">
-          </div>
-
-          <button onclick="handleRegisterAccount()" class="w-full bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold py-3 rounded-xl text-xs shadow-lg transition mt-2">
-            অ্যাকাউন্ট তৈরি করুন
-          </button>
-        </div>
-      `;
-      modal.classList.remove('hidden');
-    };
-
-    window.handleRegisterAccount = function() {
-      const name = document.getElementById('regName').value.trim();
-      const email = document.getElementById('regEmail').value.trim().toLowerCase();
-      const role = document.getElementById('regRole').value;
-      const pass = document.getElementById('regPass').value;
-
-      if (!name || !email || !pass) {
-        showAdminToast('সবগুলো ঘর সঠিকভাবে পূরণ করুন!');
-        return;
-      }
-
-      createUserWithEmailAndPassword(auth, email, pass)
-        .then((userCredential) => {
-          const dealerRef = push(ref(db, 'Dealers'));
-          set(dealerRef, {
-            contact: email,
-            name: name,
-            password: pass,
-            role: role
-          });
-
-          showAdminToast(`🎉 ${role} অ্যাকাউন্ট সফলভাবে তৈরি হয়েছে!`);
-          closeAdminModal();
-        })
-        .catch((err) => {
-          showAdminToast('অ্যাকাউন্ট তৈরিতে সমস্যা হয়েছে: ' + err.message);
-        });
-    };
-
-    // FORGOT PASSWORD MODAL
-    window.openForgotPasswordModal = function() {
-      const modal = document.getElementById('adminModal');
-      const body = document.getElementById('modalBody');
-
-      body.innerHTML = `
-        <h3 class="text-sm font-bold text-slate-100 mb-3 text-center border-b border-slate-700 pb-2">পাসওয়ার্ড রিসেট করুন</h3>
-        <div class="space-y-3 text-xs">
-          <p class="text-slate-400 text-[11px] text-center">আপনার নিবন্ধিত ইমেইল দিন। আমরা রিসেট লিঙ্ক পাঠাবো।</p>
-          
-          <div>
-            <label class="block text-slate-400 mb-1">ইমেইল এড্রেস *</label>
-            <input type="text" id="resetInput" placeholder="Enter mail address..." class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-white">
-          </div>
-
-          <button id="sendResetBtn" onclick="handleSendPasswordReset()" class="w-full bg-amber-600 hover:bg-amber-500 text-white font-bold py-2.5 rounded-xl text-xs shadow transition mt-1">
-            পাসওয়ার্ড রিসেট লিঙ্ক পাঠান
-          </button>
-        </div>
-      `;
-      modal.classList.remove('hidden');
-    };
-
-    window.handleSendPasswordReset = function() {
-      const input = document.getElementById('resetInput').value.trim();
-
-      if (!input) {
-        showAdminToast('ইমেইল নম্বর দিন!');
-        return;
-      }
-
-      sendPasswordResetEmail(auth, input)
         .then(() => {
-          showAdminToast('📩 আপনার ইমেইলে রিসেট লিঙ্ক পাঠানো হয়েছে!');
-          closeAdminModal();
+          showAdminToast('এডমিন লগইন সফল!');
         })
-        .catch((error) => {
-          showAdminToast('ত্রুটি: ' + error.message);
+        .catch(() => {
+          showAdminToast('ইমেইল অথবা পাসওয়ার্ড ভুল!');
         });
     };
 
@@ -800,45 +595,91 @@
       openSubView(newView);
     };
 
+    // ⚙️ সেটিংস পেজে ড্রপডাউন ভিত্তিক ইউনিক স্মার্ট আপডেট কনফিগারেশন
     window.renderAdminDashboard = function() {
       const main = document.getElementById('adminMain');
       if (!main) return;
 
-      const isRestrictedRole = isRestrictedAdmin();
-      const currentUid = window.storedAdmin ? window.storedAdmin.uid : '';
-
       if (window.activeView === 'settings') {
+        const updateInfo = window.appUpdateInfo || {};
+
         main.innerHTML = `
           <div class="space-y-3">
-            <div class="bg-slate-800 p-4 rounded-2xl border border-slate-700 space-y-2">
+            <!-- 👤 Admin Profile Box -->
+            <div class="bg-slate-800 p-4 rounded-2xl border border-slate-700 space-y-2 shadow-md">
               <div class="flex items-center gap-3">
-                <div class="w-10 h-10 bg-indigo-600 rounded-full flex items-center justify-center font-bold text-white">
-                  <i class="fa-solid fa-user text-sm"></i>
+                <div class="w-10 h-10 bg-indigo-600 rounded-full flex items-center justify-center font-bold text-white shadow-lg">
+                  <i class="fa-solid fa-user-shield text-sm"></i>
                 </div>
                 <div>
                   <h3 class="font-bold text-sm text-slate-100">${escapeHTML(window.storedAdmin.name)}</h3>
-                  <span class="text-[10px] bg-indigo-500/20 text-indigo-400 font-bold px-2 py-0.5 rounded-full border border-indigo-500/30">${escapeHTML(window.storedAdmin.role)}</span>
+                  <span class="text-[10px] bg-indigo-500/20 text-indigo-400 font-bold px-2 py-0.5 rounded-full border border-indigo-500/30">Main Admin</span>
                 </div>
               </div>
               <p class="text-xs text-slate-400 pt-2 border-t border-slate-700/80"><strong>Contact:</strong> ${escapeHTML(window.storedAdmin.contact)}</p>
             </div>
 
-            ${!isRestrictedRole ? `
-              <button onclick="openSubView('payment_setup')" class="w-full bg-slate-800 p-3.5 rounded-2xl border border-slate-700 flex justify-between items-center text-xs hover:border-indigo-500 transition">
-                <div class="flex items-center gap-2.5">
-                  <div class="w-8 h-8 bg-emerald-500/20 text-emerald-400 rounded-xl flex items-center justify-center font-bold">
-                    <i class="fa-solid fa-wallet text-sm"></i>
-                  </div>
-                  <div class="text-left">
-                    <span class="font-bold text-slate-100 block">Payment System Setup</span>
-                    <span class="text-[10px] text-slate-400">bKash, Nagad, Rocket, Bank Account setup</span>
+            <!-- 💳 Payment Setup Link -->
+            <button onclick="openSubView('payment_setup')" class="w-full bg-slate-800 p-3.5 rounded-2xl border border-slate-700 flex justify-between items-center text-xs hover:border-indigo-500 transition shadow-sm">
+              <div class="flex items-center gap-2.5">
+                <div class="w-8 h-8 bg-emerald-500/20 text-emerald-400 rounded-xl flex items-center justify-center font-bold">
+                  <i class="fa-solid fa-wallet text-sm"></i>
+                </div>
+                <div class="text-left">
+                  <span class="font-bold text-slate-100 block">Payment System Setup</span>
+                  <span class="text-[10px] text-slate-400">bKash, Nagad, Rocket, Bank Account setup</span>
+                </div>
+              </div>
+              <i class="fa-solid fa-chevron-right text-slate-500 text-xs"></i>
+            </button>
+
+            <!-- 📱 Smart Single-Card Dropdown Update Configuration -->
+            <div class="bg-slate-800 p-3.5 rounded-2xl border border-slate-700 space-y-2.5 shadow-md">
+              <h3 class="text-xs font-bold text-slate-200 flex items-center gap-2 border-b border-slate-700 pb-1.5">
+                <i class="fa-solid fa-arrows-rotate text-indigo-400"></i> App Update Configuration
+              </h3>
+
+              <!-- 🎯 Target App Selector Dropdown -->
+              <div>
+                <label class="text-[10px] text-slate-400 font-bold block mb-1">Target Application *</label>
+                <select id="cfgTargetApp" onchange="loadTargetAppInfo(this.value)" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2 text-xs text-white font-bold focus:outline-none focus:border-indigo-500">
+                  <option value="all">🌐 All Apps (User & Merchant)</option>
+                  <option value="userApp">📱 User App Only (Customer)</option>
+                  <option value="merchantApp">🏪 Merchant App Only (Dealer/Sub-Admin)</option>
+                </select>
+              </div>
+
+              <div class="grid grid-cols-2 gap-2">
+                <div>
+                  <label class="text-[10px] text-slate-400 block mb-1">Version Code *</label>
+                  <input type="text" id="cfgAppVer" placeholder="e.g. 1.8.0" value="1.8.0" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2 text-xs text-white font-mono">
+                </div>
+                <div>
+                  <label class="text-[10px] text-slate-400 block mb-1">Mandatory Update</label>
+                  <div class="flex items-center h-8 pt-1">
+                    <input type="checkbox" id="cfgForceUpdate" class="w-4 h-4 accent-indigo-600 rounded">
+                    <label for="cfgForceUpdate" class="text-xs text-slate-300 font-bold ml-1.5 cursor-pointer">Force Update</label>
                   </div>
                 </div>
-                <i class="fa-solid fa-chevron-right text-slate-500 text-xs"></i>
-              </button>
-            ` : ''}
+              </div>
 
-            <div class="bg-slate-800 p-3.5 rounded-2xl border border-slate-700 space-y-2">
+              <div>
+                <label class="text-[10px] text-slate-400 block mb-1">GitHub Release APK Link *</label>
+                <input type="text" id="cfgAppUrl" placeholder="https://github.com/.../release.apk" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2 text-xs text-white">
+              </div>
+
+              <div>
+                <label class="text-[10px] text-slate-400 block mb-1">Update Notes / Message</label>
+                <textarea id="cfgAppNotes" placeholder="What's new in this release..." class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2 text-xs text-white h-16"></textarea>
+              </div>
+
+              <button onclick="saveSmartAppUpdateSettings()" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-2.5 rounded-xl text-xs transition shadow flex justify-center items-center gap-1.5 mt-1">
+                <i class="fa-solid fa-paper-plane text-xs"></i> Broadcast Update Configuration
+              </button>
+            </div>
+
+            <!-- 🌐 Language Selector -->
+            <div class="bg-slate-800 p-3.5 rounded-2xl border border-slate-700 space-y-2 shadow-sm">
               <h3 class="text-xs font-bold text-slate-200 flex items-center gap-2">
                 <i class="fa-solid fa-globe text-cyan-400"></i> ${t('languageLabel')}
               </h3>
@@ -848,52 +689,18 @@
               </select>
             </div>
 
-            ${!isRestrictedRole ? `
-              <button onclick="triggerAutoBackupRestore()" class="w-full bg-slate-800 p-3.5 rounded-2xl border border-slate-700 flex justify-between items-center text-xs hover:border-indigo-500 transition">
-                <div class="flex items-center gap-2.5">
-                  <div class="w-8 h-8 bg-blue-500/20 text-blue-400 rounded-xl flex items-center justify-center font-bold">
-                    <i class="fa-solid fa-rotate text-sm"></i>
-                  </div>
-                  <div class="text-left">
-                    <span class="font-bold text-slate-100 block">Auto Backup (Restore)</span>
-                    <span class="text-[10px] text-slate-400">Sync and restore database</span>
-                  </div>
-                </div>
-                <i class="fa-solid fa-arrows-rotate text-blue-400 text-xs"></i>
-              </button>
-
-              <button onclick="downloadSystemBackup()" class="w-full bg-slate-800 p-3.5 rounded-2xl border border-slate-700 flex justify-between items-center text-xs hover:border-indigo-500 transition">
-                <div class="flex items-center gap-2.5">
-                  <div class="w-8 h-8 bg-purple-500/20 text-purple-400 rounded-xl flex items-center justify-center font-bold">
-                    <i class="fa-solid fa-database text-sm"></i>
-                  </div>
-                  <div class="text-left">
-                    <span class="font-bold text-slate-100 block">System Data Backup</span>
-                    <span class="text-[10px] text-slate-400">Download JSON backup</span>
-                  </div>
-                </div>
-                <i class="fa-solid fa-download text-purple-400 text-xs"></i>
-              </button>
-            ` : ''}
-
-            <button onclick="checkAppUpdate()" class="w-full bg-slate-800 p-3.5 rounded-2xl border border-slate-700 flex justify-between items-center text-xs hover:border-indigo-500 transition">
-              <div class="flex items-center gap-2.5">
-                <div class="w-8 h-8 bg-indigo-500/20 text-indigo-400 rounded-xl flex items-center justify-center font-bold">
-                  <i class="fa-solid fa-cloud-arrow-down text-sm"></i>
-                </div>
-                <div class="text-left">
-                  <span class="font-bold text-slate-100 block">Checking for Update</span>
-                  <span class="text-[10px] text-slate-400">Version: ${window.currentAppVersion}</span>
-                </div>
-              </div>
-              <span class="bg-indigo-600 hover:bg-indigo-500 text-white font-bold px-3 py-1.5 rounded-xl text-[10px] shadow">Check</span>
-            </button>
-
-            <button onclick="handleAdminLogout()" class="w-full bg-red-600/20 hover:bg-red-600/30 text-red-400 font-bold py-2.5 rounded-xl text-xs border border-red-500/30 transition flex justify-center items-center gap-2 mt-3">
+            <!-- 🔴 Logout Button -->
+            <button onclick="handleAdminLogout()" class="w-full bg-red-600/20 hover:bg-red-600/30 text-red-400 font-bold py-2.5 rounded-xl text-xs border border-red-500/30 transition flex justify-center items-center gap-2 mt-3 shadow">
               <i class="fa-solid fa-right-from-bracket"></i> ${t('logoutBtn')}
             </button>
           </div>
         `;
+
+        // ইনিশিয়ালি ড্রপডাউন লোড করা
+        setTimeout(() => {
+          loadTargetAppInfo('all');
+        }, 50);
+
         return;
       }
 
@@ -902,96 +709,14 @@
         return;
       }
 
-      // 🔹 ডিলারের জন্য নির্দিষ্ট ডাটা ফিল্টার করা
-      let relevantOrders = window.orders;
-      let relevantProducts = window.products;
+      const orderRequests = window.orders.filter(o => o.status === 'Submitted (Pending Approval)' || o.status === 'Submitted');
+      const pendingOrders = window.orders.filter(o => o.status === 'পেন্ডিং' || o.status === 'Pending').length;
+      const totalSales = window.orders.filter(o => o.status === 'ডেলিভার্ড' || o.status === 'Delivery' || o.status === 'Delivered').reduce((sum, o) => sum + Number(o.totalAmount || 0), 0);
+      const lowStockCount = window.products.filter(p => Number(p.stock) <= 5).length;
+      const pendingProductsCount = window.products.filter(p => p.status === 'pending').length;
+      const pendingCouponsCount = window.coupons.filter(c => c.status !== 'approved' && c.status !== 'Approved').length;
 
-      if (isRestrictedRole) {
-        relevantProducts = window.products.filter(p => p.addedByUid === currentUid || p.addedBy === window.storedAdmin.name);
-        const myProdIds = new Set(relevantProducts.map(p => p.id));
-        relevantOrders = window.orders.filter(o => o.items && Array.isArray(o.items) && o.items.some(i => myProdIds.has(i.productId)));
-      }
-
-      const orderRequests = relevantOrders.filter(o => o.status === 'Submitted (Pending Approval)' || o.status === 'Submitted');
-      const pendingOrders = relevantOrders.filter(o => o.status === 'পেন্ডিং' || o.status === 'Pending').length;
-      const totalSales = relevantOrders.filter(o => o.status === 'ডেলিভার্ড' || o.status === 'Delivery' || o.status === 'Delivered').reduce((sum, o) => sum + Number(o.totalAmount || 0), 0);
-      const lowStockCount = relevantProducts.filter(p => Number(p.stock) <= 5).length;
-      const pendingProductsCount = relevantProducts.filter(p => p.status === 'pending').length;
-
-      // 🔹 সাব-এডমিন ও ডিলারের কুইক মেনু বার
-      if (isRestrictedRole) {
-        main.innerHTML = `
-          <div class="bg-indigo-950/60 p-4 rounded-2xl border border-indigo-800 text-xs flex justify-between items-center shadow-lg">
-            <div>
-              <span class="font-bold text-indigo-200 text-sm">${t('welcomeRole')}, ${escapeHTML(window.storedAdmin.name)}</span>
-              <p class="text-[10px] text-indigo-300 mt-0.5">Role: <span class="text-amber-400 font-bold uppercase">${escapeHTML(window.storedAdmin.role)}</span> ${t('limitedAccess')}</p>
-            </div>
-            <div class="w-10 h-10 bg-indigo-600/30 rounded-xl flex items-center justify-center border border-indigo-500/30">
-              <i class="fa-solid fa-user-shield text-indigo-300 text-lg"></i>
-            </div>
-          </div>
-
-          <div class="pt-2">
-            <h2 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">${t('assignedFeatures')}</h2>
-            
-            <div class="grid grid-cols-2 gap-3">
-              <button onclick="openSubView('products')" class="unique-nav-card p-4 rounded-2xl flex flex-col items-center text-center relative group">
-                <div class="w-11 h-11 rounded-2xl bg-indigo-500/10 text-indigo-400 flex items-center justify-center mb-1.5 group-hover:scale-110 transition border border-indigo-500/20">
-                  <i class="fa-solid fa-boxes-stacked text-lg"></i>
-                </div>
-                <span class="text-xs font-bold text-slate-200">${t('productsTitle')}</span>
-              </button>
-
-              <button onclick="openSubView('orders')" class="unique-nav-card p-4 rounded-2xl flex flex-col items-center text-center relative group">
-                ${pendingOrders > 0 ? `<span class="absolute top-2 right-2 bg-red-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow-lg">${pendingOrders}</span>` : ''}
-                <div class="w-11 h-11 rounded-2xl bg-amber-500/10 text-amber-400 flex items-center justify-center mb-1.5 group-hover:scale-110 transition border border-amber-500/20">
-                  <i class="fa-solid fa-cart-flatbed text-lg"></i>
-                </div>
-                <span class="text-xs font-bold text-slate-200">${t('ordersTitle')}</span>
-              </button>
-
-              <button onclick="openSubView('product_approval')" class="unique-nav-card p-4 rounded-2xl flex flex-col items-center text-center relative group">
-                ${pendingProductsCount > 0 ? `<span class="absolute top-2 right-2 bg-teal-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full animate-pulse shadow-lg">${pendingProductsCount}</span>` : ''}
-                <div class="w-11 h-11 rounded-2xl bg-teal-500/10 text-teal-400 flex items-center justify-center mb-1.5 group-hover:scale-110 transition border border-teal-500/20">
-                  <i class="fa-solid fa-clipboard-check text-lg"></i>
-                </div>
-                <span class="text-xs font-bold text-slate-200">${t('productApprovalTitle')}</span>
-              </button>
-
-              <button onclick="openSubView('dues')" class="unique-nav-card p-4 rounded-2xl flex flex-col items-center text-center relative group">
-                <div class="w-11 h-11 rounded-2xl bg-red-500/10 text-red-400 flex items-center justify-center mb-1.5 group-hover:scale-110 transition border border-red-500/20">
-                  <i class="fa-solid fa-book-bookmark text-lg"></i>
-                </div>
-                <span class="text-xs font-bold text-slate-200">${t('dueLedgerTitle')}</span>
-              </button>
-
-              <button onclick="openSubView('expenses')" class="unique-nav-card p-4 rounded-2xl flex flex-col items-center text-center relative group">
-                <div class="w-11 h-11 rounded-2xl bg-orange-500/10 text-orange-400 flex items-center justify-center mb-1.5 group-hover:scale-110 transition border border-orange-500/20">
-                  <i class="fa-solid fa-calculator text-lg"></i>
-                </div>
-                <span class="text-xs font-bold text-slate-200">${t('expenseLedgerTitle')}</span>
-              </button>
-
-              <button onclick="openSubView('customers')" class="unique-nav-card p-4 rounded-2xl flex flex-col items-center text-center relative group">
-                <div class="w-11 h-11 rounded-2xl bg-purple-500/10 text-purple-400 flex items-center justify-center mb-1.5 group-hover:scale-110 transition border border-purple-500/20">
-                  <i class="fa-solid fa-users text-lg"></i>
-                </div>
-                <span class="text-xs font-bold text-slate-200">${t('customersTitle')}</span>
-              </button>
-
-              <button onclick="openSubView('coupons')" class="unique-nav-card p-4 rounded-2xl flex flex-col items-center text-center relative group col-span-2">
-                <div class="w-11 h-11 rounded-2xl bg-rose-500/10 text-rose-400 flex items-center justify-center mb-1.5 group-hover:scale-110 transition border border-rose-500/20">
-                  <i class="fa-solid fa-ticket text-lg"></i>
-                </div>
-                <span class="text-xs font-bold text-slate-200">${t('couponsTitle')}</span>
-              </button>
-            </div>
-          </div>
-        `;
-        return;
-      }
-
-      // মেইন এডমিনের ফুল ড্যাশবোর্ড
+      // মেইন এডমিন ড্যাশবোর্ড
       main.innerHTML = `
         ${lowStockCount > 0 ? `
           <div onclick="openSubView('stock')" class="bg-gradient-to-r from-red-600 to-orange-600 text-white p-3 rounded-2xl shadow-lg flex items-center justify-between cursor-pointer">
@@ -1090,11 +815,13 @@
             <span class="text-[10px] font-bold text-slate-200">${t('dueLedgerTitle')}</span>
           </button>
 
+          <!-- 🎟️ Approval Coupons Module -->
           <button onclick="openSubView('coupons')" class="unique-nav-card p-3 rounded-2xl flex flex-col items-center text-center relative group">
+            ${pendingCouponsCount > 0 ? `<span class="absolute top-2 right-2 bg-rose-500 text-white text-[9px] font-bold px-1.5 py-0.2 rounded-full animate-pulse shadow-lg shadow-rose-500/50">${pendingCouponsCount}</span>` : ''}
             <div class="w-10 h-10 rounded-xl bg-rose-500/10 text-rose-400 flex items-center justify-center mb-1.5 group-hover:scale-110 transition border border-rose-500/20">
               <i class="fa-solid fa-ticket text-base"></i>
             </div>
-            <span class="text-[10px] font-bold text-slate-200">${t('couponsTitle')}</span>
+            <span class="text-[10px] font-bold text-slate-200">${t('approvalCouponsTitle')}</span>
           </button>
 
           <button onclick="openSubView('notifications')" class="unique-nav-card p-3 rounded-2xl flex flex-col items-center text-center relative group">
@@ -1107,7 +834,64 @@
       `;
     };
 
-    // 🔹 সাব-ভিউ পরিবর্তন ও ব্রাউজার হিস্টোরি পুশ করা
+    // 🔄 ড্রপডাউনে টার্গেট সিলেক্ট করলে আগের ডেটা ইনপুটে অটো-লোড হওয়ার লজিক
+    window.loadTargetAppInfo = function(targetKey) {
+      const info = window.appUpdateInfo || {};
+      let targetData = {};
+
+      if (targetKey === 'userApp') {
+        targetData = info.userApp || {};
+      } else if (targetKey === 'merchantApp') {
+        targetData = info.merchantApp || {};
+      } else {
+        targetData = info.userApp || info.merchantApp || {};
+      }
+
+      document.getElementById('cfgAppVer').value = targetData.version || '1.8.0';
+      document.getElementById('cfgAppUrl').value = targetData.downloadUrl || '';
+      document.getElementById('cfgAppNotes').value = targetData.notes || '';
+      document.getElementById('cfgForceUpdate').checked = !!targetData.forceUpdate;
+    };
+
+    // 💾 স্মার্ট ড্রপডাউন অনুযায়ী ফায়ারবেসে সেভ করার ফাংশন
+    window.saveSmartAppUpdateSettings = function() {
+      const target = document.getElementById('cfgTargetApp').value;
+      const version = document.getElementById('cfgAppVer').value.trim();
+      const downloadUrl = document.getElementById('cfgAppUrl').value.trim();
+      const notes = document.getElementById('cfgAppNotes').value.trim();
+      const forceUpdate = document.getElementById('cfgForceUpdate').checked;
+
+      if (!version || !downloadUrl) {
+        showAdminToast('ভার্সন কোড এবং গিটহাব লিংক ঘর দুটি পূরণ করুন!');
+        return;
+      }
+
+      const payload = {
+        version,
+        downloadUrl,
+        notes,
+        forceUpdate,
+        updatedAt: Date.now()
+      };
+
+      if (target === 'all') {
+        update(ref(db, 'app_update'), {
+          userApp: payload,
+          merchantApp: payload
+        }).then(() => {
+          showAdminToast('🎉 সকল অ্যাপের (User & Merchant) আপডেট সেভ হয়েছে!');
+        });
+      } else if (target === 'userApp') {
+        update(ref(db, 'app_update/userApp'), payload).then(() => {
+          showAdminToast('🎉 User App-এর জন্য আপডেট সফলভাবে ব্রডকাস্ট হয়েছে!');
+        });
+      } else if (target === 'merchantApp') {
+        update(ref(db, 'app_update/merchantApp'), payload).then(() => {
+          showAdminToast('🎉 Merchant App-এর জন্য আপডেট সফলভাবে ব্রডকাস্ট হয়েছে!');
+        });
+      }
+    };
+
     window.openSubView = function(view) {
       if (window.activeView !== view) {
         window.activeView = view;
@@ -1116,31 +900,12 @@
       }
     };
 
-    window.setOrderStatusFilter = function(status) {
-      window.selectedOrderStatusFilter = status;
-      renderAdminDashboard();
-    };
-
     function renderSubView(view) {
       const main = document.getElementById('adminMain');
-      const isRestrictedRole = isRestrictedAdmin();
-      const currentUid = window.storedAdmin ? window.storedAdmin.uid : '';
-
-      // 🔹 ডিলারের ফিল্টারড ডাটা প্রিপারেশন
-      let myProducts = window.products;
-      if (isRestrictedRole) {
-        myProducts = window.products.filter(p => p.addedByUid === currentUid || p.addedBy === window.storedAdmin.name);
-      }
-      const myProductIds = new Set(myProducts.map(p => p.id));
-
-      let html = '';
+      let html = `<button onclick="openSubView('menu')" class="mb-3 text-xs bg-slate-800 px-3 py-1.5 rounded-lg border border-slate-700 flex items-center gap-1.5"><i class="fa-solid fa-arrow-left"></i> ব্যাক টু ড্যাশবোর্ড</button>`;
 
       if (view === 'orders_approval') {
         let submittedOrders = window.orders.filter(o => o.status === 'Submitted (Pending Approval)' || o.status === 'Submitted');
-        
-        if (isRestrictedRole) {
-          submittedOrders = submittedOrders.filter(o => o.items && Array.isArray(o.items) && o.items.some(i => myProductIds.has(i.productId)));
-        }
 
         html += `
           <h2 class="text-xs font-bold text-slate-200 mb-3 flex justify-between items-center">
@@ -1161,10 +926,10 @@
                 <div class="flex justify-between items-center text-xs">
                   <span class="font-bold text-amber-400">Order ID: #${o.id.slice(-6)}</span>
                   <div class="flex items-center gap-2" onclick="event.stopPropagation()">
-                    <button onclick="promptApproveOrder('${o.id}')" class="w-8 h-8 bg-emerald-500/20 hover:bg-emerald-500/40 text-emerald-400 rounded-lg flex items-center justify-center font-bold text-base transition border border-emerald-500/40" title="Confirm Order">
+                    <button onclick="approveOrder('${o.id}')" class="w-8 h-8 bg-emerald-500/20 hover:bg-emerald-500/40 text-emerald-400 rounded-lg flex items-center justify-center font-bold text-base transition border border-emerald-500/40" title="Confirm Order">
                       ✔️
                     </button>
-                    <button onclick="promptCancelOrder('${o.id}')" class="w-8 h-8 bg-red-500/20 hover:bg-red-500/40 text-red-400 rounded-lg flex items-center justify-center font-bold text-base transition border border-red-500/40" title="Reject / Cancel Order">
+                    <button onclick="cancelOrder('${o.id}')" class="w-8 h-8 bg-red-500/20 hover:bg-red-500/40 text-red-400 rounded-lg flex items-center justify-center font-bold text-base transition border border-red-500/40" title="Reject Order">
                       ❌
                     </button>
                   </div>
@@ -1174,9 +939,6 @@
                   <p><strong>কাস্টমার:</strong> ${escapeHTML(o.userName)} (${escapeHTML(o.userPhone)})</p>
                   <p><strong>ঠিকানা:</strong> ${escapeHTML(o.address)}</p>
                   <p><strong>পেমেন্ট:</strong> <span class="uppercase font-bold text-amber-300">${escapeHTML(o.paymentMethod || 'COD')}</span> ${o.trxId ? `(TrxID: ${escapeHTML(o.trxId)})` : ''}</p>
-                  <div class="pt-1 border-t border-slate-800 text-[11px] text-slate-400">
-                    <strong>পণ্যসমূহ:</strong> ${(o.items || []).map(i => `${escapeHTML(i.name)} (${i.size ? escapeHTML(i.size) : ''} × ${i.qty || 1})`).join(', ')}
-                  </div>
                 </div>
 
                 <div class="flex justify-between items-center text-xs font-bold text-slate-200 pt-1">
@@ -1189,13 +951,136 @@
         `;
       }
 
-      else if (view === 'expenses') {
-        let filteredExpenses = window.expenses;
-        if (isRestrictedRole) {
-          filteredExpenses = window.expenses.filter(e => e.addedByUid === currentUid);
-        }
+      else if (view === 'product_approval') {
+        let pendingList = window.products.filter(p => p.status === 'pending');
 
-        const totalExp = filteredExpenses.reduce((sum, e) => sum + Number(e.amount || 0), 0);
+        html += `
+          <h2 class="text-xs font-bold text-slate-200 mb-3 flex justify-between items-center">
+            <span>${t('pendingApprovalList')}</span>
+            <span class="bg-amber-500/20 text-amber-400 text-[10px] font-bold px-2.5 py-0.5 rounded-full border border-amber-500/30">${pendingList.length} Pending</span>
+          </h2>
+          <div class="space-y-2.5">
+            ${pendingList.length === 0 ? `
+              <div class="bg-slate-800 p-8 rounded-2xl text-center text-xs text-slate-400 border border-slate-700">
+                <i class="fa-solid fa-clipboard-check text-emerald-400 text-3xl mb-2 opacity-60"></i>
+                <p>${t('noPendingProducts')}</p>
+              </div>
+            ` : pendingList.map(p => {
+              const displayImg = Array.isArray(p.imageUrl) ? p.imageUrl[0] : (p.imageUrl || 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=100');
+              return `
+              <div class="bg-slate-800 p-3 rounded-2xl border border-amber-500/40 space-y-2 shadow-md">
+                <div class="flex gap-3 items-center">
+                  <img src="${displayImg}" class="w-14 h-14 object-cover rounded-xl border border-slate-700">
+                  <div class="flex-1 text-xs space-y-0.5">
+                    <h4 class="font-bold text-slate-100">${escapeHTML(p.name)}</h4>
+                    <p class="text-slate-400 text-[10px]">${t('itemCodeText')} <span class="text-amber-400 font-bold">${escapeHTML(p.itemCode || 'N/A')}</span> | ${t('addedByText')} <span class="text-indigo-300 font-bold">${escapeHTML(p.addedBy || 'Merchant')}</span></p>
+                    <p class="text-emerald-400 font-extrabold text-xs">৳${p.currentPrice}</p>
+                  </div>
+                </div>
+                <div class="flex gap-2 pt-2 border-t border-slate-700/80">
+                  <button onclick="approveProduct('${p.id}')" class="flex-1 bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-1.5 rounded-lg text-xs shadow flex items-center justify-center gap-1 transition">
+                    <i class="fa-solid fa-check text-xs"></i> Approve
+                  </button>
+                  <button onclick="deleteProduct('${p.id}')" class="bg-red-600/20 hover:bg-red-600/30 text-red-400 font-bold px-3 py-1.5 rounded-lg text-xs border border-red-500/30 transition">
+                    Reject
+                  </button>
+                </div>
+              </div>
+            `}).join('')}
+          </div>
+        `;
+      }
+
+      // 🎟️ "APPROVAL COUPONS" Module
+      else if (view === 'coupons') {
+        const pendingCoupons = window.coupons.filter(c => c.status !== 'approved' && c.status !== 'Approved');
+        const approvedCoupons = window.coupons.filter(c => c.status === 'approved' || c.status === 'Approved');
+
+        html += `
+          <div class="bg-slate-800 p-3.5 rounded-2xl border border-slate-700 mb-4 space-y-2.5 shadow-lg">
+            <h3 class="text-xs font-bold text-slate-200 border-b border-slate-700 pb-1.5 flex items-center gap-1.5">
+              <i class="fa-solid fa-ticket text-rose-400"></i> ${t('createCoupon')}
+            </h3>
+            <div>
+              <label class="block text-[10px] text-slate-400 mb-1">${t('couponCodeLabel')}</label>
+              <input type="text" id="couponCode" placeholder="e.g. MASTER2026" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-1.5 text-xs text-white uppercase font-mono font-bold">
+            </div>
+            <div class="grid grid-cols-2 gap-2">
+              <div>
+                <label class="block text-[10px] text-slate-400 mb-1">${t('discountTypeLabel')}</label>
+                <select id="couponType" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-1.5 text-xs text-white font-bold">
+                  <option value="flat">${t('flatMoney')}</option>
+                  <option value="percent">${t('percentage')}</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-[10px] text-slate-400 mb-1">${t('discountAmountLabel')}</label>
+                <input type="number" id="couponAmount" placeholder="e.g. 200" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-1.5 text-xs text-white">
+              </div>
+            </div>
+            <div>
+              <label class="block text-[10px] text-slate-400 mb-1">${t('expiryDateLabel')}</label>
+              <input type="date" id="couponExpDate" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-1.5 text-xs text-white">
+            </div>
+            <button onclick="addMasterCoupon()" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white text-xs py-2 rounded-xl font-bold shadow transition">
+              ${t('saveCouponBtn')}
+            </button>
+          </div>
+
+          <!-- ⏳ Merchant/Sub-Admin/Dealer Coupon Approval Requests -->
+          <div class="space-y-3 mb-4">
+            <h2 class="text-xs font-bold text-amber-400 flex justify-between items-center">
+              <span>⏳ ${t('pendingCouponsTitle')} (${pendingCoupons.length})</span>
+            </h2>
+            ${pendingCoupons.length === 0 ? `
+              <div class="bg-slate-800 p-4 rounded-xl text-center text-xs text-slate-400 border border-slate-700">
+                কোনো কুপন এপ্রুভাল রিকোয়েস্ট পেন্ডিং নেই!
+              </div>
+            ` : pendingCoupons.map(c => `
+              <div class="bg-slate-800 p-3 rounded-2xl border border-amber-500/40 space-y-2 shadow-md">
+                <div class="flex justify-between items-center text-xs">
+                  <div>
+                    <span class="font-extrabold text-amber-400 font-mono text-sm">${escapeHTML(c.code)}</span>
+                    <p class="text-[10px] text-slate-300">ছাড়: ৳${c.discountAmount || c.amount || 0} | সাবমিট করেছেন: <span class="text-indigo-300 font-bold">${escapeHTML(c.addedBy || c.creatorRole || 'User')}</span></p>
+                  </div>
+                </div>
+                <div class="flex gap-2 pt-1 border-t border-slate-700/80">
+                  <button onclick="approveCoupon('${c.id}')" class="flex-1 bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-1.5 rounded-lg text-xs shadow transition flex items-center justify-center gap-1">
+                    <i class="fa-solid fa-check text-xs"></i> Accept & Approve
+                  </button>
+                  <button onclick="rejectCoupon('${c.id}')" class="bg-red-600/20 hover:bg-red-600/30 text-red-400 font-bold px-3 py-1.5 rounded-lg text-xs border border-red-500/30 transition">
+                    Reject
+                  </button>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+
+          <!-- ✅ Approved & Active Coupons List -->
+          <h2 class="text-xs font-bold text-emerald-400 mb-2">✅ ${t('availableCoupons')} (${approvedCoupons.length})</h2>
+          <div class="space-y-2">
+            ${approvedCoupons.length === 0 ? `
+              <div class="bg-slate-800 p-4 rounded-xl text-center text-xs text-slate-400 border border-slate-700">
+                কোনো একটিভ কুপন নেই!
+              </div>
+            ` : approvedCoupons.map(c => `
+              <div class="bg-slate-800 p-3 rounded-xl border border-emerald-500/30 flex justify-between items-center text-xs shadow-sm">
+                <div>
+                  <div class="flex items-center gap-2">
+                    <span class="font-black text-emerald-400 uppercase text-sm font-mono">${escapeHTML(c.code)}</span>
+                    <span class="bg-emerald-500/20 text-emerald-400 text-[9px] px-1.5 py-0.2 rounded font-bold border border-emerald-500/30">Approved & Active</span>
+                  </div>
+                  <p class="text-slate-300 text-[11px] font-bold mt-0.5">ছাড়: ${c.discountType === 'percent' ? `${c.discountAmount}%` : `৳${c.discountAmount || c.amount || 0}`} ${c.addedBy ? `| তৈরি করেছেন: ${escapeHTML(c.addedBy)}` : ''}</p>
+                </div>
+                <button onclick="deleteCoupon('${c.id}')" class="text-red-400 hover:bg-slate-700 p-2 rounded-lg transition"><i class="fa-solid fa-trash"></i></button>
+              </div>
+            `).join('')}
+          </div>
+        `;
+      }
+
+      else if (view === 'expenses') {
+        const totalExp = window.expenses.reduce((sum, e) => sum + Number(e.amount || 0), 0);
         const todayStr = new Date().toISOString().split('T')[0];
 
         html += `
@@ -1203,9 +1088,6 @@
             <h2 class="text-xs font-bold text-slate-200 flex items-center gap-1.5">
               <i class="fa-solid fa-receipt text-orange-400"></i> ${t('expenseLedgerTitle')}
             </h2>
-            <button onclick="toggleExpenseForm()" class="bg-indigo-600 hover:bg-indigo-500 text-white w-8 h-8 rounded-lg flex items-center justify-center font-bold text-sm shadow transition">
-              <i class="fa-solid fa-plus"></i>
-            </button>
           </div>
 
           <div id="expenseFormBox" class="bg-slate-800 p-3.5 rounded-2xl border border-slate-700 mb-4 space-y-2.5 shadow-lg">
@@ -1234,82 +1116,27 @@
             </button>
           </div>
 
-          <h3 class="text-xs font-bold text-slate-300 mb-2">খরচের হিসাব খাতা (${filteredExpenses.length})</h3>
+          <h3 class="text-xs font-bold text-slate-300 mb-2">খরচের হিসাব খাতা (${window.expenses.length})</h3>
           <div class="space-y-2">
-            ${filteredExpenses.length === 0 ? `
-              <div class="text-center py-8 text-slate-500 text-xs bg-slate-800/50 rounded-2xl border border-slate-800">
-                <i class="fa-solid fa-folder-open text-2xl mb-1 opacity-50 block"></i>
-                এখনো কোনো খরচের হিসাব যুক্ত করা হয়নি।
-              </div>
-            ` : `
-              ${filteredExpenses.map(e => `
-                <div class="bg-slate-800 p-3 rounded-xl border border-slate-700 flex justify-between items-center text-xs shadow-sm">
-                  <div>
-                    <span class="font-bold text-slate-100 block text-xs">${escapeHTML(e.title)}</span>
-                    <span class="text-[10px] text-slate-400"><i class="fa-regular fa-calendar text-[9px] mr-1"></i>${e.date || 'N/A'}</span>
-                  </div>
-                  <div class="flex items-center gap-3">
-                    <span class="font-bold text-orange-400 text-sm">৳${e.amount}</span>
-                    <button onclick="promptDeleteExpense('${e.id}')" class="w-7 h-7 bg-red-500/20 hover:bg-red-500/40 text-red-400 rounded-lg flex items-center justify-center transition">
-                      <i class="fa-solid fa-trash-can text-xs"></i>
-                    </button>
-                  </div>
+            ${window.expenses.map(e => `
+              <div class="bg-slate-800 p-3 rounded-xl border border-slate-700 flex justify-between items-center text-xs shadow-sm">
+                <div>
+                  <span class="font-bold text-slate-100 block text-xs">${escapeHTML(e.title)}</span>
+                  <span class="text-[10px] text-slate-400">${e.date || 'N/A'}</span>
                 </div>
-              `).join('')}
-            `}
+                <div class="flex items-center gap-3">
+                  <span class="font-bold text-orange-400 text-sm">৳${e.amount}</span>
+                  <button onclick="deleteExpense('${e.id}')" class="w-7 h-7 bg-red-500/20 hover:bg-red-500/40 text-red-400 rounded-lg flex items-center justify-center transition">
+                    <i class="fa-solid fa-trash-can text-xs"></i>
+                  </button>
+                </div>
+              </div>
+            `).join('')}
           </div>
         `;
       }
 
-      else if (view === 'product_approval') {
-        let pendingList = window.products.filter(p => p.status === 'pending');
-        if (isRestrictedRole) {
-          pendingList = pendingList.filter(p => p.addedByUid === currentUid || p.addedBy === window.storedAdmin.name);
-        }
-
-        html += `
-          <h2 class="text-xs font-bold text-slate-200 mb-3 flex justify-between items-center">
-            <span>${t('pendingApprovalList')}</span>
-            <span class="bg-amber-500/20 text-amber-400 text-[10px] font-bold px-2.5 py-0.5 rounded-full border border-amber-500/30">${pendingList.length} Pending</span>
-          </h2>
-          <div class="space-y-2.5">
-            ${pendingList.length === 0 ? `
-              <div class="bg-slate-800 p-8 rounded-2xl text-center text-xs text-slate-400 border border-slate-700">
-                <i class="fa-solid fa-clipboard-check text-emerald-400 text-3xl mb-2 opacity-60"></i>
-                <p>${t('noPendingProducts')}</p>
-              </div>
-            ` : pendingList.map(p => {
-              const displayImg = Array.isArray(p.imageUrl) ? p.imageUrl[0] : (p.imageUrl || 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=100');
-              return `
-              <div class="bg-slate-800 p-3 rounded-2xl border border-amber-500/40 space-y-2 shadow-md">
-                <div class="flex gap-3 items-center">
-                  <img src="${displayImg}" class="w-14 h-14 object-cover rounded-xl border border-slate-700">
-                  <div class="flex-1 text-xs space-y-0.5">
-                    <h4 class="font-bold text-slate-100">${escapeHTML(p.name)}</h4>
-                    <p class="text-slate-400 text-[10px]">${t('itemCodeText')} <span class="text-amber-400 font-bold">${escapeHTML(p.itemCode || 'N/A')}</span></p>
-                    <p class="text-emerald-400 font-extrabold text-xs">৳${p.currentPrice}</p>
-                  </div>
-                </div>
-                ${!isRestrictedRole ? `
-                <div class="flex gap-2 pt-2 border-t border-slate-700/80">
-                  <button onclick="approveProduct('${p.id}')" class="flex-1 bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-1.5 rounded-lg text-xs shadow flex items-center justify-center gap-1 transition">
-                    <i class="fa-solid fa-check text-xs"></i> Approve
-                  </button>
-                  <button onclick="deleteProduct('${p.id}')" class="bg-red-600/20 hover:bg-red-600/30 text-red-400 font-bold px-3 py-1.5 rounded-lg text-xs border border-red-500/30 transition">
-                    Reject
-                  </button>
-                </div>
-                ` : `
-                <div class="pt-2 border-t border-slate-700/80 text-center text-[10px] text-amber-400 font-semibold">
-                  ⏳ মেইন এডমিনের অনুমোদনের অপেক্ষায় রয়েছে
-                </div>
-                `}
-              </div>
-            `}).join('')}
-          </div>
-        `;
-      }
-
+      // 💳 Payment Setup Screen
       else if (view === 'payment_setup') {
         html += `
           <div class="flex justify-between items-center mb-3">
@@ -1323,8 +1150,8 @@
 
           <div class="space-y-2">
             ${window.paymentMethods.length === 0 ? `
-              <div class="bg-slate-800 p-6 rounded-2xl text-center text-xs text-slate-400 border border-slate-700">
-                <p>No payment method added yet! Click + Add to configure.</p>
+              <div class="bg-slate-800 p-4 rounded-xl text-center text-xs text-slate-400 border border-slate-700">
+                কোনো পেমেন্ট মেথড যোগ করা নেই!
               </div>
             ` : window.paymentMethods.map(pm => `
               <div class="bg-slate-800 p-3 rounded-xl border border-slate-700 flex justify-between items-center text-xs">
@@ -1342,66 +1169,8 @@
         `;
       }
 
-      else if (view === 'coupons') {
-        let filteredCoupons = window.coupons;
-        if (isRestrictedRole) {
-          filteredCoupons = window.coupons.filter(c => c.addedByUid === currentUid);
-        }
-
-        html += `
-          <div class="bg-slate-800 p-3.5 rounded-2xl border border-slate-700 mb-4 space-y-2.5">
-            <h3 class="text-xs font-bold text-slate-200 border-b border-slate-700 pb-1.5 flex items-center gap-1.5">
-              <i class="fa-solid fa-ticket text-rose-400"></i> ${t('createCoupon')}
-            </h3>
-            <div>
-              <label class="block text-[10px] text-slate-400 mb-1">${t('couponCodeLabel')}</label>
-              <input type="text" id="couponCode" placeholder="e.g. EID2026" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-1.5 text-xs text-white uppercase font-mono font-bold">
-            </div>
-            <div class="grid grid-cols-2 gap-2">
-              <div>
-                <label class="block text-[10px] text-slate-400 mb-1">${t('discountTypeLabel')}</label>
-                <select id="couponType" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-1.5 text-xs text-white font-bold">
-                  <option value="flat">${t('flatMoney')}</option>
-                  <option value="percent">${t('percentage')}</option>
-                </select>
-              </div>
-              <div>
-                <label class="block text-[10px] text-slate-400 mb-1">${t('discountAmountLabel')}</label>
-                <input type="number" id="couponAmount" placeholder="e.g. 200" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-1.5 text-xs text-white">
-              </div>
-            </div>
-            <div>
-              <label class="block text-[10px] text-slate-400 mb-1">${t('expiryDateLabel')}</label>
-              <input type="date" id="couponExpDate" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-1.5 text-xs text-white">
-            </div>
-            <button onclick="addCoupon()" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white text-xs py-2 rounded-xl font-bold shadow">
-              ${t('saveCouponBtn')}
-            </button>
-          </div>
-
-          <h2 class="text-xs font-bold text-slate-200 mb-2">${t('availableCoupons')} (${filteredCoupons.length})</h2>
-          <div class="space-y-2">
-            ${filteredCoupons.map(c => `
-              <div class="bg-slate-800 p-3 rounded-xl border border-slate-700 flex justify-between items-center text-xs">
-                <div>
-                  <span class="font-black text-amber-400 uppercase text-sm font-mono">${escapeHTML(c.code)}</span>
-                  <p class="text-slate-300 text-[11px] font-bold">Discount: ${c.discountType === 'flat' ? `৳${c.discountAmount}` : `${c.discountAmount}%`}</p>
-                </div>
-                <button onclick="deleteCoupon('${c.id}')" class="text-red-400 hover:bg-slate-700 p-2 rounded-lg transition"><i class="fa-solid fa-trash"></i></button>
-              </div>
-            `).join('')}
-          </div>
-        `;
-      }
-
       else if (view === 'dues') {
         let codOrders = window.orders.filter(o => o.paymentMethod === 'cod');
-        let filteredDues = window.dues;
-
-        if (isRestrictedRole) {
-          codOrders = codOrders.filter(o => o.items && Array.isArray(o.items) && o.items.some(i => myProductIds.has(i.productId)));
-          filteredDues = window.dues.filter(d => d.addedByUid === currentUid);
-        }
 
         html += `
           <div class="bg-slate-800 p-3 rounded-xl border border-slate-700 mb-3 space-y-2">
@@ -1426,7 +1195,7 @@
               </div>
             `).join('')}
 
-            ${filteredDues.map(d => `
+            ${window.dues.map(d => `
               <div class="bg-slate-800 p-3 rounded-xl border border-slate-700 flex justify-between items-center text-xs">
                 <div>
                   <h4 class="font-bold text-slate-200">${escapeHTML(d.customerName)} (Manual)</h4>
@@ -1440,24 +1209,8 @@
       }
 
       else if (view === 'customers') {
-        let filteredCustomers = window.customers;
-        if (isRestrictedRole) {
-          const myCustomerPhones = new Set();
-          window.orders.forEach(o => {
-            if (o.items && Array.isArray(o.items) && o.items.some(i => myProductIds.has(i.productId))) {
-              if (o.userPhone) myCustomerPhones.add(o.userPhone.toLowerCase().trim());
-              if (o.userId) myCustomerPhones.add(o.userId.toLowerCase().trim());
-            }
-          });
-          filteredCustomers = window.customers.filter(c => {
-            const phone = (c.contact || c.phone || '').toLowerCase().trim();
-            const uid = (c.id || '').toLowerCase().trim();
-            return myCustomerPhones.has(phone) || myCustomerPhones.has(uid);
-          });
-        }
-
-        const totalUsers = filteredCustomers.length;
-        const todayUsers = filteredCustomers.filter(c => isToday(c.createdAt)).length;
+        const totalUsers = window.customers.length;
+        const todayUsers = window.customers.filter(c => isToday(c.createdAt)).length;
 
         html += `
           <div class="grid grid-cols-2 gap-2.5 mb-3">
@@ -1473,15 +1226,13 @@
 
           <h2 class="text-xs font-bold text-slate-200 mb-2">${t('userList')} (${totalUsers})</h2>
           <div class="space-y-2">
-            ${filteredCustomers.map(c => `
+            ${window.customers.map(c => `
               <div class="bg-slate-800 p-3 rounded-xl border border-slate-700 space-y-2 text-xs shadow-sm">
                 <div class="flex justify-between items-center font-bold text-slate-100">
                   <span class="text-indigo-400 text-sm"><i class="fa-solid fa-user text-xs mr-1"></i> ${escapeHTML(c.name || 'User')}</span>
-                  <div class="flex items-center gap-2">
-                    <button onclick="promptDeleteCustomer('${c.id}')" class="w-7 h-7 bg-red-500/20 hover:bg-red-500/40 text-red-400 rounded-lg flex items-center justify-center transition">
-                      <i class="fa-solid fa-trash-can text-xs"></i>
-                    </button>
-                  </div>
+                  <button onclick="deleteCustomer('${c.id}')" class="w-7 h-7 bg-red-500/20 hover:bg-red-500/40 text-red-400 rounded-lg flex items-center justify-center transition">
+                    <i class="fa-solid fa-trash-can text-xs"></i>
+                  </button>
                 </div>
 
                 <div class="text-slate-300 space-y-1 pt-1 border-t border-slate-700/60">
@@ -1496,10 +1247,6 @@
 
       else if (view === 'orders') {
         let filteredOrders = window.orders.filter(o => o.status !== 'Submitted (Pending Approval)' && o.status !== 'Submitted');
-        
-        if (isRestrictedRole) {
-          filteredOrders = filteredOrders.filter(o => o.items && Array.isArray(o.items) && o.items.some(i => myProductIds.has(i.productId)));
-        }
 
         if (window.selectedOrderStatusFilter === 'Pending') {
           filteredOrders = filteredOrders.filter(o => o.status === 'Pending' || o.status === 'পেন্ডিং');
@@ -1521,7 +1268,7 @@
             <h2 class="text-xs font-bold text-slate-200">${t('filterOrders')} (${filteredOrders.length})</h2>
             <div class="relative">
               <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
-              <input type="text" id="orderSearchInput" oninput="handleOrderSearch(this.value)" value="${escapeHTML(window.orderSearchQuery || '')}" placeholder="অর্ডার আইডি দিয়ে সার্চ করুন (যেমন: -OaB2...)" class="w-full bg-slate-800 border border-slate-700 rounded-xl pl-9 pr-3 py-2 text-xs text-white focus:outline-none focus:border-indigo-500 font-mono">
+              <input type="text" id="orderSearchInput" oninput="handleOrderSearch(this.value)" value="${escapeHTML(window.orderSearchQuery || '')}" placeholder="অর্ডার আইডি দিয়ে সার্চ করুন..." class="w-full bg-slate-800 border border-slate-700 rounded-xl pl-9 pr-3 py-2 text-xs text-white focus:outline-none focus:border-indigo-500 font-mono">
             </div>
           </div>
 
@@ -1534,15 +1281,10 @@
           </div>
 
           <div class="space-y-2.5">
-            ${filteredOrders.length === 0 ? `
-              <div class="bg-slate-800 p-8 rounded-2xl text-center text-xs text-slate-400 border border-slate-700">
-                <i class="fa-solid fa-box-open text-slate-500 text-3xl mb-2"></i>
-                <p>কোনো অর্ডার পাওয়া যায়নি!</p>
-              </div>
-            ` : filteredOrders.map(o => `
+            ${filteredOrders.map(o => `
               <div onclick="openOrderDetailsModal('${o.id}')" class="bg-slate-800 p-3 rounded-xl border border-slate-700 space-y-2 shadow hover:border-indigo-500/80 cursor-pointer transition">
                 <div class="flex justify-between items-center text-xs" onclick="event.stopPropagation()">
-                  <span class="font-bold text-indigo-400 cursor-pointer font-mono" onclick="openOrderDetailsModal('${o.id}')">#${o.id.slice(-6)}</span>
+                  <span class="font-bold text-indigo-400 font-mono">#${o.id.slice(-6)}</span>
                   <div class="flex items-center gap-1.5">
                     <select onchange="updateOrderStatus('${o.id}', this.value)" class="bg-slate-900 border border-slate-600 text-xs px-2 py-1 rounded font-bold text-amber-400">
                       <option value="Pending" ${o.status === 'Pending' || o.status === 'পেন্ডিং' ? 'selected' : ''}>1. Pending</option>
@@ -1550,7 +1292,7 @@
                       <option value="Delivered" ${o.status === 'Delivery' || o.status === 'ডেলিভার্ড' || o.status === 'Delivered' ? 'selected' : ''}>3. Delivered (Deduct Stock)</option>
                       <option value="Return & Cancellation" ${o.status === 'Return & Cancellation' || o.status === 'বাতিল' || o.status === 'Cancelled' ? 'selected' : ''}>Return & Cancelled</option>
                     </select>
-                    <button onclick="promptDeleteOrder('${o.id}')" class="w-7 h-7 bg-red-500/20 text-red-400 rounded-lg flex items-center justify-center hover:bg-red-500/40 transition">
+                    <button onclick="deleteOrder('${o.id}')" class="w-7 h-7 bg-red-500/20 text-red-400 rounded-lg flex items-center justify-center hover:bg-red-500/40 transition">
                       <i class="fa-solid fa-trash-can text-xs"></i>
                     </button>
                   </div>
@@ -1573,9 +1315,6 @@
 
       else if (view === 'products') {
         let filteredProds = window.products;
-        if (isRestrictedRole) {
-          filteredProds = filteredProds.filter(p => p.addedByUid === currentUid || p.addedBy === window.storedAdmin.name);
-        }
 
         if (window.selectedProductCat !== ' সকল ') {
           filteredProds = filteredProds.filter(p => p.category === window.selectedProductCat);
@@ -1603,13 +1342,12 @@
                   </div>
                   <div class="text-[10px] text-slate-400">
                     ${t('itemCode')} <span class="text-amber-300">${escapeHTML(p.itemCode || 'N/A')}</span> | ${t('category')} <span class="text-indigo-400">${escapeHTML(p.category)}</span>
-                    ${p.brand || p.brandName ? ` | <span class="text-amber-400 font-bold"><i class="fa-solid fa-copyright"></i> ${escapeHTML(p.brand || p.brandName)}</span>` : ''}
                   </div>
                   <div class="text-[11px] text-emerald-400 font-bold">৳${p.currentPrice} <span class="text-slate-400 text-[10px] font-normal">(Stock: ${p.stock || 0}, Sold: ${p.sold || 0})</span></div>
                 </div>
                 <div class="flex items-center gap-1">
-                  <span class="text-indigo-400 p-1 hover:bg-slate-700 rounded text-xs" title="Click to Edit"><i class="fa-solid fa-pen-to-square"></i></span>
-                  ${!isRestrictedRole ? `<button onclick="event.stopPropagation(); deleteProduct('${p.id}')" class="text-red-400 p-1.5 hover:bg-slate-700 rounded"><i class="fa-solid fa-trash text-xs"></i></button>` : ''}
+                  <span class="text-indigo-400 p-1 hover:bg-slate-700 rounded text-xs"><i class="fa-solid fa-pen-to-square"></i></span>
+                  <button onclick="event.stopPropagation(); deleteProduct('${p.id}')" class="text-red-400 p-1.5 hover:bg-slate-700 rounded"><i class="fa-solid fa-trash text-xs"></i></button>
                 </div>
               </div>
             `}).join('')}
@@ -1619,9 +1357,6 @@
 
       else if (view === 'stock') {
         let stockProducts = window.products;
-        if (isRestrictedRole) {
-          stockProducts = stockProducts.filter(p => p.addedByUid === currentUid || p.addedBy === window.storedAdmin.name);
-        }
 
         if (window.stockSearchQuery) {
           const query = window.stockSearchQuery.toLowerCase();
@@ -1644,25 +1379,16 @@
           </div>
 
           <div class="space-y-2">
-            ${stockProducts.length === 0 ? `
-              <div class="bg-slate-800 p-8 rounded-2xl text-center text-xs text-slate-400 border border-slate-700">
-                <i class="fa-solid fa-magnifying-glass text-slate-500 text-3xl mb-2"></i>
-                <p>কোনো প্রোডাক্ট পাওয়া যায়নি!</p>
-              </div>
-            ` : stockProducts.map(p => {
+            ${stockProducts.map(p => {
               const displayImg = Array.isArray(p.imageUrl) ? p.imageUrl[0] : (p.imageUrl || 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=100');
               const isLow = Number(p.stock) <= 5;
               return `
-              <div onclick="openProductDetailsModal('${p.id}')" class="bg-slate-800 p-2.5 rounded-xl border ${isLow ? 'border-red-500/50 hover:border-red-500' : 'border-slate-700 hover:border-indigo-500/80'} flex items-center gap-3 cursor-pointer transition group shadow-sm">
-                <img src="${displayImg}" class="w-12 h-12 object-cover rounded-lg group-hover:scale-105 transition border border-slate-700">
+              <div onclick="openProductDetailsModal('${p.id}')" class="bg-slate-800 p-2.5 rounded-xl border ${isLow ? 'border-red-500/50' : 'border-slate-700'} flex items-center gap-3 cursor-pointer transition shadow-sm">
+                <img src="${displayImg}" class="w-12 h-12 object-cover rounded-lg border border-slate-700">
                 <div class="flex-1 min-w-0">
                   <h3 class="text-xs font-bold text-slate-100 truncate">${escapeHTML(p.name)}</h3>
-                  <p class="text-[10px] text-slate-400">
-                    কোড: <span class="text-amber-300 font-mono">${escapeHTML(p.itemCode || 'N/A')}</span>
-                  </p>
-                  <p class="text-[10px] ${isLow ? 'text-red-400 font-bold' : 'text-emerald-400'}">
-                    স্টক: <span class="text-xs font-black">${p.stock || 0} পিস</span>
-                  </p>
+                  <p class="text-[10px] text-slate-400">কোড: <span class="text-amber-300 font-mono">${escapeHTML(p.itemCode || 'N/A')}</span></p>
+                  <p class="text-[10px] ${isLow ? 'text-red-400 font-bold' : 'text-emerald-400'}">স্টক: <span class="text-xs font-black">${p.stock || 0} পিস</span></p>
                 </div>
                 <button onclick="event.stopPropagation(); updateStockModal('${p.id}', ${p.stock || 0})" class="bg-slate-700 hover:bg-slate-600 px-2.5 py-1.5 rounded-lg text-[10px] font-bold text-slate-200 transition">
                   ${t('updateBtn')}
@@ -1718,18 +1444,12 @@
           </h3>
 
           <div class="space-y-2">
-            ${window.notifications.length === 0 ? `
-              <div class="text-center py-8 text-slate-500 text-xs bg-slate-800/50 rounded-2xl border border-slate-800">
-                <i class="fa-solid fa-bell-slash text-2xl mb-1 opacity-50 block"></i>
-                এখনো কোনো Custom Notification পাঠানো হয়নি।
-              </div>
-            ` : window.notifications.slice().reverse().map(n => `
+            ${window.notifications.slice().reverse().map(n => `
               <div class="bg-slate-800 p-3 rounded-xl border border-slate-700 space-y-1 text-xs shadow-sm">
                 <div class="flex justify-between items-start gap-2">
                   <div class="flex-1">
                     <h4 class="font-bold text-amber-400 text-xs">${escapeHTML(n.title || 'শিরোনামহীন')}</h4>
                     <p class="text-slate-300 text-[11px] mt-1 leading-relaxed">${escapeHTML(n.message || '')}</p>
-                    <span class="text-[9px] text-slate-400 block mt-1.5"><i class="fa-regular fa-clock mr-1"></i>${n.createdAt ? new Date(n.createdAt).toLocaleString() : 'N/A'}</span>
                   </div>
                   <button onclick="deleteNotification('${n.id}')" class="w-7 h-7 bg-red-500/20 hover:bg-red-500/40 text-red-400 rounded-lg flex items-center justify-center shrink-0 transition">
                     <i class="fa-solid fa-trash-can text-xs"></i>
@@ -1744,376 +1464,160 @@
       main.innerHTML = html;
     }
 
-    // CHECK APP UPDATE LOGIC
-    window.checkAppUpdate = function() {
-      showAdminToast("🔍 Checking for updates...");
-      setTimeout(() => {
-        const modal = document.getElementById('adminModal');
-        const body = document.getElementById('modalBody');
-        const serverVer = window.latestServerVersionInfo;
+    // 🎟️ কুপন এপ্রুভ ও রিজেক্ট হ্যান্ডলিং
+    window.approveCoupon = function(couponId) {
+      if (!couponId) {
+        showAdminToast('Error: Invalid Coupon ID!');
+        return;
+      }
 
-        if (serverVer && serverVer.version && serverVer.version !== window.currentAppVersion) {
-          const sizeText = serverVer.size || '11.17 MB';
-          const warningText = serverVer.warning || 'Online features will be locked unless you download the data.';
+      const existingCoupon = window.coupons.find(c => c.id === couponId);
+      if (!existingCoupon) {
+        showAdminToast('Error: কুপন খুঁজে পাওয়া যায়নি!');
+        return;
+      }
 
-          body.innerHTML = `
-            <div class="space-y-4 text-xs text-slate-200 text-center py-2">
-              <h3 class="font-bold text-base text-slate-100">Download Latest Data?</h3>
-              <p class="text-slate-300 leading-relaxed text-xs px-2">${escapeHTML(warningText)}</p>
-              <p class="font-bold text-slate-200 text-sm">Data size: ${escapeHTML(sizeText)}</p>
-              
-              <div class="flex gap-2 pt-2">
-                <button onclick="closeAdminModal()" class="flex-1 bg-sky-200/80 hover:bg-sky-200 text-slate-800 font-bold py-2.5 rounded-xl text-xs transition">
-                  Cancel
-                </button>
-                <button onclick="startLiveDownload('${escapeHTML(serverVer.version)}')" class="flex-1 bg-sky-300 hover:bg-sky-400 text-slate-900 font-bold py-2.5 rounded-xl text-xs transition">
-                  Download
-                </button>
-              </div>
-            </div>
-          `;
-        } else {
-          body.innerHTML = `
-            <div class="space-y-3 text-xs text-slate-200 text-center py-3">
-              <div class="w-12 h-12 bg-emerald-500/20 text-emerald-400 rounded-full flex items-center justify-center mx-auto text-xl border border-emerald-500/30">
-                <i class="fa-solid fa-check"></i>
-              </div>
-              <h3 class="font-bold text-base text-slate-100">আপনার অ্যাপটি আপডেট আছে!</h3>
-              <p class="text-slate-400 text-xs">বর্তমানে আপনি লেটেস্ট ভার্সন (<span class="text-emerald-400 font-bold">${window.currentAppVersion}</span>) ব্যবহার করছেন।</p>
-              <button onclick="closeAdminModal()" class="w-full bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold py-2.5 rounded-xl text-xs transition">
-                ঠিক আছে
-              </button>
-            </div>
-          `;
-        }
-        modal.classList.remove('hidden');
-      }, 800);
+      const updatedCoupon = {
+        ...existingCoupon,
+        status: 'approved',
+        active: true
+      };
+      delete updatedCoupon.id;
+
+      set(ref(db, `coupons/${couponId}`), updatedCoupon)
+        .then(() => {
+          showAdminToast('🎉 কুপনটি সফলভাবে এপ্রুভ ও সক্রিয় করা হয়েছে!');
+        })
+        .catch(err => {
+          console.error('Coupon Approval Error:', err);
+          showAdminToast('Error: কুপন এপ্রুভ করা সম্ভব হয়নি!');
+        });
     };
 
-    // LIVE DOWNLOAD PROCESS
-    window.startLiveDownload = function(version) {
-      const body = document.getElementById('modalBody');
-      showAdminToast(`📥 Downloading update ${version}...`);
+    window.rejectCoupon = function(couponId) {
+      if (!couponId) {
+        showAdminToast('Error: Invalid Coupon ID!');
+        return;
+      }
 
-      body.innerHTML = `
-        <div class="space-y-4 text-xs text-slate-200 text-center py-3">
-          <h3 class="font-bold text-base text-slate-100">Live Update in Progress</h3>
-          <p class="text-slate-300 text-xs leading-relaxed px-2">Applying the Live Update ensures you will play with the latest team roster and player data.</p>
-          
-          <div class="py-2">
-            <span id="downloadProgressPercent" class="font-bold text-slate-100 text-sm block mb-2">0%</span>
-            <div class="w-full bg-slate-800 rounded-full h-2.5 overflow-hidden border border-slate-700">
-              <div id="downloadProgressBar" class="bg-blue-500 h-2.5 rounded-full transition-all duration-100" style="width: 0%"></div>
-            </div>
-          </div>
-        </div>
-      `;
-
-      let progress = 0;
-      const interval = setInterval(() => {
-        progress += 5;
-        const bar = document.getElementById('downloadProgressBar');
-        const txt = document.getElementById('downloadProgressPercent');
-
-        if (bar && txt) {
-          bar.style.width = progress + '%';
-          txt.innerText = progress + '%';
-        }
-
-        if (progress >= 100) {
-          clearInterval(interval);
-          window.currentAppVersion = version;
-          localStorage.setItem('app_current_version', version);
-          showAdminToast(`🎉 অ্যাপ সফলভাবে ${version} ভার্সনে আপডেট হয়েছে!`);
-          
-          showUpdateFeaturesModal(version);
-          renderAdminDashboard();
-        }
-      }, 100);
+      remove(ref(db, `coupons/${couponId}`))
+        .then(() => {
+          showAdminToast('কুপনটি রিজেক্ট ও বাতিল করা হয়েছে');
+        })
+        .catch(err => {
+          console.error('Coupon Rejection Error:', err);
+          showAdminToast('Error: রিজেক্ট করা সম্ভব হয়নি!');
+        });
     };
 
-    // SHOW UPDATED FEATURES / CHANGELOG
-    function showUpdateFeaturesModal(version) {
+    window.addMasterCoupon = function() {
+      const code = document.getElementById('couponCode').value.trim().toUpperCase();
+      const type = document.getElementById('couponType').value;
+      const amt = Number(document.getElementById('couponAmount').value);
+      const expDate = document.getElementById('couponExpDate').value;
+
+      if (!code || !amt || !expDate) {
+        showAdminToast('সকল ঘর পূরণ করুন!');
+        return;
+      }
+      const newRef = push(ref(db, 'coupons'));
+      set(newRef, { 
+        code, 
+        discountType: type, 
+        discountAmount: amt, 
+        expDate, 
+        active: true, 
+        status: 'approved',
+        addedBy: 'Main Admin',
+        createdAt: Date.now() 
+      }).then(() => {
+        showAdminToast('🎉 মাস্টার কুপন তৈরি ও সক্রিয় হয়েছে!');
+        renderAdminDashboard();
+      });
+    };
+
+    window.deleteCoupon = function(id) {
+      if (!confirm('কুপনটি মুছবেন?')) return;
+      remove(ref(db, `coupons/${id}`));
+      showAdminToast('কুপন মোছা হয়েছে');
+    };
+
+    // 💳 পেমেন্ট সিস্টেম সেটআপ
+    window.openAddPaymentModal = function() {
       const modal = document.getElementById('adminModal');
       const body = document.getElementById('modalBody');
-      const serverVer = window.latestServerVersionInfo;
-
-      const features = serverVer && serverVer.changelog 
-        ? serverVer.changelog 
-        : ['নতুন ডায়নামিক ফিচারস যুক্ত করা হয়েছে', 'পারফরম্যান্স ও ইউজার ইন্টারফেস উন্নত করা হয়েছে', 'বাগ ফিক্সিং সম্পন্ন করা হয়েছে'];
 
       body.innerHTML = `
-        <div class="space-y-3 text-xs text-slate-200 py-1">
-          <div class="w-12 h-12 bg-emerald-500/20 text-emerald-400 rounded-full flex items-center justify-center mx-auto text-xl border border-emerald-500/30">
-            <i class="fa-solid fa-sparkles"></i>
+        <h3 class="text-sm font-bold text-slate-100 mb-3">+ Add Payment Method</h3>
+        <div class="space-y-2.5 text-xs">
+          <div>
+            <label class="block text-slate-400 mb-1">Method Name *</label>
+            <input type="text" id="pmName" placeholder="e.g. bKash, Nagad" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-2 text-white font-bold">
           </div>
-          <h3 class="font-bold text-sm text-slate-100 text-center">নতুন ভার্সন (${version}) ফিচারসমূহ</h3>
-          
-          <div class="bg-slate-950 p-3 rounded-xl border border-slate-800 space-y-1.5 text-left">
-            ${features.map(f => `<p class="flex items-start gap-1.5 text-slate-300"><i class="fa-solid fa-circle-check text-emerald-400 text-xs mt-0.5 shrink-0"></i> <span>${escapeHTML(f)}</span></p>`).join('')}
+          <div>
+            <label class="block text-slate-400 mb-1">Account Number *</label>
+            <input type="text" id="pmNumber" placeholder="017xxxxxxxx" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-2 text-white font-mono">
           </div>
-
-          <button onclick="closeAdminModal()" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-2 rounded-xl text-xs transition">
-            ঠিক আছে
+          <div>
+            <label class="block text-slate-400 mb-1">Account Type *</label>
+            <select id="pmType" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-2 text-white font-bold">
+              <option value="Personal">Personal</option>
+              <option value="Merchant">Merchant</option>
+              <option value="Agent">Agent</option>
+            </select>
+          </div>
+          <button onclick="savePaymentMethod()" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-2.5 rounded-xl text-xs mt-2 shadow transition">
+            Save Payment Method
           </button>
         </div>
       `;
       modal.classList.remove('hidden');
-    }
+    };
 
-    // SEARCH HANDLERS
+    window.savePaymentMethod = function() {
+      const methodName = document.getElementById('pmName').value.trim();
+      const number = document.getElementById('pmNumber').value.trim();
+      const type = document.getElementById('pmType').value;
+
+      if (!methodName || !number) {
+        showAdminToast('সকল তথ্য সঠিকভাব দিন!');
+        return;
+      }
+
+      const newRef = push(ref(db, 'payment_methods'));
+      set(newRef, { methodName, number, type, createdAt: Date.now() }).then(() => {
+        showAdminToast('🎉 পেমেন্ট মেথড সেভ হয়েছে!');
+        closeAdminModal();
+      });
+    };
+
+    window.deletePaymentMethod = function(id) {
+      if (!confirm('পেমেন্ট মেথডটি মুছতে চান?')) return;
+      remove(ref(db, `payment_methods/${id}`));
+      showAdminToast('পেমেন্ট মেথড মোছা হয়েছে');
+    };
+
+    // SEARCH & MODAL HANDLERS
     window.handleOrderSearch = function(val) {
       window.orderSearchQuery = val;
       renderAdminDashboard();
-      const input = document.getElementById('orderSearchInput');
-      if (input) {
-        input.focus();
-        input.setSelectionRange(val.length, val.length);
-      }
     };
 
     window.handleStockSearch = function(val) {
       window.stockSearchQuery = val;
       renderAdminDashboard();
-      const input = document.getElementById('stockSearchInput');
-      if (input) {
-        input.focus();
-        input.setSelectionRange(val.length, val.length);
-      }
     };
 
-    // PRODUCT DETAILS MODAL
-    window.openProductDetailsModal = function(productId) {
-      const p = window.products.find(item => item.id === productId);
-      if (!p) return;
-
-      const displayImg = Array.isArray(p.imageUrl) ? p.imageUrl[0] : (p.imageUrl || 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=200');
-      const modal = document.getElementById('adminModal');
-      const body = document.getElementById('modalBody');
-
-      body.innerHTML = `
-        <div class="space-y-3 text-xs text-slate-200">
-          <div class="flex justify-between items-center border-b border-slate-700 pb-2">
-            <h3 class="font-bold text-sm text-indigo-400">প্রোডাক্ট এর বিস্তারিত বিবরণ</h3>
-            <span class="bg-amber-500/20 text-amber-300 font-bold px-2 py-0.5 rounded text-[10px]">কোড: ${escapeHTML(p.itemCode || 'N/A')}</span>
-          </div>
-
-          <div class="flex gap-3">
-            <img src="${displayImg}" class="w-20 h-20 object-cover rounded-xl border border-slate-700 shadow">
-            <div class="space-y-1 flex-1">
-              <h4 class="font-bold text-slate-100 text-sm leading-tight">${escapeHTML(p.name)}</h4>
-              <p class="text-slate-400 text-[10px]">ক্যাটাগরি: <span class="text-indigo-300">${escapeHTML(p.category || 'General')}</span></p>
-              ${p.brand || p.brandName ? `<p class="text-slate-400 text-[10px]">ব্র্যান্ড: <span class="text-amber-400 font-bold">${escapeHTML(p.brand || p.brandName)}</span></p>` : ''}
-              <div class="text-emerald-400 font-extrabold text-sm pt-0.5">৳${p.currentPrice} ${p.originalPrice ? `<span class="text-slate-500 text-xs line-through ml-1">৳${p.originalPrice}</span>` : ''}</div>
-            </div>
-          </div>
-
-          <div class="grid grid-cols-2 gap-2 bg-slate-950 p-2.5 rounded-xl border border-slate-800 text-center">
-            <div class="border-r border-slate-800 pr-2">
-              <span class="text-slate-400 block text-[10px]">অবশিষ্ট স্টক (Stock)</span>
-              <span class="text-amber-400 font-black text-base">${p.stock || 0} পিস</span>
-            </div>
-            <div class="pl-2">
-              <span class="text-slate-400 block text-[10px]">মোট বিক্রি (Sold)</span>
-              <span class="text-emerald-400 font-black text-base">${p.sold || 0} পিস</span>
-            </div>
-          </div>
-
-          <div class="bg-slate-800 p-2.5 rounded-xl border border-slate-700 space-y-1.5 text-[11px]">
-            <p><strong>সাইজ (Size):</strong> <span class="text-slate-300">${escapeHTML(p.size || 'None')}</span></p>
-            <p><strong>কালার (Colour):</strong> <span class="text-slate-300">${escapeHTML(p.color || 'None')}</span></p>
-            <p><strong>সংক্ষিপ্ত বিবরণ:</strong></p>
-            <p class="text-slate-400 leading-relaxed bg-slate-900/60 p-2 rounded-lg border border-slate-700/50">${escapeHTML(p.description) || 'কোনো বিবরণ দেওয়া হয়নি।'}</p>
-          </div>
-
-          <button onclick="closeAdminModal()" class="w-full bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold py-2 rounded-xl text-xs transition">
-            বন্ধ করুন
-          </button>
-        </div>
-      `;
-      modal.classList.remove('hidden');
+    window.setOrderStatusFilter = function(status) {
+      window.selectedOrderStatusFilter = status;
+      renderAdminDashboard();
     };
 
-    // ORDERS APPROVAL HANDLERS WITH NOTIFICATION
-    window.promptApproveOrder = function(orderId) {
-      document.getElementById('confirmActionTitle').innerText = 'অর্ডার কনফার্ম করার নিশ্চয়তা';
-      document.getElementById('confirmActionMsg').innerText = 'আপনি কি নিশ্চিত যে এই অর্ডারটি কনফার্ম করে Pending এ পাঠাতে চান?';
-      
-      const iconBox = document.getElementById('confirmModalIcon');
-      iconBox.className = "w-12 h-12 bg-emerald-500/20 text-emerald-500 rounded-full flex items-center justify-center mx-auto text-2xl";
-      iconBox.innerHTML = '<i class="fa-solid fa-circle-check"></i>';
-
-      const btn = document.getElementById('confirmActionBtn');
-      btn.className = "flex-1 bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2 rounded-xl text-xs transition shadow";
-      btn.onclick = function() {
-        const order = window.orders.find(o => o.id === orderId);
-        
-        update(ref(db, `orders/${orderId}`), { status: 'Pending' })
-          .then(() => {
-            showAdminToast('🎉 আপনার অর্ডারটি কনফার্ম করা হয়েছে!');
-            
-            if (order) {
-              const notifRef = push(ref(db, 'notifications'));
-              set(notifRef, {
-                title: "🎉 আপনার অর্ডার কনফার্ম ও এপ্রুভ করা হয়েছে! আমাদের সাথে থাকার জন্য, ধন্যবাদ❣️",
-                message: `প্রিয় ${order.userName}, আপনার #${orderId.slice(-6)} নম্বর অর্ডারটি এডমিন প্যানেল থেকে এপ্রুভ করা হয়েছে এবং এখন 'Pending' তালিকায় রয়েছে।`,
-                userId: order.userId || order.userPhone,
-                createdAt: Date.now()
-              });
-            }
-
-            closeConfirmActionModal();
-          });
-      };
-      document.getElementById('confirmActionModal').classList.remove('hidden');
+    window.filterProductCategory = function(cat) {
+      window.selectedProductCat = cat;
+      renderAdminDashboard();
     };
 
-    window.promptCancelOrder = function(orderId) {
-      document.getElementById('confirmActionTitle').innerText = 'অর্ডার বাতিল করার নিশ্চয়তা';
-      document.getElementById('confirmActionMsg').innerText = 'আপনি কি নিশ্চিত যে এই অর্ডারটি বাতিল করে Return & Cancellation এ পাঠাতে চান?';
-      
-      const iconBox = document.getElementById('confirmModalIcon');
-      iconBox.className = "w-12 h-12 bg-red-500/20 text-red-500 rounded-full flex items-center justify-center mx-auto text-2xl";
-      iconBox.innerHTML = '<i class="fa-solid fa-circle-xmark"></i>';
-
-      const btn = document.getElementById('confirmActionBtn');
-      btn.className = "flex-1 bg-red-600 hover:bg-red-500 text-white font-bold py-2 rounded-xl text-xs transition shadow";
-      btn.onclick = function() {
-        const order = window.orders.find(o => o.id === orderId);
-
-        update(ref(db, `orders/${orderId}`), { status: 'Return & Cancellation' })
-          .then(() => {
-            showAdminToast('❌ অর্ডারটি বাতিল করা হয়েছে!');
-
-            if (order) {
-              const notifRef = push(ref(db, 'notifications'));
-              set(notifRef, {
-                title: "❌ আমরা সাময়িক ভাবে দুঃখিত, আপনার অর্ডার রিকোয়েস্ট বাতিল করা হয়েছে",
-                message: `প্রিয় ${order.userName}, আপনার #${orderId.slice(-6)} নম্বর অর্ডার রিকোয়েস্টটি বাতিল করা হয়েছে। বিস্তারিত জানতে হেল্পলাইনে যোগাযোগ করুন।`,
-                userId: order.userId || order.userPhone,
-                createdAt: Date.now()
-              });
-            }
-
-            closeConfirmActionModal();
-          });
-      };
-      document.getElementById('confirmActionModal').classList.remove('hidden');
-    };
-
-    // ORDER STATUS UPDATE WITH NOTIFICATION
-    window.updateOrderStatus = function(id, newStatus) {
-      const order = window.orders.find(o => o.id === id);
-      if (!order) return;
-
-      const isDelivered = ['Delivered', 'ডেলিভার্ড', 'Delivery'].includes(newStatus);
-      const wasDelivered = ['Delivered', 'ডেলিভার্ড', 'Delivery'].includes(order.status);
-
-      if (isDelivered && !wasDelivered) {
-        if (order.items && Array.isArray(order.items)) {
-          order.items.forEach(item => {
-            const prod = window.products.find(p => p.id === item.productId);
-            if (prod) {
-              const currentStock = Number(prod.stock) || 0;
-              const currentSold = Number(prod.sold) || 0;
-              const orderQty = Number(item.qty) || 1;
-
-              const newStock = Math.max(0, currentStock - orderQty);
-              const newSold = currentSold + orderQty;
-
-              update(ref(db, `products/${prod.id}`), {
-                stock: newStock,
-                sold: newSold
-              });
-            }
-          });
-        }
-      }
-
-      update(ref(db, `orders/${id}`), { status: newStatus }).then(() => {
-        showAdminToast(`Status updated to '${newStatus}'`);
-
-        let notifTitle = `অর্ডার আপডেট (#${id.slice(-6)})`;
-        let notifMsg = `আপনার #${id.slice(-6)} নম্বর অর্ডারের স্ট্যাটাস পরিবর্তন করে '${newStatus}' করা হয়েছে।`;
-
-        if (newStatus === 'Pending') {
-          notifTitle = "🎉 আপনার অর্ডারটি সফলভাবে কনফার্ম করা হয়েছে!";
-          notifMsg = `প্রিয় ${order.userName}, আপনার #${id.slice(-6)} নম্বর অর্ডারটি সফলভাবে কনফার্ম ও গ্রহণ করা হয়েছে।`;
-        } else if (newStatus === 'Processing') {
-          notifTitle = "📦 আপনার প্রোডাক্ট-টি প্রসেসিংয়ে রয়েছে, অনুগ্রহ করে একটু অপেক্ষা করুন। ধন্যবাদ❣️";
-          notifMsg = `প্রিয় ${order.userName}, আপনার #${id.slice(-6)} নম্বর অর্ডারের পণ্যগুলো প্যাকেজিং ও প্রসেসিংয়ের কাজ চলছে।`;
-        } else if (newStatus === 'Delivered' || newStatus === 'Delivery') {
-          notifTitle = "🚚 আপনার প্রোডাক্ট-টি ডেলিভারি সম্পন্ন হয়েছে, আমরা খুবই আনন্দিত। ধন্যবাদ আবার আসবেন❣️";
-          notifMsg = `অভিনন্দন ${order.userName}! আপনার #${id.slice(-6)} নম্বর অর্ডারটি সফলভাবে ডেলিভারি করা হয়েছে। আমাদের সাথে থাকার জন্য ধন্যবাদ!`;
-        } else if (newStatus === 'Return & Cancellation' || newStatus === 'Cancelled') {
-          notifTitle = "❌ আমরা সাময়িক ভাবে দুঃখিত, আপনার অর্ডার বাতিল/রিটার্ন করা হয়েছে";
-          notifMsg = `প্রিয় ${order.userName}, দুঃখিত! আপনার #${id.slice(-6)} নম্বর অর্ডারটি বাতিল বা রিটার্ন প্রসেস করা হয়েছে। বিস্তারিত জানতে সাপোর্টে যোগাযোগ করুন।`;
-        }
-
-        const notifRef = push(ref(db, 'notifications'));
-        set(notifRef, {
-          title: notifTitle,
-          message: notifMsg,
-          userId: order.userId || order.userPhone,
-          createdAt: Date.now()
-        });
-      });
-    };
-
-    // EXPENSE LEDGER HANDLERS
-    window.toggleExpenseForm = function() {
-      const el = document.getElementById('expenseFormBox');
-      if(el) el.classList.toggle('hidden');
-    };
-
-    window.confirmAddExpense = function() {
-      const date = document.getElementById('expDate').value;
-      const title = document.getElementById('expTitle').value.trim();
-      const amt = Number(document.getElementById('expAmount').value);
-
-      if (!date || !title || !amt) {
-        showAdminToast('তারিখ, খরচের বিবরণ ও পরিমাণ লিখুন!');
-        return;
-      }
-
-      const newRef = push(ref(db, 'expenses'));
-      set(newRef, { 
-        date, 
-        title, 
-        amount: amt, 
-        addedByUid: window.storedAdmin ? window.storedAdmin.uid : '',
-        createdAt: Date.now() 
-      });
-      showAdminToast('🎉 খরচটি সফলভাবে খাতায় যুক্ত হয়েছে!');
-      document.getElementById('expTitle').value = '';
-      document.getElementById('expAmount').value = '';
-    };
-
-    window.promptDeleteExpense = function(expId) {
-      document.getElementById('confirmActionTitle').innerText = 'খরচ মুছে ফেলার নিশ্চয়তা';
-      document.getElementById('confirmActionMsg').innerText = 'আপনি কি নিশ্চিত যে এই খরচের হিসাবটি ডিলিট করতে চান?';
-      
-      const iconBox = document.getElementById('confirmModalIcon');
-      iconBox.className = "w-12 h-12 bg-red-500/20 text-red-500 rounded-full flex items-center justify-center mx-auto text-xl";
-      iconBox.innerHTML = '<i class="fa-solid fa-trash-can"></i>';
-
-      const btn = document.getElementById('confirmActionBtn');
-      btn.className = "flex-1 bg-red-600 hover:bg-red-500 text-white font-bold py-2 rounded-xl text-xs transition shadow";
-      btn.onclick = function() {
-        remove(ref(db, `expenses/${expId}`))
-          .then(() => {
-            showAdminToast('খরচের হিসাব ডিলিট করা হয়েছে!');
-            closeConfirmActionModal();
-          });
-      };
-      document.getElementById('confirmActionModal').classList.remove('hidden');
-    };
-
-    window.closeConfirmActionModal = function() {
-      document.getElementById('confirmActionModal').classList.add('hidden');
-    };
-
-    // PRODUCT APPROVAL
     window.approveProduct = function(id) {
       update(ref(db, `products/${id}`), { status: 'approved' })
         .then(() => {
@@ -2121,7 +1625,83 @@
         });
     };
 
-    // PRODUCT MODALS
+    window.approveOrder = function(id) {
+      update(ref(db, `orders/${id}`), { status: 'Pending' })
+        .then(() => {
+          showAdminToast('অর্ডারটি অনুমোদন করে পেন্ডিং লিস্টে পাঠানো হয়েছে');
+        });
+    };
+
+    window.cancelOrder = function(id) {
+      update(ref(db, `orders/${id}`), { status: 'Return & Cancellation' })
+        .then(() => {
+          showAdminToast('অর্ডারটি বাতিল করা হয়েছে');
+        });
+    };
+
+    window.updateOrderStatus = function(id, status) {
+      update(ref(db, `orders/${id}`), { status })
+        .then(() => {
+          showAdminToast(`অর্ডার স্ট্যাটাস '${status}' আপডেট করা হয়েছে`);
+        });
+    };
+
+    window.deleteOrder = function(id) {
+      if (!confirm('অর্ডারটি মুছে ফেলতে চান?')) return;
+      remove(ref(db, `orders/${id}`));
+      showAdminToast('অর্ডারটি মোছা হয়েছে');
+    };
+
+    window.deleteExpense = function(id) {
+      if (!confirm('খরচটি হিসাব খাতা থেকে মুছবেন?')) return;
+      remove(ref(db, `expenses/${id}`));
+      showAdminToast('খরচটি মোছা হয়েছে');
+    };
+
+    window.deleteCustomer = function(id) {
+      if (!confirm('কাস্টমারকে রিমুভ করতে চান?')) return;
+      remove(ref(db, `customers/${id}`));
+      showAdminToast('কাস্টমার মোছা হয়েছে');
+    };
+
+    window.confirmAddExpense = function() {
+      const date = document.getElementById('expDate').value;
+      const title = document.getElementById('expTitle').value.trim();
+      const amount = Number(document.getElementById('expAmount').value);
+
+      if (!date || !title || !amount) {
+        showAdminToast('সকল তথ্য সঠিকভাব দিন!');
+        return;
+      }
+
+      const newRef = push(ref(db, 'expenses'));
+      set(newRef, { date, title, amount, createdAt: Date.now() }).then(() => {
+        showAdminToast('খরচ সফলভাবে সেভ করা হয়েছে');
+        renderAdminDashboard();
+      });
+    };
+
+    window.sendPushNotification = function() {
+      const title = document.getElementById('notifTitle').value.trim();
+      const message = document.getElementById('notifMsg').value.trim();
+
+      if (!title || !message) {
+        showAdminToast('শিরোনাম ও বার্তা প্রদান করুন!');
+        return;
+      }
+
+      const newRef = push(ref(db, 'notifications'));
+      set(newRef, { title, message, createdAt: Date.now() }).then(() => {
+        showAdminToast('📣 ব্রডকাস্ট নোটিফিকেশন পাঠানো হয়েছে!');
+        renderAdminDashboard();
+      });
+    };
+
+    window.deleteNotification = function(id) {
+      remove(ref(db, `notifications/${id}`));
+      showAdminToast('নোটিফিকেশন মোছা হয়েছে');
+    };
+
     window.openAddProductModal = function() {
       window.renderProductFormModal(null);
     };
@@ -2169,37 +1749,10 @@
             </div>
           </div>
 
-          <div>
-            <label class="block text-slate-400 mb-1"><i class="fa-solid fa-copyright text-amber-400 mr-1"></i> Brand Name (Optional)</label>
-            <input type="text" id="pBrand" placeholder="e.g. Nike, Samsung, Walton, Apex" value="${isEdit ? escapeHTML(productToEdit.brand || productToEdit.brandName) || '' : ''}" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-2 text-white font-bold">
-          </div>
-
           <div class="grid grid-cols-2 gap-2">
-            <div>
-              <label class="block text-slate-400 mb-1">Size</label>
-              <select id="pSize" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-2 text-white font-bold">
-                <option value="None" ${isEdit && productToEdit.size === 'None' ? 'selected' : ''}>None</option>
-                <option value="S" ${isEdit && productToEdit.size === 'S' ? 'selected' : ''}>S</option>
-                <option value="M" ${isEdit && productToEdit.size === 'M' ? 'selected' : ''}>M</option>
-                <option value="L" ${isEdit && productToEdit.size === 'L' ? 'selected' : ''}>L</option>
-                <option value="XL" ${isEdit && productToEdit.size === 'XL' ? 'selected' : ''}>XL</option>
-                <option value="XXL" ${isEdit && productToEdit.size === 'XXL' ? 'selected' : ''}>XXL</option>
-              </select>
-            </div>
-            <div>
-              <label class="block text-slate-400 mb-1">Colour Variant</label>
-              <input type="text" id="pColor" placeholder="Red, Black..." value="${isEdit ? escapeHTML(productToEdit.color) || 'None' : 'None'}" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-2 text-white">
-            </div>
-          </div>
-
-          <div class="grid grid-cols-3 gap-2">
             <div>
               <label class="block text-slate-400 mb-1">${t('currentPriceLabel')}</label>
               <input type="number" id="pCurrPrice" placeholder="500" value="${isEdit ? productToEdit.currentPrice || '' : ''}" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-2 text-white">
-            </div>
-            <div>
-              <label class="block text-slate-400 mb-1">${t('oldPriceLabel')}</label>
-              <input type="number" id="pOrigPrice" placeholder="700" value="${isEdit ? productToEdit.originalPrice || '' : ''}" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-2 text-white">
             </div>
             <div>
               <label class="block text-slate-400 mb-1">${t('stockLabel')}</label>
@@ -2208,22 +1761,8 @@
           </div>
 
           <div>
-            <div class="flex justify-between items-center mb-1">
-              <label class="text-slate-400">${t('productUrlLabel')}</label>
-              <button onclick="addMoreImgInput()" type="button" class="bg-indigo-600 hover:bg-indigo-500 text-white text-[10px] px-2 py-0.5 rounded font-bold transition">+ Add More</button>
-            </div>
-            <div id="imgInputsList" class="space-y-1.5">
-              ${images.map((img, idx) => `
-                <div class="flex gap-1.5 items-center">
-                  <input type="text" class="pImgInput flex-1 bg-slate-800 border border-slate-700 rounded-lg p-2 text-white" placeholder="https://..." value="${img}">
-                  ${idx > 0 ? `
-                    <button onclick="this.parentElement.remove()" type="button" class="w-8 h-8 bg-red-500/20 text-red-400 rounded-lg flex items-center justify-center shrink-0">
-                      <i class="fa-solid fa-trash-can text-xs"></i>
-                    </button>
-                  ` : ''}
-                </div>
-              `).join('')}
-            </div>
+            <label class="text-slate-400 block mb-1">${t('productUrlLabel')}</label>
+            <input type="text" class="pImgInput w-full bg-slate-800 border border-slate-700 rounded-lg p-2 text-white" placeholder="https://..." value="${images[0] || ''}">
           </div>
 
           <div>
@@ -2239,59 +1778,30 @@
       modal.classList.remove('hidden');
     };
 
-    window.addMoreImgInput = function() {
-      const container = document.getElementById('imgInputsList');
-      const div = document.createElement('div');
-      div.className = 'flex gap-1.5 items-center';
-      div.innerHTML = `
-        <input type="text" class="pImgInput flex-1 bg-slate-800 border border-slate-700 rounded-lg p-2 text-white" placeholder="https://...">
-        <button onclick="this.parentElement.remove()" type="button" class="w-8 h-8 bg-red-500/20 text-red-400 rounded-lg flex items-center justify-center shrink-0">
-          <i class="fa-solid fa-trash-can text-xs"></i>
-        </button>
-      `;
-      container.appendChild(div);
-    };
-
     window.saveProduct = function(productIdToEdit = '') {
       const isEdit = !!productIdToEdit;
       const name = document.getElementById('pName').value.trim();
       const itemCode = document.getElementById('pItemCode').value.trim().toUpperCase();
       const cat = document.getElementById('pCat').value;
-      const brand = document.getElementById('pBrand').value.trim();
-      const size = document.getElementById('pSize').value || 'None';
-      const color = document.getElementById('pColor').value.trim() || 'None';
-      const orig = Number(document.getElementById('pOrigPrice').value) || 0;
       const curr = Number(document.getElementById('pCurrPrice').value) || 0;
       const stock = Number(document.getElementById('pStock').value) || 0;
       const desc = document.getElementById('pDesc').value.trim();
-
-      const imgInputs = document.querySelectorAll('.pImgInput');
-      const imgUrls = [];
-      imgInputs.forEach(inp => {
-        const val = inp.value.trim();
-        if(val) imgUrls.push(val);
-      });
+      const imgInp = document.querySelector('.pImgInput').value.trim();
 
       if (!name || !curr || !cat) {
         showAdminToast('নাম, দাম এবং ক্যাটাগরি দিন!');
         return;
       }
 
-      const isSubAdminOrDealer = isRestrictedAdmin();
-
       const payload = {
         name,
         itemCode: itemCode || ('ITEM-' + Math.floor(1000 + Math.random() * 9000)),
-        originalPrice: orig || curr,
+        originalPrice: curr,
         currentPrice: curr,
         category: cat,
-        brand: brand,
-        brandName: brand,
-        size: size,
-        color: color,
         stock,
         sold: isEdit ? (window.products.find(p => p.id === productIdToEdit)?.sold || 0) : 0,
-        imageUrl: imgUrls.length > 0 ? (imgUrls.length === 1 ? imgUrls[0] : imgUrls) : '',
+        imageUrl: imgInp || 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=200',
         description: desc
       };
 
@@ -2302,210 +1812,30 @@
             closeAdminModal();
           });
       } else {
-        payload.status = isSubAdminOrDealer ? 'pending' : 'approved';
-        payload.addedBy = window.storedAdmin ? `${window.storedAdmin.name}` : 'Main Admin';
-        payload.addedByUid = window.storedAdmin ? window.storedAdmin.uid : '';
+        payload.status = 'approved';
+        payload.addedBy = 'Main Admin';
         payload.createdAt = Date.now();
 
         const newRef = push(ref(db, 'products'));
         set(newRef, payload).then(() => {
-          showAdminToast(isSubAdminOrDealer ? 'প্রোডাক্টটি অনুমোদনের জন্য পাঠানো হয়েছে!' : 'প্রোডাক্টটি সফলভাবে সেভ করা হয়েছে!');
+          showAdminToast('প্রোডাক্টটি সফলভাবে সেভ করা হয়েছে!');
           closeAdminModal();
         });
       }
     };
 
     window.deleteProduct = function(id) {
-      if (isRestrictedAdmin()) {
-        alert('⚠️ সাব-এডমিন বা ডিলার কোনো প্রোডাক্ট ডিলিট করতে পারবে না।');
-        return;
-      }
       if (!confirm('প্রোডাক্টটি মুছতে চান?')) return;
       remove(ref(db, `products/${id}`));
       showAdminToast('প্রোডাক্ট মোছা হয়েছে');
     };
 
-    // UTILITIES & PAYMENT SETUP
-    window.openAddPaymentModal = function() {
-      const modal = document.getElementById('adminModal');
-      const body = document.getElementById('modalBody');
-      body.innerHTML = `
-        <h3 class="text-sm font-bold text-slate-100 mb-3 flex items-center gap-2">
-          <i class="fa-solid fa-wallet text-emerald-400"></i> Add New Payment Method
-        </h3>
-        <div class="space-y-2 text-xs">
-          <div>
-            <label class="block text-slate-400 mb-1">Select Gateway *</label>
-            <select id="pmMethodName" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-2 text-white font-bold">
-              <option value="bKash">bKash</option>
-              <option value="Nagad">Nagad</option>
-              <option value="Rocket">Rocket</option>
-              <option value="Upay">Upay</option>
-              <option value="Bank Transfer">Bank Transfer</option>
-            </select>
-          </div>
-          <div>
-            <label class="block text-slate-400 mb-1">Account Type</label>
-            <select id="pmType" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-2 text-white">
-              <option value="Personal">Personal</option>
-              <option value="Merchant">Merchant</option>
-              <option value="Agent">Agent</option>
-            </select>
-          </div>
-          <div>
-            <label class="block text-slate-400 mb-1">Number / Account *</label>
-            <input type="text" id="pmNumber" placeholder="017xxxxxxxx" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-2 text-white font-mono">
-          </div>
-          <button onclick="savePaymentMethod()" class="w-full bg-indigo-600 text-white font-bold py-2.5 rounded-xl text-xs mt-2 shadow">Save</button>
-        </div>
-      `;
-      modal.classList.remove('hidden');
-    };
-
-    window.savePaymentMethod = function() {
-      const name = document.getElementById('pmMethodName').value;
-      const type = document.getElementById('pmType').value;
-      const number = document.getElementById('pmNumber').value.trim();
-
-      if (!number) {
-        showAdminToast('পেমেন্ট নাম্বার অবশ্যই দিন!');
-        return;
-      }
-      const newRef = push(ref(db, 'payment_methods'));
-      set(newRef, { methodName: name, type, number, createdAt: Date.now() });
-      showAdminToast('পেমেন্ট মেথড যোগ করা হয়েছে!');
-      closeAdminModal();
-    };
-
-    window.deletePaymentMethod = function(id) {
-      if (!confirm('পেমেন্ট মেথডটি মুছবেন?')) return;
-      remove(ref(db, `payment_methods/${id}`));
-      showAdminToast('পেমেন্ট মেথড মোছা হয়েছে');
-    };
-
-    window.triggerAutoBackupRestore = function() {
-      showAdminToast("🔄 Database Syncing & Restoring...");
-      setTimeout(() => showAdminToast("✅ Auto Backup Completed!"), 1500);
-    };
-
-    window.downloadSystemBackup = function() {
-      const systemData = {
-        products: window.products,
-        categories: window.categories,
-        orders: window.orders,
-        customers: window.customers,
-        coupons: window.coupons,
-        dues: window.dues,
-        expenses: window.expenses,
-        paymentMethods: window.paymentMethods,
-        notifications: window.notifications,
-        backupDate: new Date().toISOString()
-      };
-      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(systemData, null, 2));
-      const downloadAnchor = document.createElement('a');
-      downloadAnchor.setAttribute("href", dataStr);
-      downloadAnchor.setAttribute("download", `system_backup_${new Date().toISOString().slice(0,10)}.json`);
-      document.body.appendChild(downloadAnchor);
-      downloadAnchor.click();
-      downloadAnchor.remove();
-      showAdminToast("📥 Backup JSON File Downloaded!");
-    };
-
-    // NOTIFICATION HANDLERS
-    window.sendPushNotification = function() {
-      const title = document.getElementById('notifTitle').value.trim();
-      const msg = document.getElementById('notifMsg').value.trim();
-      if(!title || !msg) {
-        showAdminToast('শিরোনাম ও মেসেজ লিখুন!');
-        return;
-      }
-      const newRef = push(ref(db, 'notifications'));
-      set(newRef, { title, message: msg, createdAt: Date.now() }).then(() => {
-        showAdminToast('🎉 নোটিফিকেশন পাঠানো হয়েছে!');
-        document.getElementById('notifTitle').value = '';
-        document.getElementById('notifMsg').value = '';
-      });
-    };
-
-    window.deleteNotification = function(id) {
-      if (!confirm('আপনি কি এই নোটিফিকেশনটি মুছে ফেলতে চান?')) return;
-      remove(ref(db, `notifications/${id}`)).then(() => {
-        showAdminToast('নোটিফিকেশন মুছে ফেলা হয়েছে!');
-      });
-    };
-
-    window.promptDeleteOrder = function(orderId) {
-      document.getElementById('confirmActionTitle').innerText = 'অর্ডার ডিলিটের নিশ্চয়তা';
-      document.getElementById('confirmActionMsg').innerText = 'আপনি কি সম্পূর্ণ অর্ডারটি মুছে ফেলতে চান?';
-      const btn = document.getElementById('confirmActionBtn');
-      btn.className = "flex-1 bg-red-600 hover:bg-red-500 text-white font-bold py-2 rounded-xl text-xs transition shadow";
-      btn.onclick = function() {
-        remove(ref(db, `orders/${orderId}`)).then(() => {
-          showAdminToast('অর্ডার ডিলিট হয়েছে!');
-          closeConfirmActionModal();
-        });
-      };
-      document.getElementById('confirmActionModal').classList.remove('hidden');
-    };
-
-    window.promptDeleteCustomer = function(customerId) {
-      document.getElementById('confirmActionTitle').innerText = 'কাস্টমার ডিলিটের নিশ্চয়তা';
-      document.getElementById('confirmActionMsg').innerText = 'আপনি কি এই কাস্টমার প্রোফাইলটি ডিলিট করতে চান?';
-      const btn = document.getElementById('confirmActionBtn');
-      btn.className = "flex-1 bg-red-600 hover:bg-red-500 text-white font-bold py-2 rounded-xl text-xs transition shadow";
-      btn.onclick = function() {
-        remove(ref(db, `customers/${customerId}`)).then(() => {
-          showAdminToast('কাস্টমার ডিলিট করা হয়েছে!');
-          closeConfirmActionModal();
-        });
-      };
-      document.getElementById('confirmActionModal').classList.remove('hidden');
-    };
-
-    window.addCoupon = function() {
-      const code = document.getElementById('couponCode').value.trim().toUpperCase();
-      const type = document.getElementById('couponType').value;
-      const amt = Number(document.getElementById('couponAmount').value);
-      const expDate = document.getElementById('couponExpDate').value;
-
-      if (!code || !amt || !expDate) {
-        showAdminToast('সকল ঘর পূরণ করুন!');
-        return;
-      }
-      const newRef = push(ref(db, 'coupons'));
-      set(newRef, { 
-        code, 
-        discountType: type, 
-        discountAmount: amt, 
-        expDate, 
-        active: true, 
-        addedByUid: window.storedAdmin ? window.storedAdmin.uid : '',
-        createdAt: Date.now() 
-      });
-      showAdminToast('কুপন তৈরি হয়েছে!');
-      renderAdminDashboard();
-    };
-
-    window.deleteCoupon = function(id) {
-      if (!confirm('কুপনটি মুছবেন?')) return;
-      remove(ref(db, `coupons/${id}`));
-      showAdminToast('কুপন মোছা হয়েছে');
-    };
-
     window.addDue = function() {
       const cust = document.getElementById('dueCustomer').value.trim();
       const amt = Number(document.getElementById('dueAmount').value);
-      if (!cust || !amt) {
-        showAdminToast('কাস্টমারের নাম ও টাকার পরিমাণ দিন!');
-        return;
-      }
+      if (!cust || !amt) return;
       const newRef = push(ref(db, 'dues'));
-      set(newRef, { 
-        customerName: cust, 
-        amount: amt, 
-        addedByUid: window.storedAdmin ? window.storedAdmin.uid : '',
-        createdAt: Date.now() 
-      });
+      set(newRef, { customerName: cust, amount: amt, createdAt: Date.now() });
       showAdminToast('বকেয়া খাতায় যোগ হয়েছে');
     };
 
@@ -2527,113 +1857,16 @@
       showAdminToast('ক্যাটাগরি মোছা হয়েছে');
     };
 
-    window.filterProductCategory = function(cat) {
-      window.selectedProductCat = cat;
-      renderAdminDashboard();
-    };
-
-    window.updateStockModal = function(id, currentStock) {
-      const newStock = prompt('নতুন স্টক সংখ্যা লিখুন:', currentStock);
-      if (newStock !== null) {
-        update(ref(db, `products/${id}`), { stock: Number(newStock) });
-        showAdminToast('স্টক আপডেট হয়েছে');
-      }
-    };
-
-    // ORDER DETAILS MODAL
-    window.openOrderDetailsModal = function(orderId) {
-      const o = window.orders.find(item => item.id === orderId);
-      if (!o) return;
-
-      const modal = document.getElementById('adminModal');
-      const body = document.getElementById('modalBody');
-
-      const itemsListHtml = (o.items && Array.isArray(o.items) && o.items.length > 0) ? o.items.map(i => {
-        const prod = window.products.find(p => p.id === i.productId);
-        let img = i.imageUrl || i.img;
-        if (!img && prod) {
-          img = Array.isArray(prod.imageUrl) ? prod.imageUrl[0] : prod.imageUrl;
-        }
-        if (!img) img = 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=100';
-
-        const price = Number(i.price || i.currentPrice || (prod ? prod.currentPrice : 0));
-        const qty = Number(i.qty || i.quantity || 1);
-        const subtotal = price * qty;
-
-        return `
-          <div class="bg-slate-900 p-2.5 rounded-xl border border-slate-800 flex items-center gap-3">
-            <img src="${img}" class="w-12 h-12 object-cover rounded-lg border border-slate-700 shrink-0">
-            <div class="flex-1 min-w-0">
-              <h4 class="font-bold text-slate-100 text-xs truncate">${escapeHTML(i.name || (prod ? prod.name : 'Unknown Product'))}</h4>
-              <p class="text-[10px] text-slate-400">
-                একক দাম: <span class="text-amber-300 font-bold">৳${price}</span> 
-                ${i.size && i.size !== 'None' ? `| সাইজ: <span class="text-indigo-300">${escapeHTML(i.size)}</span>` : ''}
-                ${i.color && i.color !== 'None' ? `| কালার: <span class="text-cyan-300">${escapeHTML(i.color)}</span>` : ''}
-              </p>
-              <p class="text-[10px] text-emerald-400 font-bold">
-                পরিমাণ: ${qty} পিস × ৳${price} = ৳${subtotal}
-              </p>
-            </div>
-          </div>
-        `;
-      }).join('') : `
-        <div class="p-3 bg-slate-900 rounded-xl text-slate-400 text-[11px] text-center border border-slate-800">
-          পণ্যের কোনো বিস্তারিত তালিকা পাওয়া যায়নি!
-        </div>
-      `;
-
-      body.innerHTML = `
-        <div class="space-y-3 text-xs text-slate-200">
-          <div class="flex justify-between items-center border-b border-slate-700 pb-2">
-            <div>
-              <h3 class="font-bold text-sm text-indigo-400">অর্ডার ডিটেইলস (#${o.id.slice(-6)})</h3>
-              <span class="text-[9px] text-slate-400"><i class="fa-regular fa-clock mr-1"></i>${o.createdAt ? new Date(o.createdAt).toLocaleString() : 'N/A'}</span>
-            </div>
-            <span class="bg-amber-500/20 text-amber-300 font-bold px-2 py-0.5 rounded text-[10px] border border-amber-500/30">${escapeHTML(o.status)}</span>
-          </div>
-
-          <div class="bg-slate-950 p-3 rounded-xl border border-slate-800 space-y-1">
-            <p><i class="fa-solid fa-user text-indigo-400 mr-1.5"></i> <strong>Customer Name:</strong> ${escapeHTML(o.userName || 'N/A')}</p>
-            <p><i class="fa-solid fa-phone text-emerald-400 mr-1.5"></i> <strong>Phone:</strong> ${escapeHTML(o.userPhone || 'N/A')}</p>
-            <p><i class="fa-solid fa-location-dot text-red-400 mr-1.5"></i> <strong>Address:</strong> ${escapeHTML(o.address || 'N/A')}</p>
-            <p><i class="fa-solid fa-credit-card text-amber-400 mr-1.5"></i> <strong>Payment Method:</strong> <span class="uppercase font-bold text-emerald-400">${escapeHTML(o.paymentMethod || 'COD')}</span> ${o.trxId ? `(TrxID: ${escapeHTML(o.trxId)})` : ''}</p>
-          </div>
-
-          <div class="space-y-1.5">
-            <h4 class="font-bold text-slate-300 text-xs flex justify-between items-center">
-              <span>অর্ডাকৃত পণ্যসমূহ:</span>
-              <span class="text-[10px] text-slate-400 font-normal">মোট: ${(o.items || []).length} টি আইটেম</span>
-            </h4>
-            <div class="space-y-2 max-h-52 overflow-y-auto no-scrollbar">
-              ${itemsListHtml}
-            </div>
-          </div>
-
-          <div class="bg-slate-800 p-3 rounded-xl font-bold flex justify-between items-center border border-slate-700 text-sm shadow">
-            <span>সর্বমোট পরিশোধযোগ্য:</span>
-            <span class="text-emerald-400 font-black text-base">৳${o.totalAmount}</span>
-          </div>
-
-          <button onclick="closeAdminModal()" class="w-full bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold py-2 rounded-xl text-xs transition">
-            বন্ধ করুন
-          </button>
-        </div>
-      `;
-      modal.classList.remove('hidden');
-    };
-
     window.closeAdminModal = function() {
       document.getElementById('adminModal').classList.add('hidden');
     };
 
+    window.closeConfirmActionModal = function() {
+      document.getElementById('confirmActionModal').classList.add('hidden');
+    };
+
     window.handleAdminLogout = function() {
       signOut(auth).then(() => {
-        window.storedAdmin = null;
-        localStorage.removeItem('app_admin_session');
-        window.activeView = 'menu';
-        initAdminView();
-        showAdminToast('এডমিন লগআউট হয়েছে।');
-      }).catch(() => {
         window.storedAdmin = null;
         localStorage.removeItem('app_admin_session');
         window.activeView = 'menu';

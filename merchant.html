@@ -1,0 +1,1748 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>All In1 Shop - Merchant Portal</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+    body {
+      font-family: 'Inter', 'Hind Siliguri', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    
+    .unique-nav-card {
+      background: linear-gradient(135deg, rgba(30, 41, 59, 0.7) 0%, rgba(15, 23, 42, 0.9) 100%);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .unique-nav-card:active {
+      transform: scale(0.95);
+    }
+    .unique-nav-card:hover {
+      border-color: rgba(99, 102, 241, 0.4);
+      box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.5);
+    }
+  </style>
+</head>
+<body class="bg-slate-950 min-h-screen flex justify-center items-center p-0 md:p-4 text-slate-100">
+
+  <!-- Merchant Mobile Frame -->
+  <div class="w-full max-w-md bg-slate-900 min-h-screen md:min-h-[840px] md:rounded-3xl shadow-2xl flex flex-col relative overflow-hidden pb-16 border border-slate-800">
+    
+    <!-- Header Bar -->
+    <header id="merchantHeader" class="bg-slate-800/90 backdrop-blur-md border-b border-slate-700/80 p-4 sticky top-0 z-30 flex justify-between items-center hidden">
+      <div class="flex items-center gap-2">
+        <div class="w-8 h-8 bg-gradient-to-tr from-indigo-600 to-violet-500 rounded-xl flex items-center justify-center font-bold text-white shadow-lg shadow-indigo-600/30">
+          <i class="fa-solid fa-store text-sm"></i>
+        </div>
+        <div>
+          <h1 class="font-bold text-sm text-slate-100 leading-tight" id="headerRoleTitle">Merchant Panel</h1>
+          <p class="text-[10px] text-emerald-400 font-medium" data-i18n="liveSync">● Live Sync Active</p>
+        </div>
+      </div>
+      <button onclick="openAddProductModal()" class="bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500 text-white text-xs px-3 py-1.5 rounded-xl font-bold flex items-center gap-1.5 shadow-md shadow-indigo-600/20 active:scale-95 transition">
+        <i class="fa-solid fa-plus text-[10px]"></i> <span data-i18n="addProductBtn">+ Product</span>
+      </button>
+    </header>
+
+    <!-- Main Container -->
+    <main id="merchantMain" class="flex-1 overflow-y-auto no-scrollbar p-3.5 space-y-4">
+    </main>
+
+    <!-- Quick Bottom Nav Bar -->
+    <nav id="merchantNav" class="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-md bg-slate-900/95 backdrop-blur-md border-t border-slate-800/80 flex justify-around items-center py-2 z-40 hidden">
+      <button onclick="switchTab('dashboard')" id="nav-dashboard" class="flex flex-col items-center text-indigo-400 font-bold">
+        <i class="fa-solid fa-gauge-high text-lg"></i>
+        <span class="text-[10px]" data-i18n="dashboard">Dashboard</span>
+      </button>
+
+      <button onclick="switchTab('stock')" id="nav-stock" class="flex flex-col items-center text-slate-400 hover:text-indigo-400 font-bold transition">
+        <i class="fa-solid fa-boxes-packing text-lg"></i>
+        <span class="text-[10px]">Stock</span>
+      </button>
+
+      <button onclick="openAddProductModal()" class="flex flex-col items-center text-slate-400 hover:text-indigo-400">
+        <div class="w-10 h-10 bg-gradient-to-tr from-indigo-600 to-violet-500 hover:from-indigo-500 hover:to-violet-400 text-white rounded-full flex items-center justify-center -mt-5 shadow-lg shadow-indigo-600/40 border-2 border-slate-900 transition">
+          <i class="fa-solid fa-plus text-lg"></i>
+        </div>
+        <span class="text-[10px] mt-0.5" data-i18n="add">Add</span>
+      </button>
+
+      <button onclick="switchTab('settings')" id="nav-settings" class="flex flex-col items-center text-slate-400 hover:text-indigo-400">
+        <i class="fa-solid fa-sliders text-lg"></i>
+        <span class="text-[10px]" data-i18n="settings">Settings</span>
+      </button>
+    </nav>
+
+    <!-- Generic Modal -->
+    <div id="merchantModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-3 hidden">
+      <div class="bg-slate-900 border border-slate-700/80 w-full max-w-md rounded-2xl p-4 max-h-[85vh] overflow-y-auto relative shadow-2xl">
+        <button onclick="closeMerchantModal()" class="absolute top-3 right-3 text-slate-400 hover:text-white bg-slate-800 w-7 h-7 rounded-full flex items-center justify-center">
+          <i class="fa-solid fa-xmark text-sm"></i>
+        </button>
+        <div id="modalBody"></div>
+      </div>
+    </div>
+
+    <!-- Confirm Action Modal -->
+    <div id="confirmActionModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+      <div class="bg-slate-900 border border-slate-700 w-full max-w-xs rounded-2xl p-4 text-center space-y-3 shadow-2xl">
+        <div id="confirmModalIcon" class="w-12 h-12 bg-amber-500/20 text-amber-500 rounded-full flex items-center justify-center mx-auto text-xl">
+          <i class="fa-solid fa-circle-question"></i>
+        </div>
+        <h3 id="confirmActionTitle" class="text-sm font-bold text-slate-100" data-i18n="confirmTitle">Confirm Action</h3>
+        <p id="confirmActionMsg" class="text-xs text-slate-400" data-i18n="confirmMsg">Are you sure you want to proceed?</p>
+        <div class="flex gap-2 pt-1">
+          <button id="confirmActionBtn" class="flex-1 bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-2 rounded-xl text-xs transition shadow">
+            Confirm
+          </button>
+          <button onclick="closeConfirmActionModal()" class="flex-1 bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold py-2 rounded-xl text-xs transition">
+            Cancel
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="merchantToast" class="fixed top-16 left-1/2 -translate-x-1/2 bg-emerald-600 text-white text-xs px-4 py-2 rounded-full shadow-lg z-50 opacity-0 pointer-events-none transition-all border border-emerald-400/30 text-center min-w-[200px]">
+      Message
+    </div>
+
+  </div>
+
+  <!-- Translation Dictionary & Security Sanitizer -->
+  <script>
+    window.MERCHANT_BUILD_VERSION = '1.0.0'; 
+
+    (function checkAndClearOldCache() {
+      const savedVersion = localStorage.getItem('app_merchant_version');
+      if (savedVersion !== window.MERCHANT_BUILD_VERSION) {
+        localStorage.clear();
+        sessionStorage.clear();
+        localStorage.setItem('app_merchant_version', window.MERCHANT_BUILD_VERSION);
+      }
+    })();
+
+    window.currentLang = localStorage.getItem('merchant_lang') || 'en';
+
+    const translations = {
+      en: {
+        liveSync: "● Live Sync Active",
+        addProductBtn: "+ Product",
+        dashboard: "Dashboard",
+        add: "Add",
+        settings: "Settings",
+        confirmTitle: "Confirm Action",
+        confirmMsg: "Are you sure you want to proceed?",
+        portalTitle: "All In1 Shop (Merchant)",
+        portalSub: "Login/Signup to access merchant panel",
+        loginHeader: "Merchant Login",
+        signupHeader: "Merchant Registration",
+        emailLabel: "Email Address *",
+        passwordLabel: "Password *",
+        nameLabel: "Full Name *",
+        roleLabel: "Account Role *",
+        loginBtn: "Login",
+        signupBtn: "Complete Registration",
+        forgotPass: "Forgot Password?",
+        newSignupLink: "New Merchant Registration (Sign Up)",
+        alreadyAccount: "Already have an account?",
+        welcome: "Welcome",
+        featuresAssigned: "FEATURES ASSIGNED FOR YOU",
+        products: "My Products",
+        orders: "Orders",
+        productApproval: "Pending Products",
+        dueLedger: "Due Ledger",
+        expenseLedger: "Expense Ledger",
+        customers: "My Customers",
+        coupons: "Coupons",
+        logoutBtn: "Logout",
+        langSelect: "App Language",
+        paymentSetup: "My Payment Accounts",
+        paymentSetupSub: "Setup bKash, Nagad, Bank (Visible only to Global Admin)",
+        checkUpdateTitle: "Check for Updates",
+        checkUpdateBtn: "Check for Update",
+        checkingText: "Checking...",
+        addPaymentBtn: "+ Add Payment Method",
+        savePaymentBtn: "Save Payment Method",
+        itemCode: "Item Code:",
+        stock: "Stock:",
+        total: "Total:",
+        exitPrompt: "Press back again to exit app"
+      },
+      bn: {
+        liveSync: "● লাইভ সিঙ্ক সক্রিয়",
+        addProductBtn: "+ প্রোডাক্ট",
+        dashboard: "ড্যাশবোর্ড",
+        add: "যোগ করুন",
+        settings: "সেটিংস",
+        confirmTitle: "নিশ্চয়তা প্রদান করুন",
+        confirmMsg: "আপনি কি নিশ্চিত যে এই কাজটি সম্পন্ন করতে চান?",
+        portalTitle: "অল ইন ওয়ান শপ (মার্চেন্ট)",
+        portalSub: "প্যানেলে প্রবেশ করতে লগইন/সাইনআপ করুন",
+        loginHeader: "মার্চেন্ট লগইন",
+        signupHeader: "মার্চেন্ট রেজিস্ট্রেশন",
+        emailLabel: "ইমেইল এড্রেস *",
+        passwordLabel: "পাসওয়ার্ড *",
+        nameLabel: "আপনার পূর্ণ নাম *",
+        roleLabel: "একাউন্টের ভূমিকা (Role) *",
+        loginBtn: "লগইন করুন",
+        signupBtn: "রেজিস্ট্রেশন সম্পন্ন করুন",
+        forgotPass: "পাসওয়ার্ড ভুলে গেছেন?",
+        newSignupLink: "নতুন মার্চেন্ট রেজিস্ট্রেশন (Sign Up)",
+        alreadyAccount: "আগে থেকেই একাউন্ট করা আছে?",
+        welcome: "স্বাগতম",
+        featuresAssigned: "আপনার জন্য বরাদ্দকৃত ফিচারসমূহ",
+        products: "অনুমোদিত প্রোডাক্টসমূহ",
+        orders: "অর্ডারসমূহ",
+        productApproval: "প্রোডাক্ট এপ্রুভাল (পেন্ডিং)",
+        dueLedger: "বকেয়া খাতা (ডিউ লেজার)",
+        expenseLedger: "খরচ খাতা",
+        customers: "আমার কাস্টমার খাতা",
+        coupons: "কুপনসমূহ",
+        logoutBtn: "লগআউট করুন",
+        langSelect: "অ্যাপ ল্যাঙ্গুয়েজ (ভাষা)",
+        paymentSetup: "আমার পেমেন্ট অ্যাকাউন্টস",
+        paymentSetupSub: "bKash, Nagad, Bank যোগ করুন (শুধু গ্লোবাল এডমিন দেখতে পাবে)",
+        checkUpdateTitle: "অ্যাপ আপডেট চেক",
+        checkUpdateBtn: "Check for Update",
+        checkingText: "চেক করা হচ্ছে...",
+        addPaymentBtn: "+ নতুন পেমেন্ট মেথড",
+        savePaymentBtn: "পেমেন্ট মেথড সেভ করুন",
+        itemCode: "কোড:",
+        stock: "স্টক:",
+        total: "সর্বমোট:",
+        exitPrompt: "অ্যাপ থেকে বের হতে আবার ব্যাক বাটন চাপুন"
+      }
+    };
+
+    function t(key) {
+      return (translations[window.currentLang] && translations[window.currentLang][key]) || translations['en'][key] || key;
+    }
+
+    function setLanguage(lang) {
+      window.currentLang = lang;
+      localStorage.setItem('merchant_lang', lang);
+      document.documentElement.lang = lang;
+      if (window.renderDashboard && window.storedMerchant) {
+        window.renderDashboard();
+      } else if (window.renderAuthScreen && !window.storedMerchant) {
+        window.renderAuthScreen();
+      }
+    }
+
+    window.escapeHTML = function(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    };
+  </script>
+
+  <!-- Firebase Script Integration -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { getDatabase, ref, set, push, remove, update, onValue, get } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+    import { 
+      getAuth, 
+      signInWithEmailAndPassword, 
+      createUserWithEmailAndPassword, 
+      signOut, 
+      onAuthStateChanged,
+      sendPasswordResetEmail,
+      updateProfile
+    } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyCyTaNvT8S6Xg304_9ntWozi1k3N4DmNxM",
+      authDomain: "all-in1-shop.firebaseapp.com",
+      databaseURL: "https://all-in1-shop-default-rtdb.firebaseio.com",
+      projectId: "all-in1-shop",
+      storageBucket: "all-in1-shop.firebasestorage.app",
+      messagingSenderId: "120883945223",
+      appId: "1:120883945223:web:9f74f7ff3aa78f637fafa2"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+    const auth = getAuth(app);
+
+    window.db = db;
+    window.auth = auth;
+
+    window.storedMerchant = JSON.parse(localStorage.getItem('app_merchant_session')) || null;
+    window.products = [];
+    window.categories = [];
+    window.orders = [];
+    window.customers = [];
+    window.coupons = [];
+    window.dues = [];
+    window.expenses = [];
+    window.merchantPayments = [];
+    window.appUpdateInfo = null;
+    window.activeView = 'menu';
+    window.authMode = 'login';
+    window.orderFilterTab = 'all'; 
+    window.orderSearchQuery = '';
+
+    // 📱 Native Back Button Logic
+    window.lastBackPressTime = 0;
+
+    function pushAppState(viewName) {
+      history.pushState({ view: viewName }, '', '');
+    }
+
+    history.replaceState({ view: 'menu' }, '', '');
+
+    window.addEventListener('popstate', (e) => {
+      const modal = document.getElementById('merchantModal');
+      const confirmModal = document.getElementById('confirmActionModal');
+
+      if (modal && !modal.classList.contains('hidden')) {
+        closeMerchantModal();
+        pushAppState(window.activeView);
+        return;
+      }
+
+      if (confirmModal && !confirmModal.classList.contains('hidden')) {
+        closeConfirmActionModal();
+        pushAppState(window.activeView);
+        return;
+      }
+
+      if (window.activeView !== 'menu') {
+        window.activeView = 'menu';
+        updateNavHighlight('dashboard');
+        renderDashboard();
+        pushAppState('menu');
+      } else {
+        const currentTime = new Date().getTime();
+        if (currentTime - window.lastBackPressTime < 3000) {
+          window.close();
+        } else {
+          window.lastBackPressTime = currentTime;
+          showToast(t('exitPrompt'));
+          pushAppState('menu');
+        }
+      }
+    });
+
+    window.showToast = function(msg) {
+      const toast = document.getElementById('merchantToast');
+      toast.innerText = msg;
+      toast.classList.remove('opacity-0', 'pointer-events-none');
+      setTimeout(() => {
+        toast.classList.add('opacity-0', 'pointer-events-none');
+      }, 2500);
+    };
+
+    // Realtime Firebase Data Sync
+    function startMerchantSync() {
+      onValue(ref(db, 'products'), snap => {
+        const data = snap.val() || {};
+        window.products = Object.keys(data).map(k => ({ id: k, ...data[k] }));
+        if (window.storedMerchant) renderDashboard();
+      });
+
+      onValue(ref(db, 'categories'), snap => {
+        const data = snap.val() || {};
+        window.categories = Object.keys(data).map(k => ({ id: k, ...data[k] }));
+      });
+
+      onValue(ref(db, 'orders'), snap => {
+        const data = snap.val() || {};
+        window.orders = Object.keys(data).map(k => ({ id: k, ...data[k] })).sort((a,b) => (b.createdAt||0) - (a.createdAt||0));
+        if (window.storedMerchant) renderDashboard();
+      });
+
+      onValue(ref(db, 'customers'), snap => {
+        const data = snap.val() || {};
+        window.customers = Object.keys(data).map(k => ({ id: k, ...data[k] }));
+      });
+
+      onValue(ref(db, 'coupons'), snap => {
+        const data = snap.val() || {};
+        window.coupons = Object.keys(data).map(k => ({ id: k, ...data[k] }));
+        if (window.storedMerchant && window.activeView === 'coupons') renderDashboard();
+      });
+
+      onValue(ref(db, 'dues'), snap => {
+        const data = snap.val() || {};
+        window.dues = Object.keys(data).map(k => ({ id: k, ...data[k] }));
+      });
+
+      onValue(ref(db, 'expenses'), snap => {
+        const data = snap.val() || {};
+        window.expenses = Object.keys(data).map(k => ({ id: k, ...data[k] }));
+      });
+
+      onValue(ref(db, 'merchant_payments'), snap => {
+        const data = snap.val() || {};
+        window.merchantPayments = Object.keys(data).map(k => ({ id: k, ...data[k] }));
+        if (window.storedMerchant && window.activeView === 'merchant_payment_setup') renderDashboard();
+      });
+
+      onValue(ref(db, 'app_update'), snap => {
+        const updates = snap.val() || {};
+        window.appUpdateInfo = updates.merchantApp || updates.userApp || null;
+      });
+    }
+
+    startMerchantSync();
+
+    // 🔒 Enhanced Auth Listener - Direct Path Lookup (Prevents Permission Errors)
+    onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        try {
+          const uid = user.uid;
+          const userEmail = (user.email || '').toLowerCase().trim();
+
+          let accountData = null;
+          let role = 'Dealer';
+
+          // 1. Direct Check: Merchants/Dealers/{uid}
+          try {
+            const dealerSnap = await get(ref(db, `Merchants/Dealers/${uid}`));
+            if (dealerSnap.exists()) {
+              accountData = dealerSnap.val();
+              role = accountData.role || 'Dealer';
+            }
+          } catch(e) {}
+
+          // 2. Direct Check: Merchants/SubAdmins/{uid}
+          if (!accountData) {
+            try {
+              const subAdminSnap = await get(ref(db, `Merchants/SubAdmins/${uid}`));
+              if (subAdminSnap.exists()) {
+                accountData = subAdminSnap.val();
+                role = accountData.role || 'SubAdmin';
+              }
+            } catch(e) {}
+          }
+
+          // 3. Fallback: Search in Dealers or SubAdmins list by email
+          if (!accountData) {
+            try {
+              const dealersSnap = await get(ref(db, 'Merchants/Dealers'));
+              if (dealersSnap.exists()) {
+                const dealers = dealersSnap.val() || {};
+                const dKey = Object.keys(dealers).find(k => (dealers[k].contact || '').toLowerCase().trim() === userEmail);
+                if (dKey) {
+                  accountData = dealers[dKey];
+                  role = accountData.role || 'Dealer';
+                }
+              }
+            } catch(e) {}
+          }
+
+          if (!accountData) {
+            try {
+              const subAdminsSnap = await get(ref(db, 'Merchants/SubAdmins'));
+              if (subAdminsSnap.exists()) {
+                const subAdmins = subAdminsSnap.val() || {};
+                const sKey = Object.keys(subAdmins).find(k => (subAdmins[k].contact || '').toLowerCase().trim() === userEmail);
+                if (sKey) {
+                  accountData = subAdmins[sKey];
+                  role = accountData.role || 'SubAdmin';
+                }
+              }
+            } catch(e) {}
+          }
+
+          // 🛑 Permit Login Only If Account Exists under Dealers or SubAdmins
+          if (accountData) {
+            const finalRole = accountData.role || role;
+            const name = accountData.name || user.displayName || 'Merchant';
+
+            const session = { name, contact: user.email, role: finalRole, uid: user.uid };
+            window.storedMerchant = session;
+            localStorage.setItem('app_merchant_session', JSON.stringify(session));
+            initMerchantView();
+          } else {
+            // ❌ Access Denied! Unapproved user signed out automatically
+            await signOut(auth);
+            window.storedMerchant = null;
+            localStorage.removeItem('app_merchant_session');
+            showToast('❌ অ্যাকাউন্টটি এখনো অনুমোদিত নয়! এডমিন ডাটাবেজে ম্যানুয়ালি যুক্ত করার পর চেষ্টা করুন।');
+            initMerchantView();
+          }
+        } catch (err) {
+          console.error("Auth check exception:", err);
+          await signOut(auth);
+          window.storedMerchant = null;
+          localStorage.removeItem('app_merchant_session');
+          showToast('❌ ডাটাবেজ এক্সেস করার পারমিশন নেই বা নেটওয়ার্ক সমস্যা!');
+          initMerchantView();
+        }
+      } else {
+        window.storedMerchant = null;
+        localStorage.removeItem('app_merchant_session');
+        initMerchantView();
+      }
+    });
+
+    function initMerchantView() {
+      if (!window.storedMerchant) {
+        document.getElementById('merchantHeader').classList.add('hidden');
+        document.getElementById('merchantNav').classList.add('hidden');
+        renderAuthScreen();
+      } else {
+        document.getElementById('merchantHeader').classList.remove('hidden');
+        document.getElementById('merchantNav').classList.remove('hidden');
+        document.getElementById('headerRoleTitle').innerText = `${window.storedMerchant.role} Panel`;
+        renderDashboard();
+      }
+    }
+
+    // Auth Screen
+    window.renderAuthScreen = function() {
+      const main = document.getElementById('merchantMain');
+      main.innerHTML = `
+        <div class="min-h-[80vh] flex flex-col justify-center items-center py-6">
+          <div class="text-center mb-6">
+            <div class="w-16 h-16 bg-gradient-to-tr from-indigo-600 to-violet-500 rounded-3xl mx-auto flex items-center justify-center text-white text-3xl shadow-xl shadow-indigo-600/30 mb-3">
+              <i class="fa-solid fa-store"></i>
+            </div>
+            <h1 class="text-xl font-black text-slate-100">${t('portalTitle')}</h1>
+            <p class="text-xs text-slate-400 mt-1">${t('portalSub')}</p>
+          </div>
+
+          <div class="w-full bg-slate-800/80 backdrop-blur-md p-5 rounded-3xl border border-slate-700/80 shadow-2xl space-y-4">
+            ${window.authMode === 'login' ? `
+              <div class="space-y-3">
+                <h2 class="text-xs font-bold text-slate-300 text-center border-b border-slate-700 pb-2">${t('loginHeader')}</h2>
+                <div>
+                  <label class="text-[10px] font-bold text-slate-400 block mb-1">${t('emailLabel')}</label>
+                  <input type="email" id="loginEmail" placeholder="merchant@mail.com" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2.5 text-xs text-white focus:outline-none focus:border-indigo-500">
+                </div>
+                <div>
+                  <label class="text-[10px] font-bold text-slate-400 block mb-1">${t('passwordLabel')}</label>
+                  <input type="password" id="loginPass" placeholder="******" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2.5 text-xs text-white focus:outline-none focus:border-indigo-500">
+                </div>
+                <button onclick="handleLogin()" class="w-full bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500 text-white font-bold py-3 rounded-xl text-xs shadow-lg transition mt-2">
+                  ${t('loginBtn')}
+                </button>
+
+                <div class="flex justify-between items-center text-xs pt-2 border-t border-slate-700">
+                  <button onclick="handleForgotPassword()" class="text-amber-400 hover:underline">${t('forgotPass')}</button>
+                  <button onclick="toggleAuthMode('signup')" class="text-indigo-400 font-bold hover:underline">${t('newSignupLink')}</button>
+                </div>
+              </div>
+            ` : `
+              <div class="space-y-3">
+                <h2 class="text-xs font-bold text-slate-300 text-center border-b border-slate-700 pb-2">${t('signupHeader')}</h2>
+                <div>
+                  <label class="text-[10px] font-bold text-slate-400 block mb-1">${t('nameLabel')}</label>
+                  <input type="text" id="regName" placeholder="Rahim Ahmed" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2.5 text-xs text-white focus:outline-none focus:border-indigo-500">
+                </div>
+                <div>
+                  <label class="text-[10px] font-bold text-slate-400 block mb-1">${t('emailLabel')}</label>
+                  <input type="email" id="regEmail" placeholder="merchant@mail.com" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2.5 text-xs text-white focus:outline-none focus:border-indigo-500">
+                </div>
+                <div>
+                  <label class="text-[10px] font-bold text-slate-400 block mb-1">${t('roleLabel')}</label>
+                  <select id="regRole" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2.5 text-xs text-white font-bold">
+                    <option value="Dealer">Dealer</option>
+                    <option value="SubAdmin">Sub-Admin</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="text-[10px] font-bold text-slate-400 block mb-1">${t('passwordLabel')}</label>
+                  <input type="password" id="regPass" placeholder="******" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2.5 text-xs text-white focus:outline-none focus:border-indigo-500">
+                </div>
+                <button onclick="handleRegister()" class="w-full bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold py-3 rounded-xl text-xs shadow-lg transition mt-2">
+                  ${t('signupBtn')}
+                </button>
+
+                <div class="text-center text-xs pt-2 border-t border-slate-700">
+                  <span class="text-slate-400">${t('alreadyAccount')}</span>
+                  <button onclick="toggleAuthMode('login')" class="text-indigo-400 font-bold hover:underline ml-1">${t('loginBtn')}</button>
+                </div>
+              </div>
+            `}
+          </div>
+        </div>
+      `;
+    };
+
+    window.toggleAuthMode = function(mode) {
+      window.authMode = mode;
+      renderAuthScreen();
+    };
+
+    window.handleLogin = function() {
+      const email = document.getElementById('loginEmail').value.trim();
+      const pass = document.getElementById('loginPass').value;
+
+      if (!email || !pass) {
+        showToast('Please enter Email and Password!');
+        return;
+      }
+
+      signInWithEmailAndPassword(auth, email, pass)
+        .then(() => showToast('Authenticating...'))
+        .catch(() => showToast('Invalid email or password!'));
+    };
+
+    // 🔒 Registration Logic - Saves to 'PendingMerchants' for Admin Manual Approval
+    window.handleRegister = function() {
+      const name = document.getElementById('regName').value.trim();
+      const email = document.getElementById('regEmail').value.trim().toLowerCase();
+      const role = document.getElementById('regRole').value;
+      const pass = document.getElementById('regPass').value;
+
+      if (!name || !email || !pass) {
+        showToast('Please fill in all fields correctly!');
+        return;
+      }
+
+      createUserWithEmailAndPassword(auth, email, pass)
+        .then((userCredential) => {
+          const user = userCredential.user;
+
+          updateProfile(user, { displayName: name });
+
+          const userRef = ref(db, 'PendingMerchants/' + user.uid);
+          const userData = { 
+            uid: user.uid,
+            contact: email, 
+            name: name, 
+            password: pass, 
+            role: role,
+            createdAt: Date.now()
+          };
+
+          set(userRef, userData).then(() => {
+            signOut(auth);
+            window.storedMerchant = null;
+            localStorage.removeItem('app_merchant_session');
+            
+            alert(`🎉 রেজিস্ট্রেশন সফল হয়েছে!\n\nএডমিন ডাটাবেজে আপনার অ্যাকাউন্টটি ${role} নোডে ম্যানুয়ালি যুক্ত করলে তবেই আপনি প্যানেলে লগইন করতে পারবেন।`);
+            window.authMode = 'login';
+            initMerchantView();
+          });
+        })
+        .catch((err) => showToast('Error: ' + err.message));
+    };
+
+    window.handleForgotPassword = function() {
+      const email = prompt("Enter your merchant account email address:");
+      if (!email) return;
+
+      sendPasswordResetEmail(auth, email.trim())
+        .then(() => showToast('📩 Reset password link sent to your email!'))
+        .catch((err) => showToast('Error: ' + err.message));
+    };
+
+    function updateNavHighlight(tab) {
+      document.querySelectorAll('#merchantNav button').forEach(btn => {
+        btn.classList.remove('text-indigo-400');
+        btn.classList.add('text-slate-400');
+      });
+
+      if (tab === 'dashboard') {
+        document.getElementById('nav-dashboard').classList.add('text-indigo-400');
+      } else if (tab === 'stock') {
+        document.getElementById('nav-stock').classList.add('text-indigo-400');
+      } else if (tab === 'settings') {
+        document.getElementById('nav-settings').classList.add('text-indigo-400');
+      }
+    }
+
+    // Bottom Nav Switcher
+    window.switchTab = function(tab) {
+      updateNavHighlight(tab);
+
+      if (tab === 'dashboard') {
+        window.activeView = 'menu';
+      } else if (tab === 'stock') {
+        window.activeView = 'stock_overview';
+      } else if (tab === 'settings') {
+        window.activeView = 'settings';
+      }
+      
+      pushAppState(window.activeView);
+      renderDashboard();
+    };
+
+    // Dashboard Engine
+    window.renderDashboard = function() {
+      const main = document.getElementById('merchantMain');
+      if (!main || !window.storedMerchant) return;
+
+      if (window.activeView === 'settings') {
+        main.innerHTML = `
+          <div class="space-y-3">
+            <div class="bg-slate-800 p-4 rounded-2xl border border-slate-700 space-y-2 shadow-md">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-indigo-600 rounded-full flex items-center justify-center font-bold text-white shadow-lg">
+                  <i class="fa-solid fa-user text-sm"></i>
+                </div>
+                <div>
+                  <h3 class="font-bold text-sm text-slate-100">${escapeHTML(window.storedMerchant.name)}</h3>
+                  <span class="text-[10px] bg-indigo-500/20 text-indigo-400 font-bold px-2 py-0.5 rounded-full border border-indigo-500/30">${escapeHTML(window.storedMerchant.role)}</span>
+                </div>
+              </div>
+              <p class="text-xs text-slate-400 pt-2 border-t border-slate-700/80"><strong>Email:</strong> ${escapeHTML(window.storedMerchant.contact)}</p>
+            </div>
+
+            <button onclick="openSubView('merchant_payment_setup')" class="w-full bg-slate-800 p-3.5 rounded-2xl border border-slate-700 flex justify-between items-center text-xs hover:border-indigo-500 transition shadow-sm">
+              <div class="flex items-center gap-2.5">
+                <div class="w-8 h-8 bg-emerald-500/20 text-emerald-400 rounded-xl flex items-center justify-center font-bold">
+                  <i class="fa-solid fa-wallet text-sm"></i>
+                </div>
+                <div class="text-left">
+                  <span class="font-bold text-slate-100 block">${t('paymentSetup')}</span>
+                  <span class="text-[10px] text-slate-400">${t('paymentSetupSub')}</span>
+                </div>
+              </div>
+              <i class="fa-solid fa-chevron-right text-slate-500 text-xs"></i>
+            </button>
+
+            <div class="bg-slate-800 p-3.5 rounded-2xl border border-slate-700 space-y-2 shadow-sm">
+              <h3 class="text-xs font-bold text-slate-200 flex items-center gap-2">
+                <i class="fa-solid fa-globe text-cyan-400"></i> ${t('langSelect')}
+              </h3>
+              <select onchange="setLanguage(this.value)" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2 text-xs text-white font-bold">
+                <option value="en" ${window.currentLang === 'en' ? 'selected' : ''}>English (Default)</option>
+                <option value="bn" ${window.currentLang === 'bn' ? 'selected' : ''}>বাংলা (Bengali)</option>
+              </select>
+            </div>
+
+            <div class="bg-slate-800 p-3.5 rounded-2xl border border-slate-700 space-y-2.5 shadow-sm">
+              <div class="flex justify-between items-center border-b border-slate-700 pb-2">
+                <div>
+                  <h3 class="text-xs font-bold text-slate-200 flex items-center gap-1.5">
+                    <i class="fa-solid fa-arrows-rotate text-amber-400"></i> ${t('checkUpdateTitle')}
+                  </h3>
+                  <span class="text-[10px] text-slate-400">Current Build: <span class="font-mono text-indigo-400">v${window.MERCHANT_BUILD_VERSION}</span></span>
+                </div>
+                <button onclick="checkForAppUpdate()" id="btnCheckUpdate" class="bg-indigo-600 hover:bg-indigo-500 text-white font-bold px-3 py-1.5 rounded-lg text-xs shadow transition">
+                  ${t('checkUpdateBtn')}
+                </button>
+              </div>
+              <div id="updateStatusBox" class="hidden text-xs p-2.5 rounded-xl border"></div>
+            </div>
+
+            <button onclick="handleLogout()" class="w-full bg-red-600/20 hover:bg-red-600/30 text-red-400 font-bold py-2.5 rounded-xl text-xs border border-red-500/30 transition flex justify-center items-center gap-2 mt-3 shadow">
+              <i class="fa-solid fa-right-from-bracket"></i> ${t('logoutBtn')}
+            </button>
+          </div>
+        `;
+        return;
+      }
+
+      if (window.activeView !== 'menu') {
+        renderSubView(window.activeView);
+        return;
+      }
+
+      const currentUid = window.storedMerchant.uid;
+      const myAllProducts = window.products.filter(p => p.addedByUid === currentUid || p.addedBy === window.storedMerchant.contact);
+      
+      const myApprovedProducts = myAllProducts.filter(p => p.status === 'approved' || p.status === 'active');
+      const myPendingProducts = myAllProducts.filter(p => p.status === 'pending');
+
+      const myApprovedProdIds = new Set(myApprovedProducts.map(p => p.id));
+      const myOrders = window.orders.filter(o => o.items && Array.isArray(o.items) && o.items.some(i => myApprovedProdIds.has(i.productId)));
+      
+      const pendingOrders = myOrders.filter(o => (o.status || '').toLowerCase().includes('pending') || o.status === '1. Pending' || o.status === 'পেন্ডিং').length;
+
+      main.innerHTML = `
+        <div class="bg-indigo-950/60 p-4 rounded-2xl border border-indigo-800 text-xs flex justify-between items-center shadow-lg">
+          <div>
+            <span class="font-bold text-indigo-200 text-sm">${t('welcome')}, ${escapeHTML(window.storedMerchant.name)}</span>
+            <p class="text-[10px] text-indigo-300 mt-0.5">Role: <span class="text-amber-400 font-bold uppercase">${escapeHTML(window.storedMerchant.role)}</span></p>
+          </div>
+          <div class="w-10 h-10 bg-indigo-600/30 rounded-xl flex items-center justify-center border border-indigo-500/30">
+            <i class="fa-solid fa-store text-indigo-300 text-lg"></i>
+          </div>
+        </div>
+
+        <div class="pt-2">
+          <h2 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">${t('featuresAssigned')}</h2>
+          
+          <div class="grid grid-cols-2 gap-3">
+            <!-- My Products List -->
+            <button onclick="openSubView('products')" class="unique-nav-card p-4 rounded-2xl flex flex-col items-center text-center relative group">
+              <span class="absolute top-2 right-2 bg-emerald-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow-lg">${myApprovedProducts.length}</span>
+              <div class="w-11 h-11 rounded-2xl bg-indigo-500/10 text-indigo-400 flex items-center justify-center mb-1.5 group-hover:scale-110 transition border border-indigo-500/20">
+                <i class="fa-solid fa-boxes-stacked text-lg"></i>
+              </div>
+              <span class="text-xs font-bold text-slate-200">${t('products')}</span>
+            </button>
+
+            <!-- Orders -->
+            <button onclick="openSubView('orders')" class="unique-nav-card p-4 rounded-2xl flex flex-col items-center text-center relative group">
+              ${pendingOrders > 0 ? `<span class="absolute top-2 right-2 bg-red-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow-lg">${pendingOrders}</span>` : ''}
+              <div class="w-11 h-11 rounded-2xl bg-amber-500/10 text-amber-400 flex items-center justify-center mb-1.5 group-hover:scale-110 transition border border-amber-500/20">
+                <i class="fa-solid fa-cart-flatbed text-lg"></i>
+              </div>
+              <span class="text-xs font-bold text-slate-200">${t('orders')}</span>
+            </button>
+
+            <!-- Pending Products Products List -->
+            <button onclick="openSubView('product_approval')" class="unique-nav-card p-4 rounded-2xl flex flex-col items-center text-center relative group">
+              ${myPendingProducts.length > 0 ? `<span class="absolute top-2 right-2 bg-amber-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full animate-pulse shadow-lg">${myPendingProducts.length}</span>` : ''}
+              <div class="w-11 h-11 rounded-2xl bg-teal-500/10 text-teal-400 flex items-center justify-center mb-1.5 group-hover:scale-110 transition border border-teal-500/20">
+                <i class="fa-solid fa-clipboard-check text-lg"></i>
+              </div>
+              <span class="text-xs font-bold text-slate-200">${t('productApproval')}</span>
+            </button>
+
+            <!-- Dues -->
+            <button onclick="openSubView('dues')" class="unique-nav-card p-4 rounded-2xl flex flex-col items-center text-center relative group">
+              <div class="w-11 h-11 rounded-2xl bg-red-500/10 text-red-400 flex items-center justify-center mb-1.5 group-hover:scale-110 transition border border-red-500/20">
+                <i class="fa-solid fa-book-bookmark text-lg"></i>
+              </div>
+              <span class="text-xs font-bold text-slate-200">${t('dueLedger')}</span>
+            </button>
+
+            <!-- Expenses -->
+            <button onclick="openSubView('expenses')" class="unique-nav-card p-4 rounded-2xl flex flex-col items-center text-center relative group">
+              <div class="w-11 h-11 rounded-2xl bg-orange-500/10 text-orange-400 flex items-center justify-center mb-1.5 group-hover:scale-110 transition border border-orange-500/20">
+                <i class="fa-solid fa-calculator text-lg"></i>
+              </div>
+              <span class="text-xs font-bold text-slate-200">${t('expenseLedger')}</span>
+            </button>
+
+            <!-- Customers -->
+            <button onclick="openSubView('customers')" class="unique-nav-card p-4 rounded-2xl flex flex-col items-center text-center relative group">
+              <div class="w-11 h-11 rounded-2xl bg-purple-500/10 text-purple-400 flex items-center justify-center mb-1.5 group-hover:scale-110 transition border border-purple-500/20">
+                <i class="fa-solid fa-users text-lg"></i>
+              </div>
+              <span class="text-xs font-bold text-slate-200">${t('customers')}</span>
+            </button>
+
+            <!-- Coupons -->
+            <button onclick="openSubView('coupons')" class="unique-nav-card p-4 rounded-2xl flex flex-col items-center text-center relative group col-span-2">
+              <div class="w-11 h-11 rounded-2xl bg-rose-500/10 text-rose-400 flex items-center justify-center mb-1.5 group-hover:scale-110 transition border border-rose-500/20">
+                <i class="fa-solid fa-ticket text-lg"></i>
+              </div>
+              <span class="text-xs font-bold text-slate-200">${t('coupons')}</span>
+            </button>
+          </div>
+        </div>
+      `;
+    };
+
+    window.checkForAppUpdate = function() {
+      const btn = document.getElementById('btnCheckUpdate');
+      const box = document.getElementById('updateStatusBox');
+      
+      btn.innerText = t('checkingText');
+      btn.disabled = true;
+
+      setTimeout(() => {
+        btn.innerText = t('checkUpdateBtn');
+        btn.disabled = false;
+        box.classList.remove('hidden');
+
+        const info = window.appUpdateInfo;
+        if (info && info.version && info.version !== window.MERCHANT_BUILD_VERSION) {
+          box.className = "text-xs p-3 rounded-xl border bg-amber-950/40 border-amber-500/40 text-amber-200 space-y-2";
+          box.innerHTML = `
+            <div class="flex justify-between items-center">
+              <span class="font-bold text-amber-400">🎉 New Update Available: v${escapeHTML(info.version)}</span>
+              ${info.forceUpdate ? '<span class="bg-red-500 text-white text-[9px] px-1.5 py-0.2 rounded font-bold">Mandatory</span>' : ''}
+            </div>
+            <p class="text-[11px] text-slate-300">${escapeHTML(info.notes || 'A new build is ready with improved features.')}</p>
+            <a href="${escapeHTML(info.downloadUrl || '#')}" target="_blank" class="block w-full bg-amber-600 hover:bg-amber-500 text-white font-bold py-1.5 text-center rounded-lg shadow transition">
+              Download Latest Version
+            </a>
+          `;
+        } else {
+          box.className = "text-xs p-3 rounded-xl border bg-emerald-950/40 border-emerald-500/40 text-emerald-400 font-bold flex items-center gap-2";
+          box.innerHTML = `<i class="fa-solid fa-circle-check"></i> You are using the latest version (v${window.MERCHANT_BUILD_VERSION}).`;
+        }
+      }, 800);
+    };
+
+    window.openSubView = function(view) {
+      window.activeView = view;
+      pushAppState(view);
+      renderDashboard();
+    };
+
+    window.setOrderFilterTab = function(tab) {
+      window.orderFilterTab = tab;
+      renderDashboard();
+    };
+
+    window.handleOrderSearchInput = function(val) {
+      window.orderSearchQuery = val.trim().toLowerCase();
+      renderDashboard();
+    };
+
+    // Sub-Views Renderer
+    function renderSubView(view) {
+      const main = document.getElementById('merchantMain');
+      const currentUid = window.storedMerchant.uid;
+      
+      const myAllProducts = window.products.filter(p => p.addedByUid === currentUid || p.addedBy === window.storedMerchant.contact);
+      
+      const myApprovedProducts = myAllProducts.filter(p => p.status === 'approved' || p.status === 'active');
+      const myPendingProducts = myAllProducts.filter(p => p.status === 'pending');
+
+      const myApprovedProdIds = new Set(myApprovedProducts.map(p => p.id));
+      let myApprovedOrders = window.orders.filter(o => o.items && Array.isArray(o.items) && o.items.some(i => myApprovedProdIds.has(i.productId)));
+
+      let html = ``;
+
+      if (view === 'stock_overview') {
+        const totalStockQty = myAllProducts.reduce((acc, p) => acc + Number(p.stock || 0), 0);
+        const totalSoldQty = myAllProducts.reduce((acc, p) => acc + Number(p.sold || 0), 0);
+
+        html = `
+          <div class="space-y-3">
+            <div class="flex justify-between items-center">
+              <h2 class="text-xs font-bold text-slate-100 flex items-center gap-1.5">
+                <i class="fa-solid fa-boxes-packing text-indigo-400"></i> Stock & Inventory Status
+              </h2>
+              <button onclick="openAddProductModal()" class="bg-indigo-600 hover:bg-indigo-500 text-white text-[11px] font-bold px-2.5 py-1 rounded-lg shadow transition">
+                + Add Stock Item
+              </button>
+            </div>
+
+            <div class="grid grid-cols-2 gap-2.5">
+              <div class="bg-slate-800/90 p-3 rounded-2xl border border-slate-700/80 space-y-1">
+                <span class="text-[10px] text-slate-400 font-bold uppercase block">Current Stock</span>
+                <span class="text-xl font-black text-emerald-400 font-mono">${totalStockQty} Pcs</span>
+              </div>
+              <div class="bg-slate-800/90 p-3 rounded-2xl border border-slate-700/80 space-y-1">
+                <span class="text-[10px] text-slate-400 font-bold uppercase block">Total Delivered/Sold</span>
+                <span class="text-xl font-black text-cyan-400 font-mono">${totalSoldQty} Pcs</span>
+              </div>
+            </div>
+
+            <p class="text-[10px] text-slate-400 italic bg-slate-800/60 p-2.5 rounded-xl border border-slate-700/60">
+              📊 আপনার যোগ করা সকল প্রোডাক্টের ইন-স্টক ও সোল্ড সংখ্যা এখানে লাইভ রিয়েলটাইমে প্রদর্শিত হচ্ছে।
+            </p>
+
+            <div class="space-y-2 pt-1">
+              ${myAllProducts.length === 0 ? `
+                <div class="p-8 text-center text-xs text-slate-400 bg-slate-800 rounded-2xl border border-slate-700">
+                  এখনো কোনো প্রোডাক্ট যুক্ত করা হয়নি!
+                </div>
+              ` : myAllProducts.map(p => {
+                const inStock = Number(p.stock || 0);
+                const sold = Number(p.sold || 0);
+                const totalAdded = inStock + sold;
+                const img = Array.isArray(p.imageUrl) ? p.imageUrl[0] : (p.imageUrl || 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=100');
+
+                return `
+                  <div class="bg-slate-800 p-3 rounded-2xl border border-slate-700/80 flex items-center justify-between text-xs gap-3">
+                    <img src="${img}" class="w-12 h-12 object-cover rounded-xl border border-slate-700 flex-shrink-0">
+                    <div class="flex-1 min-w-0">
+                      <h3 class="font-bold text-slate-100 truncate">${escapeHTML(p.name)}</h3>
+                      <div class="text-[10px] text-slate-400 mt-0.5 flex flex-wrap gap-x-2">
+                        <span>In Stock: <strong class="text-emerald-400 font-mono">${inStock} Pcs</strong></span>
+                        <span>Sold: <strong class="text-cyan-400 font-mono">${sold} Pcs</strong></span>
+                      </div>
+                      <span class="text-[9px] text-slate-500">Total Added: ${totalAdded} Pcs</span>
+                    </div>
+                    <button onclick="quickRefillStockModal('${p.id}', '${escapeHTML(p.name)}', ${inStock})" class="bg-indigo-600/30 hover:bg-indigo-600/50 text-indigo-300 font-bold text-[10px] px-2.5 py-1.5 rounded-xl border border-indigo-500/30 transition flex-shrink-0">
+                      + Stock
+                    </button>
+                  </div>
+                `;
+              }).join('')}
+            </div>
+          </div>
+        `;
+      }
+
+      else if (view === 'products') {
+        html += `
+          <h2 class="text-xs font-bold text-slate-200 mb-2">${t('products')} (${myApprovedProducts.length})</h2>
+          <div class="space-y-2">
+            ${myApprovedProducts.length === 0 ? `
+              <div class="p-6 text-center text-xs text-slate-400 bg-slate-800 rounded-xl border border-slate-700">
+                No approved products yet. Products will appear here after Global Admin approves them.
+              </div>
+            ` : myApprovedProducts.map(p => `
+              <div class="bg-slate-800 p-2.5 rounded-xl border border-slate-700 flex items-center gap-3">
+                <img src="${Array.isArray(p.imageUrl)?p.imageUrl[0]:(p.imageUrl||'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=100')}" class="w-12 h-12 object-cover rounded-lg">
+                <div class="flex-1">
+                  <h3 class="text-xs font-bold text-slate-100">${escapeHTML(p.name)}</h3>
+                  <div class="text-[10px] text-slate-400">${t('itemCode')} ${escapeHTML(p.itemCode||'N/A')} | ${t('stock')} ${p.stock||0} | Sold: <span class="text-emerald-400 font-bold">${p.sold||0}</span></div>
+                  <div class="text-[11px] text-emerald-400 font-bold">৳${p.currentPrice}</div>
+                </div>
+                <span class="bg-emerald-500/20 text-emerald-400 text-[9px] px-2 py-0.5 rounded-full border border-emerald-500/30 font-bold">Approved</span>
+              </div>
+            `).join('')}
+          </div>
+        `;
+      }
+
+      else if (view === 'orders') {
+        if (window.orderSearchQuery) {
+          myApprovedOrders = myApprovedOrders.filter(o => 
+            (o.id || '').toLowerCase().includes(window.orderSearchQuery) || 
+            (o.userName || '').toLowerCase().includes(window.orderSearchQuery) ||
+            (o.userEmail || '').toLowerCase().includes(window.orderSearchQuery)
+          );
+        }
+
+        let filteredOrders = myApprovedOrders;
+        if (window.orderFilterTab === 'pending') {
+          filteredOrders = myApprovedOrders.filter(o => (o.status || '').toLowerCase().includes('pending') || o.status === '1. Pending' || o.status === 'পেন্ডিং');
+        } else if (window.orderFilterTab === 'processing') {
+          filteredOrders = myApprovedOrders.filter(o => (o.status || '').toLowerCase().includes('processing') || o.status === '2. Processing');
+        } else if (window.orderFilterTab === 'delivery') {
+          filteredOrders = myApprovedOrders.filter(o => (o.status || '').toLowerCase().includes('deliver') || o.status === '3. Delivery' || o.status === 'Delivered');
+        } else if (window.orderFilterTab === 'return') {
+          filteredOrders = myApprovedOrders.filter(o => (o.status || '').toLowerCase().includes('cancel') || (o.status || '').toLowerCase().includes('return') || o.status === '4. Return & Cancellation');
+        }
+
+        const activeTabClass = "bg-indigo-600 text-white font-bold px-3 py-1.5 rounded-xl text-[11px] shadow-md border border-indigo-500 transition";
+        const inactiveTabClass = "bg-slate-800 text-slate-400 hover:text-slate-200 px-3 py-1.5 rounded-xl text-[11px] border border-slate-700/80 transition whitespace-nowrap";
+
+        html += `
+          <div class="space-y-3">
+            <h2 class="text-xs font-extrabold text-slate-100">Filter Customer Orders (${filteredOrders.length})</h2>
+
+            <div class="relative">
+              <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
+              <input type="text" oninput="handleOrderSearchInput(this.value)" value="${escapeHTML(window.orderSearchQuery)}" placeholder="অর্ডার আইডি দিয়ে সার্চ করুন (যেমন: -0aB2...)" class="w-full bg-slate-900 border border-slate-700/80 rounded-xl pl-9 pr-3 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500">
+            </div>
+
+            <div class="flex items-center gap-1.5 overflow-x-auto no-scrollbar pb-1">
+              <button onclick="setOrderFilterTab('all')" class="${window.orderFilterTab === 'all' ? activeTabClass : inactiveTabClass}">All</button>
+              <button onclick="setOrderFilterTab('pending')" class="${window.orderFilterTab === 'pending' ? activeTabClass : inactiveTabClass}">Pending</button>
+              <button onclick="setOrderFilterTab('processing')" class="${window.orderFilterTab === 'processing' ? activeTabClass : inactiveTabClass}">Processing</button>
+              <button onclick="setOrderFilterTab('delivery')" class="${window.orderFilterTab === 'delivery' ? activeTabClass : inactiveTabClass}">Delivery</button>
+              <button onclick="setOrderFilterTab('return')" class="${window.orderFilterTab === 'return' ? activeTabClass : inactiveTabClass}">Return & Cancellation</button>
+            </div>
+
+            <div class="space-y-3 pt-1">
+              ${filteredOrders.length === 0 ? `
+                <div class="p-8 text-center text-xs text-slate-400 bg-slate-800/80 rounded-2xl border border-slate-700">
+                  কোনো অনুমোদিত প্রোডাক্টের অর্ডার পাওয়া যায়নি!
+                </div>
+              ` : filteredOrders.map(o => `
+                <div class="bg-slate-900/90 p-4 rounded-2xl border border-slate-800 shadow-xl space-y-3">
+                  <div class="flex justify-between items-center">
+                    <span class="font-bold text-indigo-400 text-sm font-mono">#${o.id.slice(-6)}</span>
+                    <select onchange="updateOrderStatus('${o.id}', this.value)" class="bg-slate-800 text-amber-400 font-bold text-xs border border-amber-500/30 rounded-xl px-2.5 py-1.5 focus:outline-none">
+                      <option value="1. Pending" ${o.status === '1. Pending' || (o.status||'').toLowerCase().includes('pending') ? 'selected' : ''}>1. Pending</option>
+                      <option value="2. Processing" ${o.status === '2. Processing' || (o.status||'').toLowerCase().includes('processing') ? 'selected' : ''}>2. Processing</option>
+                      <option value="3. Delivery" ${o.status === '3. Delivery' || (o.status||'').toLowerCase().includes('deliver') ? 'selected' : ''}>3. Delivery</option>
+                      <option value="4. Return & Cancellation" ${o.status === '4. Return & Cancellation' || (o.status||'').toLowerCase().includes('cancel') ? 'selected' : ''}>4. Return & Cancellation</option>
+                    </select>
+                  </div>
+
+                  <div class="text-xs text-slate-300 space-y-1 pt-1">
+                    <p><strong>Customer:</strong> ${escapeHTML(o.userName)} (${escapeHTML(o.userEmail || o.userPhone || 'N/A')})</p>
+                    <p><strong>Address:</strong> ${escapeHTML(o.shippingAddress || o.address || 'Dewanganj')}</p>
+                  </div>
+
+                  <div class="flex justify-between items-center pt-2 border-t border-slate-800/80">
+                    <span class="text-emerald-400 font-bold text-xs">Total: ৳${o.totalAmount}</span>
+                    <button onclick="viewOrderItemsModal('${o.id}')" class="bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs px-3.5 py-1.5 rounded-xl shadow-md flex items-center gap-1.5 transition">
+                      <i class="fa-solid fa-eye text-[10px]"></i> Details
+                    </button>
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        `;
+      }
+
+      else if (view === 'product_approval') {
+        html += `
+          <h2 class="text-xs font-bold text-slate-200 mb-2">Pending Product Approval List (${myPendingProducts.length})</h2>
+          <div class="space-y-2">
+            ${myPendingProducts.length === 0 ? `<div class="p-6 text-center text-xs text-slate-400 bg-slate-800 rounded-xl border border-slate-700">No pending products!</div>` : myPendingProducts.map(p => `
+              <div class="bg-slate-800 p-3 rounded-xl border border-amber-500/40 text-xs space-y-1">
+                <div class="flex justify-between items-start">
+                  <h4 class="font-bold text-slate-100">${escapeHTML(p.name)}</h4>
+                  <span class="text-amber-400 text-[10px] bg-amber-500/10 px-2 py-0.5 rounded-full border border-amber-500/30">Pending Products</span>
+                </div>
+                <p class="text-slate-400 text-[10px]">${t('itemCode')} ${escapeHTML(p.itemCode||'N/A')} | Price: ৳${p.currentPrice}</p>
+                <p class="text-amber-300 text-[10px] italic pt-1">⏳ Waiting for Global Admin approval. Customers or your My Products list cannot see this item yet.</p>
+              </div>
+            `).join('')}
+          </div>
+        `;
+      }
+
+      else if (view === 'merchant_payment_setup') {
+        const myPayments = window.merchantPayments.filter(m => m.merchantUid === currentUid);
+
+        html += `
+          <div class="flex justify-between items-center mb-3">
+            <h2 class="text-xs font-bold text-slate-200 flex items-center gap-1.5">
+              <i class="fa-solid fa-wallet text-emerald-400"></i> ${t('paymentSetup')}
+            </h2>
+            <button onclick="openAddMerchantPaymentModal()" class="bg-indigo-600 hover:bg-indigo-500 text-white font-bold px-3 py-1.5 rounded-lg text-xs flex items-center gap-1 shadow">
+              <i class="fa-solid fa-plus"></i> Add
+            </button>
+          </div>
+
+          <p class="text-[10px] text-amber-400 italic bg-amber-950/30 p-2 rounded-lg border border-amber-800/40 mb-3">
+            ⚠️ Privacy Notice: The payment methods you add here are completely private and will be visible ONLY to the Global Admin. Customers will never see these during checkout.
+          </p>
+
+          <div class="space-y-2">
+            ${myPayments.length === 0 ? `
+              <div class="bg-slate-800 p-4 rounded-xl text-center text-xs text-slate-400 border border-slate-700">
+                No payment accounts added yet!
+              </div>
+            ` : myPayments.map(pm => `
+              <div class="bg-slate-800 p-3 rounded-xl border border-slate-700 flex justify-between items-center text-xs">
+                <div>
+                  <div class="flex items-center gap-2">
+                    <span class="font-extrabold text-amber-400 text-sm">${escapeHTML(pm.methodName)}</span>
+                    <span class="bg-emerald-500/20 text-emerald-400 text-[9px] px-1.5 py-0.2 rounded font-bold">${escapeHTML(pm.type || 'Personal')}</span>
+                  </div>
+                  <p class="font-mono font-bold text-slate-100 text-xs mt-0.5"><i class="fa-solid fa-phone text-[10px] mr-1 text-slate-400"></i>${escapeHTML(pm.number)}</p>
+                </div>
+                <button onclick="deleteMerchantPayment('${pm.id}')" class="text-red-400 hover:bg-slate-700 p-2 rounded-lg transition"><i class="fa-solid fa-trash"></i></button>
+              </div>
+            `).join('')}
+          </div>
+        `;
+      }
+
+      else if (view === 'dues') {
+        const myDues = window.dues.filter(d => d.addedByUid === currentUid);
+        
+        const activePendingOrders = myApprovedOrders.filter(o => {
+          const st = (o.status || '').toLowerCase();
+          return st.includes('pending') || st.includes('processing') || st === '1. pending' || st === '2. processing';
+        });
+
+        html += `
+          <div class="bg-slate-800 p-3 rounded-xl border border-slate-700 mb-3 space-y-2">
+            <h3 class="text-xs font-bold text-slate-200">+ Add Manual Due (ম্যানুয়াল ডিউ এন্ট্রি)</h3>
+            <input type="text" id="dueCustomer" placeholder="Customer Name" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-1.5 text-xs text-white">
+            <input type="number" id="dueAmount" placeholder="Amount (৳)" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-1.5 text-xs text-white">
+            <button onclick="addDue()" class="w-full bg-red-600 hover:bg-red-500 text-white text-xs py-2 rounded-lg font-bold shadow">Add Due</button>
+          </div>
+
+          <h2 class="text-xs font-bold text-slate-200 mb-2">অর্ডারভিত্তিক অটোমেটিক ডিউ (Pending / Processing)</h2>
+          <div class="space-y-2 mb-4">
+            ${activePendingOrders.length === 0 ? `
+              <div class="p-3 bg-slate-800/60 rounded-xl border border-slate-700/60 text-slate-400 text-[11px] text-center">
+                কোনো পেন্ডিং বা প্রসেসিং অর্ডারের বকেয়া নেই।
+              </div>
+            ` : activePendingOrders.map(o => `
+              <div class="bg-red-950/30 p-3 rounded-xl border border-red-500/40 text-xs space-y-1">
+                <div class="flex justify-between items-center font-bold">
+                  <span class="text-red-400">Order #${o.id.slice(-6)}</span>
+                  <span class="bg-amber-500/20 text-amber-400 text-[10px] px-2 py-0.5 rounded-full border border-amber-500/30">${escapeHTML(o.status)}</span>
+                </div>
+                <p class="text-slate-200">Customer: ${escapeHTML(o.userName)}</p>
+                <div class="flex justify-between items-center pt-1 border-t border-red-900/40">
+                  <span class="text-[10px] text-slate-400">ডেলিভারি হয়ে গেলে এটি স্বয়ংক্রিয়ভাবে ক্লিয়ার হবে</span>
+                  <span class="text-red-400 font-extrabold text-xs">৳${o.totalAmount}</span>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+
+          <h2 class="text-xs font-bold text-slate-200 mb-2">ম্যানুয়াল বকেয়া তালিকা</h2>
+          <div class="space-y-2">
+            ${myDues.length === 0 ? `<div class="p-3 text-slate-400 text-[11px] text-center">কোনো ম্যানুয়াল ডিউ এন্ট্রি নেই।</div>` : myDues.map(d => `
+              <div class="bg-slate-800 p-3 rounded-xl border border-slate-700 flex justify-between items-center text-xs">
+                <div>
+                  <h4 class="font-bold text-slate-200">${escapeHTML(d.customerName)}</h4>
+                  <span class="text-red-400 font-bold">৳${d.amount}</span>
+                </div>
+                <button onclick="deleteDue('${d.id}')" class="bg-emerald-600/20 text-emerald-400 px-2.5 py-1 rounded-lg text-[10px] font-bold border border-emerald-500/30">Paid / Clear</button>
+              </div>
+            `).join('')}
+          </div>
+        `;
+      }
+
+      else if (view === 'expenses') {
+        const myExpenses = window.expenses.filter(e => e.addedByUid === currentUid);
+        html += `
+          <div class="bg-slate-800 p-3 rounded-xl border border-slate-700 mb-3 space-y-2">
+            <h3 class="text-xs font-bold text-slate-200">+ Add New Expense</h3>
+            <input type="date" id="expDate" value="${new Date().toISOString().split('T')[0]}" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-1.5 text-xs text-white">
+            <input type="text" id="expTitle" placeholder="Expense Description" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-1.5 text-xs text-white">
+            <input type="number" id="expAmount" placeholder="Amount (৳)" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-1.5 text-xs text-white">
+            <button onclick="addExpense()" class="w-full bg-orange-600 hover:bg-orange-500 text-white text-xs py-2 rounded-lg font-bold shadow">Save Expense</button>
+          </div>
+          <div class="space-y-2">
+            ${myExpenses.map(e => `
+              <div class="bg-slate-800 p-3 rounded-xl border border-slate-700 flex justify-between items-center text-xs">
+                <div>
+                  <span class="font-bold text-slate-100 block">${escapeHTML(e.title)}</span>
+                  <span class="text-[10px] text-slate-400">${e.date}</span>
+                </div>
+                <span class="font-bold text-orange-400">৳${e.amount}</span>
+              </div>
+            `).join('')}
+          </div>
+        `;
+      }
+
+      else if (view === 'customers') {
+        const myCustomerOrders = window.orders.filter(o => o.items && Array.isArray(o.items) && o.items.some(i => myApprovedProdIds.has(i.productId)));
+        
+        const myUniqueCustomersMap = {};
+        myCustomerOrders.forEach(o => {
+          const emailKey = (o.userEmail || o.userPhone || o.userName || '').toLowerCase().trim();
+          if (emailKey && !myUniqueCustomersMap[emailKey]) {
+            myUniqueCustomersMap[emailKey] = {
+              name: o.userName || 'Unknown Customer',
+              email: o.userEmail || 'N/A',
+              address: o.shippingAddress || o.address || 'Address not provided'
+            };
+          }
+        });
+
+        const myCustomerList = Object.values(myUniqueCustomersMap);
+
+        html += `
+          <div class="flex justify-between items-center mb-3">
+            <h2 class="text-xs font-bold text-slate-200 flex items-center gap-1.5">
+              <i class="fa-solid fa-users text-purple-400"></i> আমার কাস্টমার খাতা (${myCustomerList.length})
+            </h2>
+            <span class="text-[9px] bg-purple-500/20 text-purple-300 font-bold px-2 py-0.5 rounded-full border border-purple-500/30">Read-Only</span>
+          </div>
+
+          <p class="text-[10px] text-slate-400 italic bg-slate-800 p-2.5 rounded-xl border border-slate-700/80 mb-3">
+            🔒 আপনার অনুমোদিত প্রোডাক্টের নির্দিষ্ট অর্ডার অনুযায়ী কাস্টমারদের ৩টি ডাটা (নাম, ইমেইল ও ঠিকানা) প্রদর্শিত হচ্ছে।
+          </p>
+
+          <div class="space-y-2">
+            ${myCustomerList.length === 0 ? `
+              <div class="bg-slate-800 p-6 rounded-2xl text-center text-xs text-slate-400 border border-slate-700">
+                এখনো আপনার অনুমোদিত প্রোডাক্টের কোনো অর্ডারকৃত কাস্টমার নেই।
+              </div>
+            ` : myCustomerList.map(c => `
+              <div class="bg-slate-800 p-3.5 rounded-2xl border border-slate-700 text-xs space-y-1.5 shadow-sm">
+                <div class="flex items-center gap-2 border-b border-slate-700/60 pb-1.5">
+                  <div class="w-6 h-6 bg-purple-600/30 text-purple-300 rounded-full flex items-center justify-center font-bold text-[10px]">
+                    <i class="fa-solid fa-user"></i>
+                  </div>
+                  <h4 class="font-bold text-indigo-300 text-xs">${escapeHTML(c.name)}</h4>
+                </div>
+                <div class="text-[11px] text-slate-300 space-y-1 pt-0.5">
+                  <p class="flex items-center gap-1.5"><i class="fa-solid fa-envelope text-[10px] text-slate-400"></i> <strong>ইমেইল:</strong> ${escapeHTML(c.email)}</p>
+                  <p class="flex items-start gap-1.5"><i class="fa-solid fa-location-dot text-[10px] text-slate-400 mt-0.5"></i> <strong>ঠিকানা:</strong> ${escapeHTML(c.address)}</p>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        `;
+      }
+
+      else if (view === 'coupons') {
+        const myCoupons = window.coupons.filter(c => c.addedByUid === currentUid);
+        html += `
+          <div class="bg-slate-800 p-3.5 rounded-2xl border border-slate-700 mb-4 space-y-2.5 shadow-lg">
+            <h3 class="text-xs font-bold text-slate-200 border-b border-slate-700 pb-1.5 flex items-center gap-1.5">
+              <i class="fa-solid fa-ticket text-rose-400"></i> + New Coupon Request
+            </h3>
+            <p class="text-[10px] text-amber-400 italic">⚠️ Note: New coupons require Global Admin approval before becoming active.</p>
+            <div>
+              <label class="block text-[10px] text-slate-400 mb-1">Coupon Code *</label>
+              <input type="text" id="cpCode" placeholder="e.g. EID2026" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-1.5 text-xs text-white uppercase font-mono font-bold">
+            </div>
+            <div>
+              <label class="block text-[10px] text-slate-400 mb-1">Discount Amount (৳) *</label>
+              <input type="number" id="cpAmount" placeholder="e.g. 200" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-1.5 text-xs text-white">
+            </div>
+            <div>
+              <label class="block text-[10px] text-slate-400 mb-1">Expiry Date *</label>
+              <input type="date" id="cpExpDate" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-1.5 text-xs text-white">
+            </div>
+            <button onclick="addCoupon()" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white text-xs py-2 rounded-xl font-bold shadow transition">
+              Submit Coupon
+            </button>
+          </div>
+
+          <h2 class="text-xs font-bold text-slate-200 mb-2">My Coupons (${myCoupons.length})</h2>
+          <div class="space-y-2">
+            ${myCoupons.length === 0 ? `<div class="p-6 text-center text-xs text-slate-400 bg-slate-800 rounded-xl">No coupons added yet.</div>` : myCoupons.map(c => `
+              <div class="bg-slate-800 p-3 rounded-xl border ${c.status === 'pending' ? 'border-amber-500/40' : 'border-emerald-500/40'} flex justify-between items-center text-xs shadow-sm">
+                <div>
+                  <div class="flex items-center gap-2">
+                    <span class="font-extrabold text-amber-400 font-mono text-sm">${escapeHTML(c.code)}</span>
+                    ${c.status === 'pending' 
+                      ? `<span class="bg-amber-500/20 text-amber-400 text-[9px] px-1.5 py-0.5 rounded font-bold border border-amber-500/30">⏳ Pending Products</span>`
+                      : `<span class="bg-emerald-500/20 text-emerald-400 text-[9px] px-1.5 py-0.5 rounded font-bold border border-emerald-500/30">✅ Approved & Active</span>`
+                    }
+                  </div>
+                  <p class="text-[10px] text-slate-300 mt-1">Discount: ৳${c.discountAmount} | Expiry: ${c.expDate||'N/A'}</p>
+                </div>
+                <button onclick="deleteCoupon('${c.id}')" class="text-red-400 hover:bg-slate-700 p-1.5 rounded-lg transition"><i class="fa-solid fa-trash"></i></button>
+              </div>
+            `).join('')}
+          </div>
+        `;
+      }
+
+      main.innerHTML = html;
+    }
+
+    window.quickRefillStockModal = function(prodId, prodName, currentStock) {
+      const modal = document.getElementById('merchantModal');
+      const body = document.getElementById('modalBody');
+
+      body.innerHTML = `
+        <h3 class="text-sm font-bold text-slate-100 mb-2 border-b border-slate-700 pb-2">📦 Quick Stock Refill</h3>
+        <p class="text-xs text-indigo-400 font-bold mb-3">${escapeHTML(prodName)}</p>
+        <div class="space-y-3 text-xs">
+          <div class="bg-slate-800 p-2.5 rounded-xl border border-slate-700 flex justify-between text-slate-300">
+            <span>Current Stock:</span>
+            <span class="font-mono font-bold text-emerald-400">${currentStock} Pcs</span>
+          </div>
+          <div>
+            <label class="block text-[10px] font-bold text-slate-400 mb-1">Add More Pcs (কত পিস যোগ করতে চান) *</label>
+            <input type="number" id="addStockQty" placeholder="e.g. 20" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-white font-mono text-sm focus:outline-none focus:border-indigo-500">
+          </div>
+          <button onclick="saveRefilledStock('${prodId}', ${currentStock})" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2.5 rounded-xl text-xs shadow-lg transition">
+            Update Stock
+          </button>
+        </div>
+      `;
+      modal.classList.remove('hidden');
+      pushAppState('modal');
+    };
+
+    window.saveRefilledStock = function(prodId, currentStock) {
+      const addQty = Number(document.getElementById('addStockQty').value) || 0;
+      if (addQty <= 0) {
+        showToast('Please enter a valid stock quantity!');
+        return;
+      }
+
+      const productRef = ref(db, `products/${prodId}`);
+      update(productRef, { stock: currentStock + addQty })
+        .then(() => {
+          showToast(`🎉 Stock updated (+${addQty} Pcs added)!`);
+          closeMerchantModal();
+          renderDashboard();
+        })
+        .catch(err => showToast('Error: ' + err.message));
+    };
+
+    window.updateOrderStatus = function(orderId, newStatus) {
+      if (!orderId || !newStatus) return;
+      
+      const order = window.orders.find(o => o.id === orderId);
+      const isDelivered = newStatus === '3. Delivery' || newStatus.toLowerCase().includes('deliver');
+      
+      const orderRef = ref(db, `orders/${orderId}`);
+
+      update(orderRef, { 
+        status: newStatus,
+        stockDeducted: isDelivered ? true : (order ? !!order.stockDeducted : false)
+      }).then(() => {
+
+        if (isDelivered && order && !order.stockDeducted && Array.isArray(order.items)) {
+          order.items.forEach(item => {
+            if (item.productId) {
+              const productRef = ref(db, `products/${item.productId}`);
+              get(productRef).then(snap => {
+                if (snap.exists()) {
+                  const pData = snap.val();
+                  const qty = Number(item.qty || item.quantity || 1);
+                  const currentStock = Number(pData.stock || 0);
+                  const currentSold = Number(pData.sold || 0);
+
+                  const newStock = Math.max(0, currentStock - qty);
+                  const newSold = currentSold + qty;
+
+                  update(productRef, {
+                    stock: newStock,
+                    sold: newSold
+                  });
+                }
+              });
+            }
+          });
+        }
+
+        showToast(`🎉 Order #${orderId.slice(-6)} Status Updated to: ${newStatus}`);
+        renderDashboard();
+      }).catch(err => showToast('Error updating status: ' + err.message));
+    };
+
+    window.viewOrderItemsModal = function(orderId) {
+      const order = window.orders.find(o => o.id === orderId);
+      if (!order) return;
+
+      const modal = document.getElementById('merchantModal');
+      const body = document.getElementById('modalBody');
+
+      const defaultPlaceholder = 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=150';
+
+      const itemsHtml = (order.items || []).map(i => {
+        const prod = window.products.find(p => p.id === i.productId) || {};
+        
+        let rawImg = i.image || i.img || i.imageUrl || prod.imageUrl || prod.image;
+        let imgSrc = defaultPlaceholder;
+
+        if (Array.isArray(rawImg) && rawImg.length > 0) {
+          imgSrc = rawImg[0];
+        } else if (typeof rawImg === 'string' && rawImg.trim().length > 5) {
+          imgSrc = rawImg.trim();
+        }
+
+        const qty = i.qty || i.quantity || 1;
+        const price = i.price || i.currentPrice || 0;
+        const totalItemPrice = qty * price;
+
+        return `
+          <div class="bg-slate-800 p-2.5 rounded-xl border border-slate-700 flex items-center gap-3">
+            <div class="w-12 h-12 rounded-lg bg-slate-900 border border-slate-700 overflow-hidden flex-shrink-0 flex items-center justify-center">
+              <img src="${imgSrc}" onerror="this.onerror=null;this.src='${defaultPlaceholder}';" class="w-full h-full object-cover">
+            </div>
+            <div class="flex-1 text-xs">
+              <h4 class="font-bold text-slate-100 leading-tight">${escapeHTML(i.name || prod.name || 'Product Item')}</h4>
+              <p class="text-[10px] text-slate-400 mt-1">Qty: ${qty} x ৳${price}</p>
+            </div>
+            <span class="font-extrabold text-emerald-400 text-xs">৳${totalItemPrice}</span>
+          </div>
+        `;
+      }).join('');
+
+      body.innerHTML = `
+        <h3 class="text-sm font-bold text-slate-100 mb-2 border-b border-slate-700 pb-2">
+          📦 Order Details (#${order.id.slice(-6)})
+        </h3>
+        <div class="space-y-3 text-xs">
+          <div class="bg-slate-800/80 p-3 rounded-xl border border-slate-700 text-[11px] space-y-1">
+            <p><strong>Customer:</strong> ${escapeHTML(order.userName)}</p>
+            <p><strong>Email/Contact:</strong> ${escapeHTML(order.userEmail || order.userPhone || 'N/A')}</p>
+            <p><strong>Address:</strong> ${escapeHTML(order.shippingAddress || order.address || 'Dewanganj')}</p>
+            <p><strong>Total Amount:</strong> <span class="text-emerald-400 font-bold">৳${order.totalAmount}</span></p>
+          </div>
+
+          <h4 class="font-bold text-slate-300 text-xs">Ordered Items:</h4>
+          <div class="space-y-2 max-h-60 overflow-y-auto no-scrollbar">
+            ${itemsHtml}
+          </div>
+        </div>
+      `;
+
+      modal.classList.remove('hidden');
+      pushAppState('modal');
+    };
+
+    // Modal Actions
+    window.openAddProductModal = function() {
+      const modal = document.getElementById('merchantModal');
+      const body = document.getElementById('modalBody');
+
+      const categoryOptions = window.categories && window.categories.length > 0 
+        ? window.categories.map(c => `<option value="${escapeHTML(c.name)}">${escapeHTML(c.name)}</option>`).join('')
+        : `<option value="Electronics">Electronics</option>
+           <option value="Fashion">Fashion</option>
+           <option value="Groceries">Groceries</option>
+           <option value="General">General</option>`;
+
+      body.innerHTML = `
+        <h3 class="text-sm font-bold text-slate-100 mb-3 border-b border-slate-700 pb-2">Add New Product</h3>
+        <div class="space-y-3 text-xs">
+          <div>
+            <label class="block text-[10px] font-bold text-slate-400 mb-1">Product Name *</label>
+            <input type="text" id="pName" placeholder="Product Name" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-white focus:outline-none focus:border-indigo-500">
+          </div>
+
+          <div class="grid grid-cols-2 gap-2">
+            <div>
+              <label class="block text-[10px] font-bold text-slate-400 mb-1">Item Code:</label>
+              <input type="text" id="pItemCode" placeholder="E.G. ITEM-102" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-white uppercase font-mono focus:outline-none focus:border-indigo-500">
+            </div>
+            <div>
+              <label class="block text-[10px] font-bold text-slate-400 mb-1">Category *</label>
+              <select id="pCategory" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-white font-bold focus:outline-none focus:border-indigo-500">
+                ${categoryOptions}
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-[10px] font-bold text-slate-400 mb-1">© Brand Name (Optional)</label>
+            <input type="text" id="pBrand" placeholder="e.g. Nike, Samsung, Walton, Apex" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-white focus:outline-none focus:border-indigo-500">
+          </div>
+
+          <div class="grid grid-cols-2 gap-2">
+            <div>
+              <label class="block text-[10px] font-bold text-slate-400 mb-1">Size</label>
+              <select id="pSize" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-white focus:outline-none focus:border-indigo-500">
+                <option value="None">None</option>
+                <option value="S">S</option>
+                <option value="M">M</option>
+                <option value="L">L</option>
+                <option value="XL">XL</option>
+                <option value="XXL">XXL</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-[10px] font-bold text-slate-400 mb-1">Colour Variant</label>
+              <input type="text" id="pColor" placeholder="None" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-white focus:outline-none focus:border-indigo-500">
+            </div>
+          </div>
+
+          <div class="grid grid-cols-3 gap-2">
+            <div>
+              <label class="block text-[10px] font-bold text-slate-400 mb-1">Current Price *</label>
+              <input type="number" id="pCurrPrice" placeholder="500" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-white focus:outline-none focus:border-indigo-500">
+            </div>
+            <div>
+              <label class="block text-[10px] font-bold text-slate-400 mb-1">Old Price</label>
+              <input type="number" id="pOldPrice" placeholder="700" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-white focus:outline-none focus:border-indigo-500">
+            </div>
+            <div>
+              <label class="block text-[10px] font-bold text-slate-400 mb-1">Stock *</label>
+              <input type="number" id="pStock" placeholder="10" value="10" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-white focus:outline-none focus:border-indigo-500">
+            </div>
+          </div>
+
+          <div>
+            <div class="flex justify-between items-center mb-1">
+              <label class="block text-[10px] font-bold text-slate-400">Product Image URL Link(s)</label>
+              <button type="button" onclick="addMoreImgInput()" class="bg-indigo-600 hover:bg-indigo-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-lg shadow transition">
+                + Add More
+              </button>
+            </div>
+            <div id="imgUrlContainer" class="space-y-2">
+              <input type="text" class="pImgUrlInputs w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-white text-xs focus:outline-none focus:border-indigo-500" placeholder="https://...">
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-[10px] font-bold text-slate-400 mb-1">Product Description</label>
+            <textarea id="pDesc" placeholder="Product description..." class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-white h-20 focus:outline-none focus:border-indigo-500"></textarea>
+          </div>
+
+          <button onclick="saveMerchantProduct()" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-3 rounded-xl text-xs shadow-lg transition mt-2">
+            Save Product
+          </button>
+        </div>
+      `;
+      modal.classList.remove('hidden');
+      pushAppState('modal');
+    };
+
+    window.addMoreImgInput = function() {
+      const container = document.getElementById('imgUrlContainer');
+      const div = document.createElement('div');
+      div.className = "flex gap-2 items-center";
+      div.innerHTML = `
+        <input type="text" class="pImgUrlInputs w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-white text-xs focus:outline-none focus:border-indigo-500" placeholder="https://...">
+        <button type="button" onclick="this.parentElement.remove()" class="text-red-400 hover:text-red-300 bg-slate-800 border border-slate-700 p-2 rounded-xl">
+          <i class="fa-solid fa-trash text-xs"></i>
+        </button>
+      `;
+      container.appendChild(div);
+    };
+
+    window.saveMerchantProduct = function() {
+      const name = document.getElementById('pName').value.trim();
+      const itemCode = document.getElementById('pItemCode').value.trim().toUpperCase();
+      const category = document.getElementById('pCategory').value;
+      const brand = document.getElementById('pBrand').value.trim();
+      const size = document.getElementById('pSize').value;
+      const color = document.getElementById('pColor').value.trim();
+      
+      const curr = Number(document.getElementById('pCurrPrice').value) || 0;
+      const oldPrice = Number(document.getElementById('pOldPrice').value) || 0;
+      const stock = Number(document.getElementById('pStock').value) || 0;
+      const desc = document.getElementById('pDesc').value.trim();
+
+      const imgElements = document.querySelectorAll('.pImgUrlInputs');
+      const imageUrls = Array.from(imgElements)
+        .map(input => input.value.trim())
+        .filter(url => url.length > 0);
+
+      if (!name || !curr) {
+        showToast('Please enter Product Name and Current Price!');
+        return;
+      }
+
+      const payload = {
+        name,
+        itemCode: itemCode || ('ITEM-' + Math.floor(1000 + Math.random()*9000)),
+        category: category || 'General',
+        brand: brand || 'Generic',
+        size: size || 'None',
+        color: color || 'None',
+        originalPrice: oldPrice || curr,
+        currentPrice: curr,
+        stock,
+        sold: 0,
+        imageUrl: imageUrls.length > 0 ? imageUrls : ['https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=200'],
+        description: desc,
+        status: 'pending',
+        addedBy: window.storedMerchant.name,
+        addedByUid: window.storedMerchant.uid,
+        createdAt: Date.now()
+      };
+
+      const newRef = push(ref(db, 'products'));
+      set(newRef, payload).then(() => {
+        showToast('🎉 Product submitted for Global Admin approval!');
+        closeMerchantModal();
+      });
+    };
+
+    window.openAddMerchantPaymentModal = function() {
+      const modal = document.getElementById('merchantModal');
+      const body = document.getElementById('modalBody');
+
+      body.innerHTML = `
+        <h3 class="text-sm font-bold text-slate-100 mb-3">+ Add Personal Payment Account</h3>
+        <div class="space-y-2.5 text-xs">
+          <div>
+            <label class="block text-slate-400 mb-1">Method Name *</label>
+            <input type="text" id="mPmName" placeholder="e.g. bKash, Nagad, Bank" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-2 text-white font-bold">
+          </div>
+          <div>
+            <label class="block text-slate-400 mb-1">Account Number / Details *</label>
+            <input type="text" id="mPmNumber" placeholder="017xxxxxxxx or Bank AC Details" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-2 text-white font-mono">
+          </div>
+          <div>
+            <label class="block text-slate-400 mb-1">Account Type</label>
+            <select id="mPmType" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-2 text-white font-bold">
+              <option value="Personal">Personal</option>
+              <option value="Merchant">Merchant</option>
+              <option value="Agent">Agent</option>
+              <option value="Bank">Bank Account</option>
+            </select>
+          </div>
+          <button onclick="saveMerchantPayment()" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-2.5 rounded-xl text-xs mt-2 shadow transition">
+            ${t('savePaymentBtn')}
+          </button>
+        </div>
+      `;
+      modal.classList.remove('hidden');
+      pushAppState('modal');
+    };
+
+    window.saveMerchantPayment = function() {
+      const methodName = document.getElementById('mPmName').value.trim();
+      const number = document.getElementById('mPmNumber').value.trim();
+      const type = document.getElementById('mPmType').value;
+
+      if (!methodName || !number) {
+        showToast('Please fill in all details!');
+        return;
+      }
+
+      const newRef = push(ref(db, 'merchant_payments'));
+      set(newRef, {
+        methodName,
+        number,
+        type,
+        merchantName: window.storedMerchant.name,
+        merchantEmail: window.storedMerchant.contact,
+        merchantUid: window.storedMerchant.uid,
+        createdAt: Date.now()
+      }).then(() => {
+        showToast('🎉 Payment Account saved securely (Visible to Global Admin only)!');
+        closeMerchantModal();
+      });
+    };
+
+    window.deleteMerchantPayment = function(id) {
+      if (!confirm('Delete this payment account?')) return;
+      remove(ref(db, `merchant_payments/${id}`));
+      showToast('Payment account removed');
+    };
+
+    window.addDue = function() {
+      const cust = document.getElementById('dueCustomer').value.trim();
+      const amt = Number(document.getElementById('dueAmount').value);
+      if(!cust || !amt) return;
+
+      const newRef = push(ref(db, 'dues'));
+      set(newRef, { customerName: cust, amount: amt, addedByUid: window.storedMerchant.uid, createdAt: Date.now() });
+      showToast('Due record added');
+      renderDashboard();
+    };
+
+    window.deleteDue = function(id) {
+      remove(ref(db, `dues/${id}`));
+      showToast('Due record cleared');
+      renderDashboard();
+    };
+
+    window.addExpense = function() {
+      const date = document.getElementById('expDate').value;
+      const title = document.getElementById('expTitle').value.trim();
+      const amt = Number(document.getElementById('expAmount').value);
+      if(!date || !title || !amt) return;
+
+      const newRef = push(ref(db, 'expenses'));
+      set(newRef, { date, title, amount: amt, addedByUid: window.storedMerchant.uid, createdAt: Date.now() });
+      showToast('Expense saved');
+      renderDashboard();
+    };
+
+    window.addCoupon = function() {
+      const code = document.getElementById('cpCode').value.trim().toUpperCase();
+      const amt = Number(document.getElementById('cpAmount').value);
+      const expDate = document.getElementById('cpExpDate').value;
+
+      if (!code || !amt || !expDate) {
+        showToast('Please enter all coupon details!');
+        return;
+      }
+
+      const newRef = push(ref(db, 'coupons'));
+      set(newRef, { 
+        code, 
+        discountType: 'flat', 
+        discountAmount: amt, 
+        expDate, 
+        active: false,
+        status: 'pending',
+        addedBy: window.storedMerchant.name,
+        addedByUid: window.storedMerchant.uid, 
+        createdAt: Date.now() 
+      }).then(() => {
+        showToast('🎉 Coupon request sent to Global Admin!');
+        renderDashboard();
+      });
+    };
+
+    window.deleteCoupon = function(id) {
+      remove(ref(db, `coupons/${id}`));
+      showToast('Coupon deleted');
+      renderDashboard();
+    };
+
+    window.closeMerchantModal = function() {
+      document.getElementById('merchantModal').classList.add('hidden');
+    };
+
+    window.closeConfirmActionModal = function() {
+      document.getElementById('confirmActionModal').classList.add('hidden');
+    };
+
+    window.handleLogout = function() {
+      signOut(auth).then(() => {
+        window.storedMerchant = null;
+        localStorage.removeItem('app_merchant_session');
+        initMerchantView();
+        showToast('Logged out successfully.');
+      });
+    };
+
+    initMerchantView();
+  </script>
+</body>
+</html>

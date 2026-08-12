@@ -114,11 +114,11 @@
         <div id="updateDetailsBox" class="bg-slate-950/80 p-3 rounded-2xl border border-slate-800 text-left space-y-1.5 text-xs">
           <div class="flex justify-between items-center text-[11px]">
             <span class="text-slate-400">বর্তমান ভার্সন:</span>
-            <span id="currentVersionVal" class="font-mono font-bold text-slate-300">v1.7.3</span>
+            <span id="currentVersionVal" class="font-mono font-bold text-slate-300">v1.8.0</span>
           </div>
           <div class="flex justify-between items-center text-[11px]">
             <span class="text-slate-400">নতুন ভার্সন:</span>
-            <span id="newVersionVal" class="font-mono font-bold text-emerald-400">v1.7.3</span>
+            <span id="newVersionVal" class="font-mono font-bold text-emerald-400">v1.8.0</span>
           </div>
           <div class="pt-1 border-t border-slate-800">
             <span class="text-[10px] text-slate-400 block font-bold">আপডেট নোট & সাইজ:</span>
@@ -126,7 +126,7 @@
           </div>
         </div>
 
-        <!-- 🚀 Live Download Progress UI -->
+        <!-- Live Download Progress UI -->
         <div id="downloadProgressContainer" class="space-y-1.5 text-left hidden">
           <div class="flex justify-between text-[11px] font-bold text-slate-300">
             <span id="downloadStatusText">Downloading...</span>
@@ -234,7 +234,7 @@
       </div>
     </div>
 
-    <!-- ✨ SMART EXIT APP CONFIRMATION MODAL WITH ICONS -->
+    <!-- SMART EXIT APP CONFIRMATION MODAL -->
     <div id="exitAppModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-[110] flex items-center justify-center p-4 hidden">
       <div class="bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-800 w-full max-w-xs rounded-3xl p-5 text-center space-y-4 shadow-2xl relative animate-in fade-in zoom-in duration-200">
         <div class="w-14 h-14 bg-red-100 dark:bg-red-950/80 text-red-600 dark:text-red-400 rounded-full flex items-center justify-center mx-auto text-2xl shadow">
@@ -591,8 +591,9 @@
     window.bestSellingTimer = null;
     window.countdownTimer = null;
     
-    // Dynamic App Update Tracker Variable (একদম কারেন্ট আসল ভার্সন)
-    window.userAppVersion = localStorage.getItem('app_installed_version') || "v1.7.3";
+    // 🔥 NEW VERSION 1.8.0
+    window.USER_BUILD_VERSION = 'v1.8.0';
+    window.userAppVersion = localStorage.getItem('app_installed_version') || window.USER_BUILD_VERSION;
     window.latestAppUpdate = null;
     window.currentProductDetails = null;
 
@@ -602,6 +603,42 @@
     }
     
     pushStateToHistory({ page: 'home' });
+
+    // 🎯 PERFECTED DIRECT APP EXIT LOGIC (NO BLANK PAGE)
+    window.showExitAppModal = function() {
+      const modal = document.getElementById('exitAppModal');
+      if (modal) modal.classList.remove('hidden');
+    };
+
+    window.closeExitAppModal = function() {
+      const modal = document.getElementById('exitAppModal');
+      if (modal) modal.classList.add('hidden');
+      pushStateToHistory({ page: 'home' });
+    };
+
+    window.confirmExitApp = function() {
+      closeExitAppModal();
+      
+      // ১. অ্যান্ড্রয়েড নেটিভ WebView / TWA / Cordova অ্যাপ হলে
+      if (window.Android && typeof window.Android.exitApp === 'function') {
+        window.Android.exitApp();
+        return;
+      }
+      if (navigator.app && typeof navigator.app.exitApp === 'function') {
+        navigator.app.exitApp();
+        return;
+      }
+
+      // ২. ব্রাউজার ট্যাব সম্পূর্ণ ক্লোজ করার চেষ্টা
+      window.close();
+
+      // ৩. ব্যাক হিস্ট্রি ক্লিয়ার করে ক্লোজ করার ব্যাকআপ
+      if (window.history.length > 1) {
+        window.history.go(-(window.history.length));
+      } else {
+        window.close();
+      }
+    };
 
     window.addEventListener('popstate', (event) => {
       const productModal = document.getElementById('productModal');
@@ -654,23 +691,7 @@
       }
 
       showExitAppModal();
-      pushStateToHistory({ page: 'home' });
     });
-
-    window.showExitAppModal = function() {
-      const modal = document.getElementById('exitAppModal');
-      if (modal) modal.classList.remove('hidden');
-    };
-
-    window.closeExitAppModal = function() {
-      const modal = document.getElementById('exitAppModal');
-      if (modal) modal.classList.add('hidden');
-    };
-
-    window.confirmExitApp = function() {
-      closeExitAppModal();
-      history.go(-2);
-    };
 
     // Firebase Auth Observer Integration
     onAuthStateChanged(auth, (user) => {
@@ -892,9 +913,14 @@
     }
 
     function startRealtimeSync() {
+      // 🔒 মূল সংশোধন: ফায়ারবেস থেকে নেওয়ার পরই কেবল APPROVED বা ACTIVE প্রোডাক্ট ফিল্টার করা হচ্ছে
       onValue(ref(db, 'products'), (snapshot) => {
         const data = snapshot.val() || {};
-        window.products = Object.keys(data).map(k => ({ id: k, ...data[k] }));
+        const allProducts = Object.keys(data).map(k => ({ id: k, ...data[k] }));
+        
+        // 🛑 Global Admin Approve না করলে কাস্টমারকে কোনো পণ্য দেখাবে না
+        window.products = allProducts.filter(p => p.status === 'approved' || p.status === 'active');
+        
         checkDeepLink();
         if (window.storedAccount && window.currentTab === 'dashboard' && !window.currentProductDetails) renderDashboard();
       });
@@ -913,6 +939,7 @@
       onValue(ref(db, 'orders'), (snapshot) => {
         const data = snapshot.val() || {};
         window.orders = Object.keys(data).map(k => ({ id: k, ...data[k] }));
+        if (window.storedAccount && window.currentTab === 'dashboard' && !window.currentProductDetails) renderDashboard();
         if (window.storedAccount && window.currentTab === 'settings') renderSettings();
       });
 
@@ -923,7 +950,27 @@
 
       onValue(ref(db, 'notifications'), (snapshot) => {
         const data = snapshot.val() || {};
-        window.notifications = Object.keys(data).map(k => ({ id: k, ...data[k] })).reverse();
+        const allNotifs = Object.keys(data).map(k => ({ id: k, ...data[k] })).reverse();
+
+        const userContact = window.storedAccount ? (window.storedAccount.contact || window.storedAccount.email) : null;
+        const userId = window.currentUser ? window.currentUser.uid : null;
+
+        window.notifications = allNotifs.filter(n => {
+          if (n.targetUser && userContact && n.targetUser.toLowerCase() === userContact.toLowerCase()) {
+            return true;
+          }
+          if (n.userId && userId && n.userId === userId) {
+            return true;
+          }
+          if (n.userId && userContact && n.userId.toLowerCase() === userContact.toLowerCase()) {
+            return true;
+          }
+          if (n.isBroadcast === true || n.targetUser === 'all' || n.type === 'broadcast' || !n.targetUser) {
+            return true;
+          }
+          return false;
+        });
+
         updateNotificationBadge();
         if (window.storedAccount && window.currentTab === 'notifications') renderNotificationsPage();
         else if (window.storedAccount && window.currentTab === 'dashboard' && !window.currentProductDetails) renderDashboard();
@@ -935,7 +982,6 @@
         if (window.currentTab === 'cart') renderCart();
       });
 
-      // Realtime Database-এর আপডেট ট্র্যাকার
       onValue(ref(db, 'app_update/user'), (snapshot) => {
         window.latestAppUpdate = snapshot.val() || null;
       });
@@ -1261,13 +1307,33 @@
       }
     }
 
-    // Helper Card Component for Product Grid
+    // 🎯 মূল সোল্ড কাউন্ট ক্যালকুলেশন লজিক (শুধু 'Delivered' হলেই গণনা হবে)
+    function calculateProductSold(p) {
+      let deliveredSold = 0;
+      if (window.orders && Array.isArray(window.orders)) {
+        window.orders.forEach(o => {
+          const isDelivered = ['Delivered', 'ডেলিভার্ড', 'Delivery'].includes(o.status);
+          if (isDelivered && o.items && Array.isArray(o.items)) {
+            o.items.forEach(it => {
+              if (it.productId === p.id) {
+                deliveredSold += (Number(it.qty) || 1);
+              }
+            });
+          }
+        });
+      }
+      return Math.max(deliveredSold, Number(p.soldCount) || Number(p.sold) || 0);
+    }
+
     function renderProductCard(p) {
       const discount = p.originalPrice > p.currentPrice ? Math.round(((p.originalPrice - p.currentPrice) / p.originalPrice) * 100) : 0;
       const isWish = window.wishlist.some(w => w.id === p.id);
       const pReviews = window.reviews.filter(r => r.productId === p.id);
       const avgRating = pReviews.length > 0 ? (pReviews.reduce((sum, r) => sum + Number(r.rating), 0) / pReviews.length).toFixed(1) : '5.0';
       const pBrand = p.brand || p.brandName;
+
+      // 🔒 শুধুমাত্র ডেলিভারি সম্পন্ন হলেই সোল্ড গণনায় যোগ হবে
+      const totalSold = calculateProductSold(p);
 
       return `
         <div class="bg-white dark:bg-slate-900 border border-gray-100 dark:border-slate-800 rounded-2xl p-2.5 shadow-sm hover:shadow-md transition-all flex flex-col justify-between relative">
@@ -1283,14 +1349,26 @@
 
           <div onclick="openProductPage('${p.id}')" class="cursor-pointer">
             <img src="${getProductImage(p)}" class="w-full h-28 object-cover rounded-xl mb-2">
+            
             <div class="flex items-center justify-between text-[10px] mb-1">
               <span class="text-amber-500 font-bold"><i class="fa-solid fa-star"></i> ${avgRating}</span>
               <span class="font-bold text-[9px] px-1.5 py-0.2 rounded ${Number(p.stock) > 0 ? 'bg-emerald-100 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-400' : 'bg-red-100 dark:bg-red-950/60 text-red-600 dark:text-red-400'}">
                 ${Number(p.stock) > 0 ? `${t('inStock')} ${p.stock}` : t('outOfStock')}
               </span>
             </div>
+
             ${pBrand ? `<span class="text-[9px] font-bold text-indigo-500 dark:text-indigo-400 uppercase tracking-wider block">${escapeHTML(pBrand)}</span>` : ''}
+            
             <h3 class="text-xs font-semibold text-gray-800 dark:text-slate-100 line-clamp-2 h-8 leading-tight">${escapeHTML(p.name)}</h3>
+            
+            <!-- 🔥 শুধু ডেলিভারি সম্পন্ন সোল্ড স্থায়ীভাবে দেখাবে -->
+            ${totalSold > 0 ? `
+              <div class="text-[9px] font-bold text-amber-600 dark:text-amber-400 my-0.5 flex items-center gap-1">
+                <i class="fa-solid fa-fire text-[10px]"></i>
+                <span>Sold: ${totalSold} Pcs</span>
+              </div>
+            ` : ''}
+
             <div class="flex items-baseline gap-1 mt-1">
               <span class="text-sm font-bold text-indigo-600 dark:text-indigo-400">৳${p.currentPrice}</span>
               ${p.originalPrice > p.currentPrice ? `<span class="text-[10px] text-gray-400 dark:text-slate-500 line-through">৳${p.originalPrice}</span>` : ''}
@@ -1320,16 +1398,8 @@
       const flashSaleProducts = window.products.filter(p => Number(p.stock) >= 1 && Number(p.stock) <= 10);
       
       const bestSellingProducts = [...window.products].map(p => {
-        let sold = 0;
-        window.orders.forEach(o => {
-          if (o.items) {
-            o.items.forEach(it => {
-              if (it.productId === p.id) sold += (it.qty || 1);
-            });
-          }
-        });
-        return { ...p, soldCount: sold };
-      }).sort((a,b) => b.soldCount - a.soldCount).slice(0, 6);
+        return { ...p, soldCount: calculateProductSold(p) };
+      }).filter(p => p.soldCount > 0).sort((a,b) => b.soldCount - a.soldCount).slice(0, 6);
 
       let categoryFilteredProducts = window.products;
       if (window.activeCategory !== 'All' && window.activeCategory !== 'সকল') {
@@ -1377,7 +1447,7 @@
           ` : ''}
         </div>
 
-        <!-- 1. FEATURED NEW ARRIVAL BANNER SLIDER -->
+        <!-- FEATURED NEW ARRIVAL BANNER SLIDER -->
         ${featuredProducts.length > 0 ? `
           <div class="space-y-1.5">
             <h2 class="text-xs font-bold text-gray-800 dark:text-slate-200 flex items-center gap-1.5">
@@ -1412,7 +1482,7 @@
           </div>
         ` : ''}
 
-        <!-- 2. FLASH SALE SLIDER (1-10 Stock) -->
+        <!-- FLASH SALE SLIDER -->
         ${flashSaleProducts.length > 0 ? `
           <div class="bg-gradient-to-r from-rose-600 via-red-600 to-amber-600 rounded-2xl p-3.5 text-white shadow-lg space-y-3">
             <div class="flex justify-between items-center border-b border-white/20 pb-2">
@@ -1454,7 +1524,7 @@
           </div>
         ` : ''}
 
-        <!-- 3. POPULAR CATEGORIES -->
+        <!-- POPULAR CATEGORIES -->
         <div>
           <h2 class="text-xs font-bold text-gray-800 dark:text-slate-200 mb-2 flex items-center gap-1.5">
             <i class="fa-solid fa-layer-group text-indigo-500"></i> ${t('popularCategories')}
@@ -1477,7 +1547,7 @@
           </div>
         </div>
 
-        <!-- 4. ALL BRANDS -->
+        <!-- ALL BRANDS -->
         ${categoryBrands.length > 0 ? `
           <div>
             <h2 class="text-[11px] font-bold text-gray-600 dark:text-slate-400 mb-1.5 flex items-center gap-1.5">
@@ -1496,7 +1566,7 @@
           </div>
         ` : ''}
 
-        <!-- 5. FIRST BATCH PRODUCTS GRID (4 ITEMS) -->
+        <!-- FIRST BATCH PRODUCTS GRID -->
         <div>
           <div class="flex justify-between items-center mb-2">
             <h2 class="text-xs font-bold text-gray-800 dark:text-slate-200">${escapeHTML(window.activeCategory)} Products ${window.activeBrand !== 'All' ? `(${escapeHTML(window.activeBrand)})` : ''}</h2>
@@ -1513,7 +1583,7 @@
           `}
         </div>
 
-        <!-- 6. 🔥 BEST SELLING PRODUCTS SLIDER -->
+        <!-- BEST SELLING PRODUCTS SLIDER -->
         ${(bestSellingProducts.length > 0 && !window.searchQuery) ? `
           <div class="bg-gradient-to-r from-amber-500 via-orange-500 to-yellow-500 rounded-2xl p-3.5 text-white shadow-lg space-y-3">
             <div class="flex justify-between items-center border-b border-white/20 pb-2">
@@ -1551,7 +1621,7 @@
           </div>
         ` : ''}
 
-        <!-- 7. REMAINING PRODUCTS GRID -->
+        <!-- REMAINING PRODUCTS GRID -->
         ${remainingProducts.length > 0 ? `
           <div class="pt-2">
             <div class="grid grid-cols-2 gap-3">
@@ -1565,7 +1635,6 @@
       startCountdownTimer();
     };
 
-    // Quick View Popup Function for Order Items
     window.showProductQuickViewModal = function(pId, fallbackItem) {
       let p = window.products.find(item => item.id === pId);
 
@@ -1631,14 +1700,7 @@
       const discount = p.originalPrice > p.currentPrice ? Math.round(((p.originalPrice - p.currentPrice) / p.originalPrice) * 100) : 0;
       const pReviews = window.reviews.filter(r => r.productId === p.id);
       
-      let soldCount = 0;
-      window.orders.forEach(o => {
-        if(o.items && ['Delivered', 'ডেলিভার্ড', 'Delivery'].includes(o.status)) {
-          o.items.forEach(it => {
-            if(it.productId === p.id) soldCount += (it.qty || 1);
-          });
-        }
-      });
+      const finalSold = calculateProductSold(p);
 
       const galleryImages = getAllProductImages(p);
       const firstImage = galleryImages[0];
@@ -1700,9 +1762,13 @@
               <span class="text-emerald-600 dark:text-emerald-400 flex items-center gap-1">
                 <i class="fa-solid fa-boxes-stacked"></i> Stock: ${p.stock || 0}
               </span>
-              <span class="text-indigo-600 dark:text-indigo-400 flex items-center gap-1">
-                <i class="fa-solid fa-bag-shopping"></i> Sold: ${soldCount}
-              </span>
+              
+              ${finalSold > 0 ? `
+                <span class="text-indigo-600 dark:text-indigo-400 flex items-center gap-1">
+                  <i class="fa-solid fa-bag-shopping"></i> Sold: ${finalSold} Pcs
+                </span>
+              ` : ''}
+
               ${(p.brand || p.brandName) ? `
                 <span class="text-amber-600 dark:text-amber-400 flex items-center gap-1">
                   <i class="fa-solid fa-copyright"></i> Brand: ${escapeHTML(p.brand || p.brandName)}
@@ -3019,10 +3085,9 @@
       return 0;
     }
 
-    // 🎯 STRICT REALTIME DATABASE UPDATE CHECKER (কোনো কাল্পনিক ধরে নেওয়ার সিন নেই)
     window.checkUserAppUpdate = function() {
       const updateData = window.latestAppUpdate;
-      const currentVersion = window.userAppVersion || "v1.7.3";
+      const currentVersion = window.userAppVersion || window.USER_BUILD_VERSION;
 
       const modal = document.getElementById('appUpdateModal');
       const iconContainer = document.getElementById('updateModalIconContainer');
@@ -3039,7 +3104,6 @@
       const progressContainer = document.getElementById('downloadProgressContainer');
       const actionButtons = document.getElementById('updateActionButtons');
 
-      // UI Reset
       if(progressContainer) progressContainer.classList.add('hidden');
       if(actionButtons) actionButtons.classList.remove('hidden');
       if(closeXBtn) closeXBtn.classList.remove('hidden');
@@ -3047,11 +3111,9 @@
       showTopStatusToast(window.currentLang === 'bn' ? "🔍 আপডেট চেক করা হচ্ছে..." : "🔍 Checking for updates...", "🔍");
 
       setTimeout(() => {
-        // ১. রিয়েলটাইম ডেটাবেজে লেটেস্ট আপডেট দেওয়া আছে কি না চেক
         const databaseHasUpdate = updateData && updateData.version && (compareVersions(updateData.version, currentVersion) > 0);
 
         if (databaseHasUpdate) {
-          // 🟢 রিয়েলটাইম ডেটাবেজে আসল আপডেট থাকলে সেটি দেখাবে
           const dbVersion = updateData.version;
 
           iconContainer.className = "w-16 h-16 bg-indigo-600/20 text-indigo-400 rounded-full flex items-center justify-center mx-auto text-2xl shadow-inner border border-indigo-500/30";
@@ -3073,7 +3135,6 @@
           cancelBtn.innerText = window.currentLang === 'bn' ? "বাতিল (Cancel)" : "Cancel";
           cancelBtn.onclick = function() { closeAppUpdateModal(); };
         } else {
-          // 🔴 ডেটাবেজে কোনো আপডেট না থাকলে কোনো ফেক ভার্সন দেখাবে না
           iconContainer.className = "w-16 h-16 bg-emerald-500/20 text-emerald-400 rounded-full flex items-center justify-center mx-auto text-2xl shadow-inner border border-emerald-500/30";
           icon.className = "fa-solid fa-circle-check";
 
@@ -3093,7 +3154,6 @@
       }, 400);
     };
 
-    // 📥 Live Download Engine & Changelog Display
     window.triggerAppDownload = function() {
       const updateData = window.latestAppUpdate || {};
       const newVersion = updateData.version || window.userAppVersion;
@@ -3126,12 +3186,22 @@
         if (progress >= 100) {
           clearInterval(interval);
           setTimeout(() => {
-            window.userAppVersion = newVersion;
-            localStorage.setItem('app_installed_version', newVersion);
             showDownloadSuccessView(newVersion, updateData);
           }, 400);
         }
       }, 200);
+    };
+
+    window.applyUserUpdateAndReload = function(newVersion) {
+      localStorage.setItem('app_installed_version', newVersion);
+      if ('caches' in window) {
+        caches.keys().then(names => {
+          for (let name of names) {
+            caches.delete(name);
+          }
+        });
+      }
+      window.location.href = window.location.pathname + '?v=' + new Date().getTime();
     };
 
     function showDownloadSuccessView(newVersion, updateData) {
@@ -3174,7 +3244,7 @@
       cancelBtn.innerText = window.currentLang === 'bn' ? "ঠিক আছে (Explore)" : "Explore Now";
       cancelBtn.onclick = function() {
         closeAppUpdateModal();
-        if(window.currentTab === 'settings') renderSettings();
+        window.applyUserUpdateAndReload(newVersion);
       };
 
       showToast(window.currentLang === 'bn' ? 'অ্যাপ ভার্সন আপডেট সম্পন্ন হয়েছে! 🎉' : 'App updated successfully! 🎉');
