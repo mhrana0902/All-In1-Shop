@@ -1,16 +1,16 @@
 {
   "user_app": {
-    "versionCode": 8,
-    "versionName": "1.7.3",
-    "apkUrl": "https://github.com/mhrana0902/All-In1-Shop/releases/download/v1.7.3/All.In1.Shop.apk",
-    "forceUpdate": true,
+    "versionCode": 9,
+    "versionName": "1.8.0",
+    "apkUrl": "https://github.com/mhrana0902/All-In1-Shop/releases/download/v1.8.0/All.In1.Shop.apk",
+    "forceUpdate": false,
     "message": "নতুন ফিচার যোগ করা হয়েছে এবং অ্যাপডেট করা হয়েছে।"
   },
   "admin_app": {
-    "versionCode": 8,
-    "versionName": "1.7.3",
-    "apkUrl": "https://github.com/mhrana0902/All-In1-Shop/releases/download/v1.7.3/All.In1.Admin.apk",
-    "forceUpdate": true,
+    "versionCode": 9,
+    "versionName": "1.8.0",
+    "apkUrl": "https://github.com/mhrana0902/All-In1-Shop/releases/download/v1.8.0/All.In1.Admin.apk",
+    "forceUpdate": false,
     "message": "এডমিন প্যানেলের নতুন আপডেট এসেছে।"
   }
 }
